@@ -11,29 +11,39 @@
 			answer: null
 		}))
 	};
+
+	async function submit() {
+		const response = await fetch("/submission", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(submission)
+		});
+		const data = await response.json();
+		console.log(data);
+	}
 </script>
 
 <h2>
 	{submission.title}
 </h2>
 
-<form action="/submit" method="POST">
-	<ul class="elements">
-		{#each submission.elements as element}
-			<li>
-				<ElementSubmission bind:element />
-			</li>
-		{/each}
-	</ul>
+<ul class="elements">
+	{#each submission.elements as element}
+		<li>
+			<ElementSubmission bind:element />
+		</li>
+	{/each}
+</ul>
 
-	<p id="required">
-		<sup aria-hidden="true">*</sup>required
-	</p>
+<p id="required">
+	<sup aria-hidden="true">*</sup>required
+</p>
 
-	<menu>
-		<button type="submit">Submit</button>
-	</menu>
-</form>
+<menu>
+	<button on:click={submit}>Submit</button>
+</menu>
 
 <style>
 	.elements {
