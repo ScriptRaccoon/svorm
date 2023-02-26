@@ -1,4 +1,4 @@
-<h1>Svorm</h1>
+<h1>Svorm - Work in Progress</h1>
 
 <p>
 	This app lets you create forms which can be shared with others. It
