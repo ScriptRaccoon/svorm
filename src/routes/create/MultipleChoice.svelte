@@ -33,7 +33,7 @@
 
 <form on:submit|preventDefault={addChoice}>
 	<input aria-label="choice" type="text" bind:value={nextChoice} required />
-	<button aria-label="add choice">Add</button>
+	<button>Add choice</button>
 </form>
 
 <style lang="scss">

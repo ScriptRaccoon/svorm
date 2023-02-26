@@ -8,10 +8,10 @@
 
 <div class="element">
 	{#if "choices" in element}
-		<h3>Choice Element</h3>
+		<h3>Multiple Choice</h3>
 		<MultipleChoice bind:element />
 	{:else}
-		<h3>Question Element</h3>
+		<h3>Question</h3>
 		<Question bind:element />
 	{/if}
 	<p>
