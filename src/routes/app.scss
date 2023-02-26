@@ -66,6 +66,14 @@ input[type="checkbox"] {
 	}
 }
 
+input[type="radio"] {
+	accent-color: var(--btn-color);
+	scale: 1.2;
+	&:focus-visible {
+		outline: 0.2em solid var(--btn-color);
+	}
+}
+
 a {
 	color: var(--btn-color);
 	&:focus-visible {
