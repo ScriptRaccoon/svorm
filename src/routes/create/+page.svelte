@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
-	import FormElement from "./FormElement.svelte";
+	import SvormElement from "./SvormElement.svelte";
 	import Menu from "./Menu.svelte";
 
-	let formElements: formElement[] = [];
+	let title: string = "";
+
+	let svormElements: svormElement[] = [];
 
 	function addQuestionElement(): void {
 		const question: questionElement = {
@@ -11,7 +13,7 @@
 			id: crypto.randomUUID(),
 			question: ""
 		};
-		formElements = [...formElements, question];
+		svormElements = [...svormElements, question];
 	}
 
 	function addChoiceElement(): void {
@@ -21,17 +23,17 @@
 			prompt: "",
 			choices: []
 		};
-		formElements = [...formElements, choice];
+		svormElements = [...svormElements, choice];
 	}
 
-	async function createForm(): Promise<void> {
+	async function createSvorm(): Promise<void> {
 		try {
 			const response = await fetch("/create", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
 				},
-				body: JSON.stringify(formElements)
+				body: JSON.stringify({ title, svormElements })
 			});
 			if (!response.ok) {
 				throw response.status + " error: svorm could not be created";
@@ -48,17 +50,22 @@
 	}
 
 	function deleteElement(id: string): void {
-		formElements = formElements.filter((data) => data.id != id);
+		svormElements = svormElements.filter((data) => data.id != id);
 	}
 </script>
 
 <h2>Create a svorm</h2>
 
-<Menu on:choice={addChoiceElement} on:question={addQuestionElement} on:finish={createForm} />
+<p>
+	<label for="title">Title</label>
+	<input type="text" bind:value={title} />
+</p>
+
+<Menu on:choice={addChoiceElement} on:question={addQuestionElement} on:finish={createSvorm} />
 
 <div class="elements">
-	{#each formElements as data}
-		<FormElement bind:data on:delete={() => deleteElement(data.id)} />
+	{#each svormElements as data}
+		<SvormElement bind:data on:delete={() => deleteElement(data.id)} />
 	{/each}
 </div>
 

@@ -11,4 +11,10 @@ type choiceElement = {
 	choices: string[];
 };
 
-type formElement = questionElement | choiceElement;
+type svormElement = questionElement | choiceElement;
+
+type svorm = {
+	id: string;
+	title: string;
+	elements: svormElement[];
+};

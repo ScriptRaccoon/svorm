@@ -2,7 +2,7 @@
 	import { createEventDispatcher } from "svelte";
 	import ChoiceElement from "./ChoiceElement.svelte";
 	import QuestionElement from "./QuestionElement.svelte";
-	export let data: formElement;
+	export let data: svormElement;
 	const dispatch = createEventDispatcher();
 </script>
 
