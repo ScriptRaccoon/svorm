@@ -1,7 +1,7 @@
 <script>
 	import { page } from "$app/stores";
 	const id = $page.params.id;
-	const url = `${$page.url.origin}/submit/${id}`;
+	const url = `${$page.url.origin}/submission/${id}`;
 </script>
 
 <h2>Svorm has been created</h2>
