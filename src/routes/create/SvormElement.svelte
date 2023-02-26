@@ -2,21 +2,21 @@
 	import { createEventDispatcher } from "svelte";
 	import ChoiceElement from "./ChoiceElement.svelte";
 	import QuestionElement from "./QuestionElement.svelte";
-	export let data: svormElement;
+	export let element: svormElement;
 	const dispatch = createEventDispatcher();
 </script>
 
 <div class="element">
-	{#if "question" in data}
+	{#if "question" in element}
 		<h3>Question Element</h3>
-		<QuestionElement bind:data />
+		<QuestionElement bind:element />
 	{:else}
 		<h3>Choice Element</h3>
-		<ChoiceElement bind:data />
+		<ChoiceElement bind:element />
 	{/if}
 	<p>
-		<label for="required + {data.id}"> Required </label>
-		<input type="checkbox" id="required + {data.id}" bind:checked={data.required} />
+		<label for="required + {element.id}"> Required </label>
+		<input type="checkbox" id="required + {element.id}" bind:checked={element.required} />
 	</p>
 	<menu>
 		<button class="small danger" on:click={() => dispatch("delete")}>Remove</button>

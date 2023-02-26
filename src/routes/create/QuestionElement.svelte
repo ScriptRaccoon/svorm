@@ -1,8 +1,8 @@
 <script lang="ts">
-	export let data: questionElement;
+	export let element: questionElement;
 </script>
 
 <p>
-	<label for="question + {data.id}"> Question </label>
-	<input type="text" id="question + {data.id}" bind:value={data.question} />
+	<label for="question + {element.id}"> Question </label>
+	<input type="text" id="question + {element.id}" bind:value={element.question} />
 </p>

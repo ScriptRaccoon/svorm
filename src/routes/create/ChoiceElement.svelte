@@ -1,26 +1,26 @@
 <script lang="ts">
-	export let data: choiceElement;
+	export let element: choiceElement;
 	let nextChoice: string = "";
 	function addChoice(): void {
-		data.choices = [...data.choices, nextChoice];
+		element.choices = [...element.choices, nextChoice];
 		nextChoice = "";
 	}
 
 	function deleteChoice(index: number): void {
-		data.choices.splice(index, 1);
-		data.choices = data.choices;
+		element.choices.splice(index, 1);
+		element.choices = element.choices;
 	}
 </script>
 
 <p>
-	<label for="question + {data.id}">Prompt</label>
-	<input type="text" id="question + {data.id}" bind:value={data.prompt} />
+	<label for="question + {element.id}">Prompt</label>
+	<input type="text" id="question + {element.id}" bind:value={element.prompt} />
 </p>
 
-{#if data.choices.length > 0}
+{#if element.choices.length > 0}
 	<p>Choices</p>
 	<ol>
-		{#each data.choices as choice, index}
+		{#each element.choices as choice, index}
 			<li>
 				<span>{choice}</span>
 				<button class="small danger" type="button" on:click={() => deleteChoice(index)}>x</button>

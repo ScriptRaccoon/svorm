@@ -61,9 +61,9 @@
 
 {#if svormElements.length > 0}
 	<ul class="elements">
-		{#each svormElements as data}
+		{#each svormElements as element}
 			<li>
-				<SvormElement bind:data on:delete={() => deleteElement(data.id)} />
+				<SvormElement bind:element on:delete={() => deleteElement(element.id)} />
 			</li>
 		{/each}
 	</ul>
