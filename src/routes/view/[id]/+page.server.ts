@@ -26,5 +26,5 @@ async function getSvorm(id: string): Promise<svorm | null> {
 export const load = (async ({ params }) => {
 	const id = params.id;
 	const svorm = await getSvorm(id);
-	return svorm;
+	return { svorm };
 }) satisfies PageServerLoad;
