@@ -1,0 +1,84 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--btn-color: #456;
+	--light-color: #eef;
+	--danger-color: rgb(223, 58, 77);
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1.2rem;
+	color: #222;
+	line-height: 1.5;
+}
+
+button {
+	--color: var(--btn-color);
+	font-family: inherit;
+	font-size: inherit;
+	background: none;
+	border: none;
+	cursor: pointer;
+	background-color: var(--color);
+	color: white;
+	padding: 0.4rem 0.6rem;
+	border-radius: 0.2rem;
+	white-space: nowrap;
+	outline-offset: 0.1em;
+	&.small {
+		font-size: 1rem;
+		padding: 0.2rem 0.4rem;
+		border-radius: 0rem;
+	}
+	&.danger {
+		--color: var(--danger-color);
+	}
+	&:focus-visible {
+		outline: 0.2em solid var(--color);
+	}
+}
+
+input[type="text"] {
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	border: 0.1em solid #555;
+	padding: 0.4rem;
+	background-color: #fff;
+	width: 100%;
+	&:focus-visible {
+		outline: 0.1em solid var(--btn-color);
+	}
+}
+
+input[type="checkbox"] {
+	accent-color: var(--btn-color);
+	scale: 1.2;
+	transform-origin: bottom left;
+	outline-offset: 0.1em;
+	&:focus-visible {
+		outline: 0.2em solid var(--btn-color);
+	}
+}
+
+a {
+	color: var(--btn-color);
+	&:focus-visible {
+		outline-offset: 0.25em;
+		outline: 0.1em solid var(--btn-color);
+	}
+}
+
+h1 {
+	text-align: center;
+}
+
+h1,
+h2 {
+	padding-block: 1rem;
+}

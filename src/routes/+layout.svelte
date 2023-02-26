@@ -1,4 +1,5 @@
 <script>
+	import "./app.scss";
 	import Nav from "$lib/Nav.svelte";
 </script>
 
@@ -7,4 +8,14 @@
 </svelte:head>
 
 <Nav />
-<slot />
+<main>
+	<slot />
+</main>
+
+<style>
+	main {
+		padding-inline: 1rem;
+		max-width: 38rem;
+		margin: 0 auto;
+	}
+</style>

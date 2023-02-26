@@ -10,8 +10,13 @@
 </nav>
 
 <style>
+	nav {
+		padding: 1rem;
+		background-color: var(--light-color);
+	}
 	ul {
 		display: flex;
+		justify-content: center;
 		list-style-type: none;
 		gap: 1rem;
 	}
