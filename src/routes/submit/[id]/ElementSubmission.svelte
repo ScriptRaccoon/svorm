@@ -1,15 +1,14 @@
 <script lang="ts">
-	import { createEventDispatcher } from "svelte";
-	import ChoiceElementView from "./ChoiceElementView.svelte";
-	import QuestionElementView from "./QuestionElementView.svelte";
-	export let element: svormElementView;
+	import ChoiceSubmission from "./ChoiceSubmission.svelte";
+	import QuestionSubmission from "./QuestionElementView.svelte";
+	export let element: svormElementSubmission;
 </script>
 
 <div class="element">
 	{#if "question" in element}
-		<QuestionElementView bind:element />
+		<QuestionSubmission bind:element />
 	{:else}
-		<ChoiceElementView bind:element />
+		<ChoiceSubmission bind:element />
 	{/if}
 </div>
 

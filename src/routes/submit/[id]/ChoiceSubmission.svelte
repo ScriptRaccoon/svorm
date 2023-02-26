@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let element: choiceElementView;
+	export let element: choiceSubmission;
 </script>
 
 <h3>

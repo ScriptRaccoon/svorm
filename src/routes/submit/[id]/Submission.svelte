@@ -1,9 +1,9 @@
 <script lang="ts">
-	import SvormElementView from "./SvormElementView.svelte";
+	import ElementSubmission from "./ElementSubmission.svelte";
 
 	export let svorm: svorm;
 
-	let svormView: svormView = {
+	let svormSubmission: svormSubmission = {
 		id: svorm.id,
 		title: svorm.title,
 		elements: svorm.elements.map((element) => ({ ...element, answer: null }))
@@ -11,14 +11,14 @@
 </script>
 
 <h2>
-	{svormView.title}
+	{svormSubmission.title}
 </h2>
 
 <form action="/submit" method="POST">
 	<ul class="elements">
-		{#each svormView.elements as element}
+		{#each svormSubmission.elements as element}
 			<li>
-				<SvormElementView bind:element />
+				<ElementSubmission bind:element />
 			</li>
 		{/each}
 	</ul>

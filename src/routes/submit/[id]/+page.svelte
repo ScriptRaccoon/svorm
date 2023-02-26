@@ -2,7 +2,7 @@
 	import { browser } from "$app/environment";
 	import { goto } from "$app/navigation";
 	import type { PageData } from "./$types";
-	import View from "./View.svelte";
+	import Submission from "./Submission.svelte";
 
 	export let data: PageData;
 
@@ -15,5 +15,5 @@
 </script>
 
 {#if svorm}
-	<View {svorm} />
+	<Submission {svorm} />
 {/if}

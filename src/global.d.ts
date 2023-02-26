@@ -4,10 +4,6 @@ type questionElement = {
 	question: string;
 };
 
-type questionElementView = questionElement & {
-	answer: string | null;
-};
-
 type choiceElement = {
 	id: string;
 	required: boolean;
@@ -15,22 +11,26 @@ type choiceElement = {
 	choices: string[];
 };
 
-type choiceElementView = choiceElement & {
-	answer: number | null;
-};
-
-type svormElement = questionElement | choiceElement;
-
-type svormElementView = questionElementView | choiceElementView;
-
 type svorm = {
 	id: string;
 	title: string;
 	elements: svormElement[];
 };
 
-type svormView = {
+type svormElement = questionElement | choiceElement;
+
+type questionSubmission = questionElement & {
+	answer: string | null;
+};
+
+type choiceSubmission = choiceElement & {
+	answer: number | null;
+};
+
+type svormElementSubmission = questionSubmission | choiceSubmission;
+
+type svormSubmission = {
 	id: string;
 	title: string;
-	elements: svormElementView[];
+	elements: svormElementSubmission[];
 };
