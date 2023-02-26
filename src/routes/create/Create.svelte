@@ -63,13 +63,20 @@
 	<ul class="elements">
 		{#each elements as element}
 			<li>
-				<SvormElement bind:element on:delete={() => deleteElement(element.id)} />
+				<SvormElement
+					bind:element
+					on:delete={() => deleteElement(element.id)}
+				/>
 			</li>
 		{/each}
 	</ul>
 {/if}
 
-<Menu on:choice={addMultipleChoice} on:question={addQuestion} on:finish={createSvorm} />
+<Menu
+	on:choice={addMultipleChoice}
+	on:question={addQuestion}
+	on:finish={createSvorm}
+/>
 
 <style>
 	.elements {

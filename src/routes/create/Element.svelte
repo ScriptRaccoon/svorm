@@ -16,10 +16,16 @@
 	{/if}
 	<p>
 		<label for="required + {element.id}">Required</label>
-		<input type="checkbox" id="required + {element.id}" bind:checked={element.required} />
+		<input
+			type="checkbox"
+			id="required + {element.id}"
+			bind:checked={element.required}
+		/>
 	</p>
 	<menu>
-		<button class="small danger" on:click={() => dispatch("delete")}>Remove</button>
+		<button class="small danger" on:click={() => dispatch("delete")}
+			>Remove</button
+		>
 	</menu>
 </div>
 

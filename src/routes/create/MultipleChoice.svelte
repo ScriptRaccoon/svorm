@@ -14,7 +14,11 @@
 
 <p>
 	<label for="question + {element.id}">Question</label>
-	<input type="text" id="question + {element.id}" bind:value={element.question} />
+	<input
+		type="text"
+		id="question + {element.id}"
+		bind:value={element.question}
+	/>
 </p>
 
 {#if element.choices.length > 0}
@@ -23,7 +27,11 @@
 		{#each element.choices as choice, index}
 			<li>
 				<span>{choice}</span>
-				<button class="small danger" type="button" on:click={() => deleteChoice(index)}>x</button>
+				<button
+					class="small danger"
+					type="button"
+					on:click={() => deleteChoice(index)}>x</button
+				>
 			</li>
 		{/each}
 	</ol>
@@ -32,7 +40,12 @@
 {/if}
 
 <form on:submit|preventDefault={addChoice}>
-	<input aria-label="choice" type="text" bind:value={nextChoice} required />
+	<input
+		aria-label="choice"
+		type="text"
+		bind:value={nextChoice}
+		required
+	/>
 	<button>Add choice</button>
 </form>
 

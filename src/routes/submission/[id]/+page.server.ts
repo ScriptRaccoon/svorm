@@ -8,13 +8,28 @@ const exampleSvorm: svorm = {
 			required: true,
 			id: "59a01248-bb5b-4d45-8081-ee17f0e0511d",
 			question: "What is your employment status?",
-			choices: ["Student", "Worker", "Employee", "Self-employed", "Director", "None"]
+			choices: [
+				"Student",
+				"Worker",
+				"Employee",
+				"Self-employed",
+				"Director",
+				"None"
+			]
 		},
 		{
 			required: true,
 			id: "d767abac-496a-481e-964e-1d0fd5ad4d5e",
 			question: "What is your favorite day of the week?",
-			choices: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+			choices: [
+				"Monday",
+				"Tuesday",
+				"Wednesday",
+				"Thursday",
+				"Friday",
+				"Saturday",
+				"Sunday"
+			]
 		},
 		{
 			required: false,

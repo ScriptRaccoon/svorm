@@ -10,7 +10,11 @@
 
 <p>
 	<label for="answer + {element.id}">Answer</label>
-	<input type="text" id="answer + {element.id}" bind:value={element.answer} />
+	<input
+		type="text"
+		id="answer + {element.id}"
+		bind:value={element.answer}
+	/>
 </p>
 
 <style>

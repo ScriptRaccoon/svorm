@@ -4,5 +4,9 @@
 
 <p>
 	<label for="question + {element.id}"> Question </label>
-	<input type="text" id="question + {element.id}" bind:value={element.question} />
+	<input
+		type="text"
+		id="question + {element.id}"
+		bind:value={element.question}
+	/>
 </p>

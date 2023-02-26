@@ -6,7 +6,10 @@
 	let submission: svormSubmission = {
 		id: svorm.id,
 		title: svorm.title,
-		elements: svorm.elements.map((element) => ({ ...element, answer: null }))
+		elements: svorm.elements.map((element) => ({
+			...element,
+			answer: null
+		}))
 	};
 </script>
 

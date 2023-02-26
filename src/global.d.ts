@@ -27,7 +27,9 @@ type multipleChoiceSubmission = multipleChoice & {
 	answer: number | null;
 };
 
-type elementSubmission = questionSubmission | multipleChoiceSubmission;
+type elementSubmission =
+	| questionSubmission
+	| multipleChoiceSubmission;
 
 type svormSubmission = {
 	id: string;
