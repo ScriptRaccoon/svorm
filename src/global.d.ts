@@ -1,36 +1,36 @@
-type questionElement = {
+type question = {
 	id: string;
 	required: boolean;
 	question: string;
 };
 
-type choiceElement = {
+type multipleChoice = {
 	id: string;
 	required: boolean;
-	prompt: string;
+	question: string;
 	choices: string[];
 };
+
+type element = question | multipleChoice;
 
 type svorm = {
 	id: string;
 	title: string;
-	elements: svormElement[];
+	elements: element[];
 };
-
-type svormElement = questionElement | choiceElement;
 
 type questionSubmission = questionElement & {
 	answer: string | null;
 };
 
-type choiceSubmission = choiceElement & {
+type multipleChoiceSubmission = multipleChoice & {
 	answer: number | null;
 };
 
-type svormElementSubmission = questionSubmission | choiceSubmission;
+type elementSubmission = questionSubmission | multipleChoiceSubmission;
 
 type svormSubmission = {
 	id: string;
 	title: string;
-	elements: svormElementSubmission[];
+	elements: elementSubmission[];
 };

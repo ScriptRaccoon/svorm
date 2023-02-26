@@ -1,29 +1,29 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
-	import SvormElement from "./SvormElement.svelte";
+	import SvormElement from "./Element.svelte";
 	import Menu from "./Menu.svelte";
 
 	let title: string = "";
 
-	let svormElements: svormElement[] = [];
+	let elements: element[] = [];
 
-	function addQuestionElement(): void {
-		const question: questionElement = {
+	function addQuestion(): void {
+		const question: question = {
 			required: false,
 			id: crypto.randomUUID(),
 			question: ""
 		};
-		svormElements = [...svormElements, question];
+		elements = [...elements, question];
 	}
 
-	function addChoiceElement(): void {
-		const choice: choiceElement = {
+	function addMultipleChoice(): void {
+		const multipleChoice: multipleChoice = {
 			required: false,
 			id: crypto.randomUUID(),
-			prompt: "",
+			question: "",
 			choices: []
 		};
-		svormElements = [...svormElements, choice];
+		elements = [...elements, multipleChoice];
 	}
 
 	async function createSvorm(): Promise<void> {
@@ -33,7 +33,7 @@
 				headers: {
 					"Content-Type": "application/json"
 				},
-				body: JSON.stringify({ title, svormElements })
+				body: JSON.stringify({ title, elements })
 			});
 			if (!response.ok) {
 				throw response.status + " error: svorm could not be created";
@@ -50,7 +50,7 @@
 	}
 
 	function deleteElement(id: string): void {
-		svormElements = svormElements.filter((data) => data.id != id);
+		elements = elements.filter((data) => data.id != id);
 	}
 </script>
 
@@ -59,9 +59,9 @@
 <label for="title">Title</label>
 <input type="text" bind:value={title} />
 
-{#if svormElements.length > 0}
+{#if elements.length > 0}
 	<ul class="elements">
-		{#each svormElements as element}
+		{#each elements as element}
 			<li>
 				<SvormElement bind:element on:delete={() => deleteElement(element.id)} />
 			</li>
@@ -69,7 +69,7 @@
 	</ul>
 {/if}
 
-<Menu on:choice={addChoiceElement} on:question={addQuestionElement} on:finish={createSvorm} />
+<Menu on:choice={addMultipleChoice} on:question={addQuestion} on:finish={createSvorm} />
 
 <style>
 	.elements {

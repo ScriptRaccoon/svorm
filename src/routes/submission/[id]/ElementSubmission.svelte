@@ -1,14 +1,14 @@
 <script lang="ts">
-	import ChoiceSubmission from "./ChoiceSubmission.svelte";
-	import QuestionSubmission from "./QuestionElementView.svelte";
-	export let element: svormElementSubmission;
+	import ChoiceSubmission from "./MultipleChoiceSubmission.svelte";
+	import QuestionSubmission from "./QuestionSubmission.svelte";
+	export let element: elementSubmission;
 </script>
 
 <div class="element">
-	{#if "question" in element}
-		<QuestionSubmission bind:element />
-	{:else}
+	{#if "choices" in element}
 		<ChoiceSubmission bind:element />
+	{:else}
+		<QuestionSubmission bind:element />
 	{/if}
 </div>
 

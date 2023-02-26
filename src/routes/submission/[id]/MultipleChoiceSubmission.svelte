@@ -1,9 +1,9 @@
 <script lang="ts">
-	export let element: choiceSubmission;
+	export let element: multipleChoiceSubmission;
 </script>
 
 <h3>
-	{element.prompt}{#if element.required}
+	{element.question}{#if element.required}
 		<sup aria-hidden="true" aria-describedby="required">*</sup>
 	{/if}
 </h3>

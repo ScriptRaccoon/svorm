@@ -1,21 +1,21 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
-	import ChoiceElement from "./ChoiceElement.svelte";
-	import QuestionElement from "./QuestionElement.svelte";
-	export let element: svormElement;
+	import MultipleChoice from "./MultipleChoice.svelte";
+	import Question from "./Question.svelte";
+	export let element: element;
 	const dispatch = createEventDispatcher();
 </script>
 
 <div class="element">
-	{#if "question" in element}
-		<h3>Question Element</h3>
-		<QuestionElement bind:element />
-	{:else}
+	{#if "choices" in element}
 		<h3>Choice Element</h3>
-		<ChoiceElement bind:element />
+		<MultipleChoice bind:element />
+	{:else}
+		<h3>Question Element</h3>
+		<Question bind:element />
 	{/if}
 	<p>
-		<label for="required + {element.id}"> Required </label>
+		<label for="required + {element.id}">Required</label>
 		<input type="checkbox" id="required + {element.id}" bind:checked={element.required} />
 	</p>
 	<menu>

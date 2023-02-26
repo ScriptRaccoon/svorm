@@ -12,7 +12,7 @@ const exampleSvorm: svorm = {
 		{
 			required: false,
 			id: "d767abac-496a-481e-964e-1d0fd5ad4d5e",
-			prompt: "which is your favorite day?",
+			question: "which is your favorite day?",
 			choices: ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
 		}
 	]

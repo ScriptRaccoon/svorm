@@ -3,7 +3,7 @@
 
 	export let svorm: svorm;
 
-	let svormSubmission: svormSubmission = {
+	let submission: svormSubmission = {
 		id: svorm.id,
 		title: svorm.title,
 		elements: svorm.elements.map((element) => ({ ...element, answer: null }))
@@ -11,12 +11,12 @@
 </script>
 
 <h2>
-	{svormSubmission.title}
+	{submission.title}
 </h2>
 
 <form action="/submit" method="POST">
 	<ul class="elements">
-		{#each svormSubmission.elements as element}
+		{#each submission.elements as element}
 			<li>
 				<ElementSubmission bind:element />
 			</li>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let element: choiceElement;
+	export let element: multipleChoice;
 	let nextChoice: string = "";
 	function addChoice(): void {
 		element.choices = [...element.choices, nextChoice];
@@ -13,8 +13,8 @@
 </script>
 
 <p>
-	<label for="question + {element.id}">Prompt</label>
-	<input type="text" id="question + {element.id}" bind:value={element.prompt} />
+	<label for="question + {element.id}">Question</label>
+	<input type="text" id="question + {element.id}" bind:value={element.question} />
 </p>
 
 {#if element.choices.length > 0}
