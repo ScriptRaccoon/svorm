@@ -1,19 +1,21 @@
 import { error, json } from "@sveltejs/kit";
-import { addSvormToDatabase } from "../../db/svorms";
+import { save_svorm_to_database } from "../../db/svorms";
 import type { RequestHandler } from "./$types";
 
 export const POST = (async ({ request }) => {
-	const svormData = await request.json();
+	const svorm_data = await request.json();
 
-	if (!svormData.title) {
+	if (!svorm_data.title) {
 		throw error(400, "No title");
 	}
 
-	if (!svormData.elements) {
+	if (!svorm_data.elements) {
 		throw error(400, "No elements");
 	}
 
-	const { data, error: err } = await addSvormToDatabase(svormData);
+	const { data, error: err } = await save_svorm_to_database(
+		svorm_data
+	);
 
 	if (err) {
 		console.log(err);

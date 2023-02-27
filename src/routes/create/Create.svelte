@@ -7,7 +7,7 @@
 
 	let elements: element[] = [];
 
-	function addQuestion(): void {
+	function add_question(): void {
 		const question: question = {
 			required: false,
 			id: crypto.randomUUID(),
@@ -16,14 +16,14 @@
 		elements = [...elements, question];
 	}
 
-	function addMultipleChoice(): void {
-		const multipleChoice: multipleChoice = {
+	function add_multiple_choice(): void {
+		const multiple_choice: multiple_choice = {
 			required: false,
 			id: crypto.randomUUID(),
 			question: "",
 			choices: []
 		};
-		elements = [...elements, multipleChoice];
+		elements = [...elements, multiple_choice];
 	}
 
 	async function createSvorm(): Promise<void> {
@@ -49,7 +49,7 @@
 		}
 	}
 
-	function deleteElement(id: string): void {
+	function delete_element(id: string): void {
 		elements = elements.filter((data) => data.id != id);
 	}
 </script>
@@ -65,7 +65,7 @@
 			<li>
 				<SvormElement
 					bind:element
-					on:delete={() => deleteElement(element.id)}
+					on:delete={() => delete_element(element.id)}
 				/>
 			</li>
 		{/each}
@@ -73,8 +73,8 @@
 {/if}
 
 <Menu
-	on:choice={addMultipleChoice}
-	on:question={addQuestion}
+	on:choice={add_multiple_choice}
+	on:question={add_question}
 	on:finish={createSvorm}
 />
 

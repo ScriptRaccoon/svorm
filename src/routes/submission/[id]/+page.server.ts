@@ -1,6 +1,6 @@
 import type { PageServerLoad } from "./$types";
 
-const exampleSvorm: svorm = {
+const example_svorm: svorm = {
 	id: "asdasjkhdjwe",
 	title: "Weekday survey",
 	elements: [
@@ -39,13 +39,13 @@ const exampleSvorm: svorm = {
 	]
 };
 
-async function getSvorm(id: string): Promise<svorm | null> {
+async function get_svorm(id: string): Promise<svorm | null> {
 	// TODO: get this svorm from database
-	return exampleSvorm;
+	return example_svorm;
 }
 
 export const load = (async ({ params }) => {
 	const id = params.id;
-	const svorm = await getSvorm(id);
+	const svorm = await get_svorm(id);
 	return { svorm };
 }) satisfies PageServerLoad;

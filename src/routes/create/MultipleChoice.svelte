@@ -1,12 +1,12 @@
 <script lang="ts">
-	export let element: multipleChoice;
-	let nextChoice: string = "";
-	function addChoice(): void {
-		element.choices = [...element.choices, nextChoice];
-		nextChoice = "";
+	export let element: multiple_choice;
+	let next_choice: string = "";
+	function add_choice(): void {
+		element.choices = [...element.choices, next_choice];
+		next_choice = "";
 	}
 
-	function deleteChoice(index: number): void {
+	function delete_choice(index: number): void {
 		element.choices.splice(index, 1);
 		element.choices = element.choices;
 	}
@@ -30,7 +30,7 @@
 				<button
 					class="small danger"
 					type="button"
-					on:click={() => deleteChoice(index)}>x</button
+					on:click={() => delete_choice(index)}>x</button
 				>
 			</li>
 		{/each}
@@ -39,11 +39,11 @@
 	<p>No choice has been added so far</p>
 {/if}
 
-<form on:submit|preventDefault={addChoice}>
+<form on:submit|preventDefault={add_choice}>
 	<input
 		aria-label="choice"
 		type="text"
-		bind:value={nextChoice}
+		bind:value={next_choice}
 		required
 	/>
 	<button>Add choice</button>

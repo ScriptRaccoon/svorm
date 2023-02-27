@@ -1,7 +1,7 @@
 <script lang="ts">
 	import ChoiceSubmission from "./MultipleChoiceSubmission.svelte";
 	import QuestionSubmission from "./QuestionSubmission.svelte";
-	export let element: elementSubmission;
+	export let element: element_submission;
 </script>
 
 <div class="element">

@@ -4,14 +4,14 @@ type question = {
 	question: string;
 };
 
-type multipleChoice = {
+type multiple_choice = {
 	id: string;
 	required: boolean;
 	question: string;
 	choices: string[];
 };
 
-type element = question | multipleChoice;
+type element = question | multiple_choice;
 
 type svorm = {
 	id: string;
@@ -19,20 +19,20 @@ type svorm = {
 	elements: element[];
 };
 
-type questionSubmission = questionElement & {
+type question_submission = question & {
 	answer: string | null;
 };
 
-type multipleChoiceSubmission = multipleChoice & {
+type multiple_choice_submission = multiple_choice & {
 	answer: number | null;
 };
 
-type elementSubmission =
-	| questionSubmission
-	| multipleChoiceSubmission;
+type element_submission =
+	| question_submission
+	| multiple_choice_submission;
 
-type svormSubmission = {
+type svorm_submission = {
 	id: string;
 	title: string;
-	elements: elementSubmission[];
+	elements: element_submission[];
 };

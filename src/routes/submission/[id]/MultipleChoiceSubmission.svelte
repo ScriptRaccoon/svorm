@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let element: multipleChoiceSubmission;
+	export let element: multiple_choice_submission;
 </script>
 
 <h3>

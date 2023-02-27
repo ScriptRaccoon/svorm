@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let element: questionSubmission;
+	export let element: question_submission;
 </script>
 
 <h3>

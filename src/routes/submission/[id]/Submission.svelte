@@ -3,7 +3,7 @@
 
 	export let svorm: svorm;
 
-	let submission: svormSubmission = {
+	let submission: svorm_submission = {
 		id: svorm.id,
 		title: svorm.title,
 		elements: svorm.elements.map((element) => ({
