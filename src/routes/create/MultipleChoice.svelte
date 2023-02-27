@@ -1,5 +1,6 @@
 <script lang="ts">
-	export let element: multiple_choice;
+	export let element: multiple_choice_create;
+	export let index: number;
 	let next_choice: string = "";
 	function add_choice(): void {
 		element.choices = [...element.choices, next_choice];
@@ -13,10 +14,10 @@
 </script>
 
 <p>
-	<label for="question + {element.id}">Question</label>
+	<label for="question{index}">Question</label>
 	<input
 		type="text"
-		id="question + {element.id}"
+		id="question{index}"
 		bind:value={element.question}
 	/>
 </p>

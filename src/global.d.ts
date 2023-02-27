@@ -1,17 +1,22 @@
 type question = {
-	id: string;
 	required: boolean;
 	question: string;
+	id: string;
 };
 
+type question_create = Omit<question, "id">;
+
 type multiple_choice = {
-	id: string;
 	required: boolean;
 	question: string;
 	choices: string[];
+	id: string;
 };
 
+type multiple_choice_create = Omit<multiple_choice, "id">;
+
 type element = question | multiple_choice;
+type element_create = question_create | multiple_choice_create;
 
 type svorm = {
 	id: string;

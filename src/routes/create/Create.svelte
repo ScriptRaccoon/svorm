@@ -1,25 +1,23 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
-	import SvormElement from "./Element.svelte";
+	import Element from "./Element.svelte";
 	import Menu from "./Menu.svelte";
 
 	let title: string = "";
 
-	let elements: element[] = [];
+	let elements: element_create[] = [];
 
 	function add_question(): void {
-		const question: question = {
+		const question: question_create = {
 			required: false,
-			id: crypto.randomUUID(),
 			question: ""
 		};
 		elements = [...elements, question];
 	}
 
 	function add_multiple_choice(): void {
-		const multiple_choice: multiple_choice = {
+		const multiple_choice: multiple_choice_create = {
 			required: false,
-			id: crypto.randomUUID(),
 			question: "",
 			choices: []
 		};
@@ -49,8 +47,8 @@
 		}
 	}
 
-	function delete_element(id: string): void {
-		elements = elements.filter((data) => data.id != id);
+	function delete_element(element: element_create): void {
+		elements = elements.filter((_element) => _element != element);
 	}
 </script>
 
@@ -61,11 +59,12 @@
 
 {#if elements.length > 0}
 	<ul class="elements">
-		{#each elements as element}
+		{#each elements as element, index}
 			<li>
-				<SvormElement
+				<Element
 					bind:element
-					on:delete={() => delete_element(element.id)}
+					{index}
+					on:delete={() => delete_element(element)}
 				/>
 			</li>
 		{/each}

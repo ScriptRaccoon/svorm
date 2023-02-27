@@ -30,9 +30,9 @@
 </h2>
 
 <ul class="elements">
-	{#each submission.elements as element}
+	{#each submission.elements as element, index}
 		<li>
-			<ElementSubmission bind:element />
+			<ElementSubmission bind:element {index} />
 		</li>
 	{/each}
 </ul>

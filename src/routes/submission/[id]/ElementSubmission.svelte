@@ -1,14 +1,15 @@
 <script lang="ts">
-	import ChoiceSubmission from "./MultipleChoiceSubmission.svelte";
+	import MultipleChoiceSubmission from "./MultipleChoiceSubmission.svelte";
 	import QuestionSubmission from "./QuestionSubmission.svelte";
 	export let element: element_submission;
+	export let index: number;
 </script>
 
 <div class="element">
 	{#if "choices" in element}
-		<ChoiceSubmission bind:element />
+		<MultipleChoiceSubmission bind:element />
 	{:else}
-		<QuestionSubmission bind:element />
+		<QuestionSubmission bind:element {index} />
 	{/if}
 </div>
 

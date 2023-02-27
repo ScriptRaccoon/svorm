@@ -1,12 +1,13 @@
 <script lang="ts">
-	export let element: question;
+	export let element: question_create;
+	export let index: number;
 </script>
 
 <p>
-	<label for="question + {element.id}"> Question </label>
+	<label for="question{index}"> Question </label>
 	<input
 		type="text"
-		id="question + {element.id}"
+		id="question{index}"
 		bind:value={element.question}
 	/>
 </p>

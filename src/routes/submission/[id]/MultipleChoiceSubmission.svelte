@@ -11,12 +11,7 @@
 <div class="choices">
 	{#each element.choices as choice, index}
 		<label>
-			<input
-				type="radio"
-				name={element.id}
-				value={index}
-				bind:group={element.answer}
-			/>
+			<input type="radio" value={index} bind:group={element.answer} />
 			<span>{choice}</span>
 		</label>
 	{/each}

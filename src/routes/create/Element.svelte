@@ -2,23 +2,24 @@
 	import { createEventDispatcher } from "svelte";
 	import MultipleChoice from "./MultipleChoice.svelte";
 	import Question from "./Question.svelte";
-	export let element: element;
+	export let element: element_create;
+	export let index: number;
 	const dispatch = createEventDispatcher();
 </script>
 
 <div class="element">
 	{#if "choices" in element}
 		<h3>Multiple Choice</h3>
-		<MultipleChoice bind:element />
+		<MultipleChoice {index} bind:element />
 	{:else}
 		<h3>Question</h3>
-		<Question bind:element />
+		<Question {index} bind:element />
 	{/if}
 	<p>
-		<label for="required + {element.id}">Required</label>
+		<label for="required{index}">Required</label>
 		<input
 			type="checkbox"
-			id="required + {element.id}"
+			id="required{index}"
 			bind:checked={element.required}
 		/>
 	</p>
