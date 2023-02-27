@@ -24,6 +24,11 @@ type svorm = {
 	elements: element[];
 };
 
+type svorm_create = {
+	title: string;
+	elements: element_create[];
+};
+
 type question_submission = question & {
 	answer: string | null;
 };

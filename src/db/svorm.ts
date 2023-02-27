@@ -1,9 +1,9 @@
 import { supabase } from "./supabase";
 
-export async function save_svorm_to_database(svorm: svorm) {
+export async function save_svorm_title(title: string) {
 	const { data, error } = await supabase
 		.from("svorm")
-		.insert([{ title: svorm.title, elements: svorm.elements }])
+		.insert([{ title: title }])
 		.select();
 	return { data, error };
 }
