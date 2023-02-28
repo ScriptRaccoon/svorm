@@ -1,3 +1,5 @@
+import { get_elements } from "../../../db/element";
+import { get_svorm } from "../../../db/svorm";
 import type { PageServerLoad } from "./$types";
 
 const example_svorm: svorm_db = {
@@ -46,21 +48,11 @@ const example_elements: element_db[] = [
 	}
 ];
 
-async function get_svorm(id: string): Promise<svorm_db | null> {
-	// TODO: get this from database
-	return example_svorm;
-}
-
-async function get_elements(
-	svorm_id: string
-): Promise<element_db[] | null> {
-	// TODO: get this from database, ordered by index
-	return example_elements;
-}
-
 export const load = (async ({ params }) => {
-	const id = params.id;
-	const svorm = await get_svorm(id);
-	const elements = await get_elements(id);
+	const svorm_id = params.id;
+	// TODO: error handling
+	const svorm = ((await get_svorm(svorm_id)).data as svorm_db[])[0];
+	const elements = await get_elements(svorm_id);
+	console.log(elements);
 	return { svorm, elements };
 }) satisfies PageServerLoad;
