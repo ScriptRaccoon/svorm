@@ -16,9 +16,13 @@ export const POST = (async ({ request }) => {
 
 	const svorm_id = data[0].id as string;
 
-	for (let i = 0; i < svorm_data.elements.length; i++) {
-		const element = svorm_data.elements[i];
-		const { data, error } = await save_element(element, svorm_id);
+	for (let index = 0; index < svorm_data.elements.length; index++) {
+		const element = svorm_data.elements[index];
+		const { data, error } = await save_element(
+			element,
+			svorm_id,
+			index
+		);
 
 		if (!data || data.length == 0 || error) {
 			console.log(error);
