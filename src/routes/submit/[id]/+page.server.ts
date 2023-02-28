@@ -1,5 +1,5 @@
-import { get_elements } from "../../../db/element";
-import { get_svorm } from "../../../db/svorm";
+import { get_elements } from "@/db/element";
+import { get_svorm } from "@/db/svorm";
 import type { PageServerLoad } from "./$types";
 
 export const load = (async ({ params }) => {

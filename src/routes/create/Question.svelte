@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let element: question_create;
+	export let element: question;
 	export let index: number;
 </script>
 
