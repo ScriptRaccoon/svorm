@@ -18,7 +18,6 @@
 		background-color: var(--light-color);
 		padding: 1rem;
 		border-radius: 0.5rem;
-		box-shadow: 0.1rem 0.1rem 0.4rem #0006;
 		display: flex;
 		flex-direction: column;
 		gap: 0.75rem;
