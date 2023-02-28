@@ -5,13 +5,13 @@
 
 	export let data: PageData;
 
-	const { svorm } = data;
+	const { svorm, elements } = data;
 
-	if (!svorm) {
+	if (!svorm || !elements) {
 		goto("/");
 	}
 </script>
 
-{#if svorm}
-	<Submission {svorm} />
+{#if svorm && elements}
+	<Submission {svorm} {elements} />
 {/if}

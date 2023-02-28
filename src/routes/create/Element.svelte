@@ -2,7 +2,7 @@
 	import { createEventDispatcher } from "svelte";
 	import MultipleChoice from "./MultipleChoice.svelte";
 	import Question from "./Question.svelte";
-	export let element: element_create;
+	export let element: element;
 	export let index: number;
 	const dispatch = createEventDispatcher();
 </script>

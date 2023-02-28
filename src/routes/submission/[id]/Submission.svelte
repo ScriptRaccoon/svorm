@@ -1,16 +1,12 @@
 <script lang="ts">
-	import ElementSubmission from "./ElementSubmission.svelte";
+	import MultipleChoiceSubmission from "./MultipleChoiceSubmission.svelte";
+	import QuestionSubmission from "./QuestionSubmission.svelte";
 
-	export let svorm: svorm;
-
-	let submission: svorm_submission = {
-		id: svorm.id,
-		title: svorm.title,
-		elements: svorm.elements.map((element) => ({
-			...element,
-			answer: null
-		}))
-	};
+	export let svorm: svorm_db;
+	export let elements: element_db[];
+	let submission: (string | number)[] = elements.map((e) =>
+		"choices" in e ? 0 : ""
+	);
 
 	async function submit() {
 		const response = await fetch("/submission", {
@@ -18,7 +14,7 @@
 			headers: {
 				"Content-Type": "application/json"
 			},
-			body: JSON.stringify(submission)
+			body: JSON.stringify({ elements, submission })
 		});
 		const data = await response.json();
 		console.log(data);
@@ -26,13 +22,25 @@
 </script>
 
 <h2>
-	{submission.title}
+	{svorm.title}
 </h2>
 
 <ul class="elements">
-	{#each submission.elements as element, index}
+	{#each elements as element, index}
 		<li>
-			<ElementSubmission bind:element {index} />
+			<div class="element">
+				{#if "choices" in element}
+					<MultipleChoiceSubmission
+						bind:element
+						bind:answer={submission[index]}
+					/>
+				{:else}
+					<QuestionSubmission
+						bind:element
+						bind:answer={submission[index]}
+					/>
+				{/if}
+			</div>
 		</li>
 	{/each}
 </ul>
@@ -52,6 +60,15 @@
 		flex-direction: column;
 		gap: 1.75rem;
 		padding-block: 1rem;
+	}
+
+	.element {
+		background-color: var(--light-color);
+		padding: 1rem;
+		border-radius: 0.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
 	}
 
 	sup {

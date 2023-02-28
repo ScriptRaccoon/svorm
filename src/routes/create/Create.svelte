@@ -5,10 +5,10 @@
 
 	let title: string = "";
 
-	let elements: element_create[] = [];
+	let elements: element[] = [];
 
 	function add_question(): void {
-		const question: question_create = {
+		const question: question = {
 			required: false,
 			question: ""
 		};
@@ -16,7 +16,7 @@
 	}
 
 	function add_multiple_choice(): void {
-		const multiple_choice: multiple_choice_create = {
+		const multiple_choice: multiple_choice = {
 			required: false,
 			question: "",
 			choices: []
@@ -47,7 +47,7 @@
 		}
 	}
 
-	function delete_element(element: element_create): void {
+	function delete_element(element: element): void {
 		elements = elements.filter((_element) => _element != element);
 	}
 </script>

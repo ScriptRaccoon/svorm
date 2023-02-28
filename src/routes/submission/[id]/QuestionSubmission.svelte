@@ -1,6 +1,6 @@
 <script lang="ts">
-	export let element: question_submission;
-	export let index: number;
+	export let element: question_db;
+	export let answer: string | number;
 </script>
 
 <h3>
@@ -10,8 +10,8 @@
 </h3>
 
 <p>
-	<label for="answer{index}">Answer</label>
-	<input type="text" id="answer{index}" bind:value={element.answer} />
+	<label for="answer{element.id}">Answer</label>
+	<input type="text" id="answer{element.id}" bind:value={answer} />
 </p>
 
 <style>

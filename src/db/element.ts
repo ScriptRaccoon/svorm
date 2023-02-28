@@ -1,14 +1,14 @@
 import { supabase } from "./supabase";
 
 export async function save_element(
-	q: element_create,
+	element: element,
 	svorm_id: string,
 	index: number
 ) {
-	const table = "choices" in q ? "multiple_choice" : "question";
+	const table = "choices" in element ? "multiple_choice" : "question";
 	const { data, error } = await supabase
 		.from(table)
-		.insert([{ ...q, svorm_id, index }])
+		.insert([{ ...element, svorm_id, index }])
 		.select();
 	return { data, error };
 }

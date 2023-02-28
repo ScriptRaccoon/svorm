@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let element: multiple_choice_create;
+	export let element: multiple_choice;
 	export let index: number;
 	let next_choice: string = "";
 	function add_choice(): void {
