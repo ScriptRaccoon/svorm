@@ -11,6 +11,11 @@ type multiple_choice = {
 
 type element = question | multiple_choice;
 
+type svorm = {
+	title: string;
+	elements: element[];
+};
+
 type svorm_db = {
 	id: string;
 	title: string;
