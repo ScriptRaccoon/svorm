@@ -1,6 +1,6 @@
 <script lang="ts">
-	import MultipleChoiceSubmission from "./MultipleChoiceSubmission.svelte";
-	import QuestionSubmission from "./QuestionSubmission.svelte";
+	import MultipleChoiceSubmit from "./MultipleChoiceSubmit.svelte";
+	import QuestionSubmit from "./QuestionSubmit.svelte";
 
 	export let svorm: svorm_db;
 	export let elements: element_db[];
@@ -9,7 +9,7 @@
 	);
 
 	async function submit() {
-		const response = await fetch("/submission", {
+		const response = await fetch("/submit", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
@@ -30,12 +30,12 @@
 		<li>
 			<div class="element">
 				{#if "choices" in element}
-					<MultipleChoiceSubmission
+					<MultipleChoiceSubmit
 						bind:element
 						bind:answer={submission[index]}
 					/>
 				{:else}
-					<QuestionSubmission
+					<QuestionSubmit
 						bind:element
 						bind:answer={submission[index]}
 					/>

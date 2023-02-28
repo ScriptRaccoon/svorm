@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
 	import type { PageData } from "./$types";
-	import Submission from "./Submission.svelte";
+	import Submit from "./Submit.svelte";
 
 	export let data: PageData;
 
@@ -13,5 +13,5 @@
 </script>
 
 {#if svorm && elements}
-	<Submission {svorm} {elements} />
+	<Submit {svorm} {elements} />
 {/if}
