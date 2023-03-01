@@ -1,16 +1,25 @@
 import { supabase } from "./supabase";
 
-export async function save_element(
-	element: element,
-	svorm_id: string,
-	index: number
+export async function save_elements(
+	elements: element[],
+	svorm_id: string
 ) {
-	const table = "choices" in element ? "multiple_choice" : "question";
-	const { data, error } = await supabase
-		.from(table)
-		.insert([{ ...element, svorm_id, index }])
-		.select();
-	return { data, error };
+	const questions: Omit<question_db, "id">[] = [];
+	const multiple_choices: Omit<multiple_choice_db, "id">[] = [];
+
+	for (let index = 0; index < elements.length; index++) {
+		const element = elements[index];
+		if ("choices" in element) {
+			const multiple_choice = { ...element, svorm_id, index };
+			multiple_choices.push(multiple_choice);
+		} else {
+			const question = { ...element, svorm_id, index };
+			questions.push(question);
+		}
+	}
+
+	await supabase.from("question").insert(questions);
+	await supabase.from("multiple_choice").insert(multiple_choices);
 }
 
 export async function get_questions(svorm_id: string) {

@@ -7,6 +7,5 @@ export const load = (async ({ params }) => {
 	// TODO: error handling
 	const svorm = ((await get_svorm(svorm_id)).data as svorm_db[])[0];
 	const elements = await get_elements(svorm_id);
-	console.log(elements);
 	return { svorm, elements };
 }) satisfies PageServerLoad;

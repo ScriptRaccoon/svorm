@@ -17,7 +17,6 @@
 			body: JSON.stringify({ elements, submission })
 		});
 		const data = await response.json();
-		console.log(data);
 	}
 </script>
 
