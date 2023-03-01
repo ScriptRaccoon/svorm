@@ -11,7 +11,7 @@ export async function save_submission(
 	}));
 
 	const { error: question_error } = await supabase
-		.from("question_answers")
+		.from("questions_answers")
 		.insert(saved_questions);
 	if (question_error) {
 		console.log({ question_error });
@@ -26,7 +26,7 @@ export async function save_submission(
 	}));
 
 	const { error: multiple_choice_error } = await supabase
-		.from("multiple_choice_answers")
+		.from("multiple_choices_answers")
 		.insert(saved_multiple_choices);
 	if (multiple_choice_error) {
 		console.log({ multiple_choice_error });

@@ -4,7 +4,7 @@ export async function save_svorm(
 	svorm: svorm
 ): Promise<string | null> {
 	const { data, error } = await supabase
-		.from("svorm")
+		.from("svorms")
 		.insert([{ title: svorm.title }])
 		.select();
 	if (error || !data || data.length == 0) {
@@ -18,7 +18,7 @@ export async function get_svorm(
 	id: string
 ): Promise<svorm_db | null> {
 	const { data, error } = await supabase
-		.from("svorm")
+		.from("svorms")
 		.select()
 		.eq("id", id);
 	if (error || !data || data.length == 0) {

@@ -19,7 +19,7 @@ export async function save_elements(
 	}
 
 	const { error: question_error } = await supabase
-		.from("question")
+		.from("questions")
 		.insert(questions)
 		.select();
 	if (question_error) {
@@ -28,7 +28,7 @@ export async function save_elements(
 	}
 
 	const { error: multiple_choice_error } = await supabase
-		.from("multiple_choice")
+		.from("multiple_choices")
 		.insert(multiple_choices);
 	if (multiple_choice_error) {
 		console.log({ multiple_choice_error });
@@ -41,7 +41,7 @@ export async function get_questions(
 	svorm_id: string
 ): Promise<question_db[] | null> {
 	const { data, error } = await supabase
-		.from("question")
+		.from("questions")
 		.select()
 		.eq("svorm_id", svorm_id);
 	if (error || !data) {
@@ -55,7 +55,7 @@ export async function get_multiple_choices(
 	svorm_id: string
 ): Promise<multiple_choice_db[] | null> {
 	const { data, error } = await supabase
-		.from("multiple_choice")
+		.from("multiple_choices")
 		.select()
 		.eq("svorm_id", svorm_id);
 	if (error || !data) {
