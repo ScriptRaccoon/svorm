@@ -4,14 +4,16 @@
 	export let element: multiple_choice;
 	export let index: number;
 	let next_choice: string = "";
-	let input: HTMLInputElement;
+	let title_input: HTMLInputElement;
+	let choice_input: HTMLInputElement;
 	onMount(() => {
-		input?.focus();
+		title_input?.focus();
 	});
 
 	function add_choice(): void {
 		element.choices = [...element.choices, next_choice];
 		next_choice = "";
+		choice_input.focus();
 	}
 
 	function delete_choice(index: number): void {
@@ -26,7 +28,7 @@
 		type="text"
 		id="question{index}"
 		bind:value={element.question}
-		bind:this={input}
+		bind:this={title_input}
 	/>
 </p>
 
@@ -54,6 +56,7 @@
 		type="text"
 		bind:value={next_choice}
 		required
+		bind:this={choice_input}
 	/>
 	<button>Add choice</button>
 </form>
