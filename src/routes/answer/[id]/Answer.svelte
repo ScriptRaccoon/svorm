@@ -9,6 +9,7 @@
 	let loading = false;
 
 	let error_message = "";
+	let error_element: HTMLElement;
 
 	const questions = elements.filter(
 		(element) => !("choices" in element)
@@ -38,6 +39,7 @@
 		if (!valid) {
 			loading = false;
 			error_message = "Please fill in all required fields";
+			error_element.scrollIntoView();
 			return;
 		}
 		const response = await fetch("/answer", {
@@ -50,6 +52,7 @@
 			goto("/answered");
 		} else {
 			error_message = "Svorm could not be submitted";
+			error_element.scrollIntoView();
 		}
 	}
 
@@ -109,11 +112,9 @@
 	<Loader />
 {/if}
 
-{#if error_message}
-	<p class="error">
-		{error_message}
-	</p>
-{/if}
+<p class={error_message ? "error" : ""} bind:this={error_element}>
+	{error_message}
+</p>
 
 <style>
 	.elements {

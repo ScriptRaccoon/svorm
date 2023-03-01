@@ -10,6 +10,7 @@
 	let elements: element[] = [];
 
 	let error_message = "";
+	let error_element: HTMLElement;
 
 	let title_input: HTMLInputElement;
 
@@ -41,6 +42,8 @@
 		if (!valid) {
 			loading = false;
 			error_message = "Please fill in all required fields";
+			error_element.scrollIntoView();
+
 			return;
 		}
 
@@ -54,6 +57,7 @@
 
 		if (!response.ok) {
 			error_message = "Svorm could not be created";
+			error_element.scrollIntoView();
 			return;
 		}
 
@@ -74,6 +78,7 @@
 	function validate(): boolean {
 		return (
 			title.length > 0 &&
+			elements.length > 0 &&
 			elements.every((e) => {
 				if ("choices" in e) {
 					return e.question.length > 0 && e.choices.length > 0;
@@ -114,11 +119,9 @@
 	<Loader />
 {/if}
 
-{#if error_message}
-	<p class="error">
-		{error_message}
-	</p>
-{/if}
+<p class={error_message ? "error" : ""} bind:this={error_element}>
+	{error_message}
+</p>
 
 <style>
 	.elements {
