@@ -6,6 +6,9 @@
 		<li>
 			<a href="/create">Create a svorm</a>
 		</li>
+		<li>
+			<a href="/submit">Submit a svorm</a>
+		</li>
 	</ul>
 </nav>
 
