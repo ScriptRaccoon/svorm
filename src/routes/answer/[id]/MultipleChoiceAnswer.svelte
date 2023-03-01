@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let element: multiple_choice_db;
-	export let answer: number;
+	export let answer: number | null = null;
 </script>
 
 <h3>

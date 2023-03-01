@@ -20,7 +20,7 @@
 	);
 
 	const answers_multiple_choices = Object.fromEntries(
-		multiple_choices.map((m) => [m.id, 0])
+		multiple_choices.map((m) => [m.id, null])
 	);
 
 	const submission: submission = {
@@ -30,6 +30,11 @@
 
 	async function submit_answers() {
 		error_message = "";
+		const valid = validate_submission();
+		if (!valid) {
+			error_message = "Please fill in all required fields";
+			return;
+		}
 		const response = await fetch("/answer", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -40,6 +45,25 @@
 		} else {
 			error_message = "Svorm could not be submitted";
 		}
+	}
+
+	function validate_submission(): boolean {
+		return (
+			questions.every(
+				(question) =>
+					!(
+						question.required &&
+						answers_questions[question.id].length == 0
+					)
+			) &&
+			multiple_choices.every(
+				(multiple_choice) =>
+					!(
+						multiple_choice.required &&
+						answers_multiple_choices[multiple_choice.id] === null
+					)
+			)
+		);
 	}
 </script>
 

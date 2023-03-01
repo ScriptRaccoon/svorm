@@ -48,6 +48,6 @@ type submission = {
 		[k: string]: string;
 	};
 	answers_multiple_choices: {
-		[k: string]: number;
+		[k: string]: number | null;
 	};
 };
