@@ -1,11 +1,11 @@
 import { supabase } from "./supabase";
 
-export async function save_svorm_title(
-	title: string
+export async function save_svorm(
+	svorm: svorm
 ): Promise<string | null> {
 	const { data, error } = await supabase
 		.from("svorm")
-		.insert([{ title: title }])
+		.insert([{ title: svorm.title }])
 		.select();
 	if (error || !data || data.length == 0) {
 		console.log(error);
