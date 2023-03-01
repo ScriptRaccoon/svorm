@@ -6,12 +6,6 @@
 	export let data: PageData;
 
 	const { svorm, elements } = data;
-
-	if (!svorm || !elements) {
-		goto("/");
-	}
 </script>
 
-{#if svorm && elements}
-	<Submit {svorm} {elements} />
-{/if}
+<Submit {svorm} {elements} />
