@@ -3,7 +3,7 @@ import { get_svorm } from "@/db/svorm";
 import { error } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 
-export const load = (async ({ params }) => {
+export const load: PageServerLoad = async ({ params }) => {
 	const { id } = params;
 
 	const svorm = await get_svorm(id);
@@ -22,4 +22,4 @@ export const load = (async ({ params }) => {
 	}
 
 	return { svorm, elements };
-}) satisfies PageServerLoad;
+};

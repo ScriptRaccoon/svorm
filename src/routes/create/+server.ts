@@ -5,7 +5,7 @@ import { save_svorm } from "@/db/svorm";
 
 import type { RequestHandler } from "./$types";
 
-export const POST = (async ({ request }) => {
+export const POST: RequestHandler = async ({ request }) => {
 	const svorm = (await request.json()) as svorm;
 
 	const svorm_id = await save_svorm(svorm);
@@ -21,4 +21,4 @@ export const POST = (async ({ request }) => {
 	}
 
 	return json({ id: svorm_id });
-}) satisfies RequestHandler;
+};
