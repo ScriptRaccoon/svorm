@@ -9,10 +9,10 @@
 	{/if}
 </h3>
 
-<p>
-	<label for="answer{element.id}">Answer</label>
-	<input type="text" id="answer{element.id}" bind:value={answer} />
-</p>
+<label>
+	Answer
+	<input type="text" bind:value={answer} />
+</label>
 
 <style>
 	sup {
