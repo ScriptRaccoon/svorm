@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
+	import Loader from "@/lib/Loader.svelte";
 	import { onMount } from "svelte";
 	import Element from "./Element.svelte";
 	import Menu from "./Menu.svelte";
@@ -11,6 +12,8 @@
 	let error_message = "";
 
 	let title_input: HTMLInputElement;
+
+	let loading = false;
 
 	function add_question(): void {
 		const question: question = {
@@ -30,6 +33,7 @@
 	}
 
 	async function create_svorm(): Promise<void> {
+		loading = true;
 		error_message = "";
 
 		const response = await fetch("/create", {
@@ -37,6 +41,8 @@
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ title, elements })
 		});
+
+		loading = false;
 
 		if (!response.ok) {
 			error_message = "Svorm could not be created";
@@ -82,6 +88,10 @@
 	on:question={add_question}
 	on:finish={create_svorm}
 />
+
+{#if loading}
+	<Loader />
+{/if}
 
 {#if error_message}
 	<p class="error">

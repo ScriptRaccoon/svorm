@@ -1,10 +1,13 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
+	import Loader from "@/lib/Loader.svelte";
 	import MultipleChoiceAnswer from "./MultipleChoiceAnswer.svelte";
 	import QuestionAnswer from "./QuestionAnswer.svelte";
 
 	export let svorm: svorm_db;
 	export let elements: element_db[];
+	let loading = false;
+
 	let error_message = "";
 
 	const questions = elements.filter(
@@ -29,9 +32,11 @@
 	};
 
 	async function submit_answers() {
+		loading = true;
 		error_message = "";
 		const valid = validate_submission();
 		if (!valid) {
+			loading = false;
 			error_message = "Please fill in all required fields";
 			return;
 		}
@@ -40,6 +45,7 @@
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(submission)
 		});
+		loading = false;
 		if (response.ok) {
 			goto("/answered");
 		} else {
@@ -98,6 +104,10 @@
 <menu>
 	<button on:click={submit_answers}>Submit your answers</button>
 </menu>
+
+{#if loading}
+	<Loader />
+{/if}
 
 {#if error_message}
 	<p class="error">
