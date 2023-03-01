@@ -18,8 +18,23 @@ export async function save_elements(
 		}
 	}
 
-	await supabase.from("question").insert(questions);
-	await supabase.from("multiple_choice").insert(multiple_choices);
+	const { data: question_data, error: question_error } =
+		await supabase.from("question").insert(questions).select();
+	if (question_error || !question_data) {
+		console.log(question_error);
+		return null;
+	}
+
+	const { data: multiple_choice_data, error: multiple_choice_error } =
+		await supabase
+			.from("multiple_choice")
+			.insert(multiple_choices)
+			.select();
+	if (multiple_choice_error || !multiple_choice_data) {
+		console.log(multiple_choice_error);
+		return null;
+	}
+	return [question_data, multiple_choice_data];
 }
 
 export async function get_questions(
