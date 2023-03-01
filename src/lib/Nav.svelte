@@ -7,7 +7,7 @@
 			<a href="/create">Create a svorm</a>
 		</li>
 		<li>
-			<a href="/submit">Submit a svorm</a>
+			<a href="/answer">Answer a svorm</a>
 		</li>
 	</ul>
 </nav>

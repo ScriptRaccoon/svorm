@@ -4,7 +4,7 @@
 	let id: string = "";
 </script>
 
-<h2>Submit a Svorm</h2>
+<h2>Answer a Svorm</h2>
 
 <label>
 	Svorm ID
@@ -12,7 +12,7 @@
 </label>
 
 <menu>
-	<button on:click={() => goto(`/submit/${id}`)}>Go</button>
+	<button on:click={() => goto(`/answer/${id}`)}>Go</button>
 </menu>
 
 <style>

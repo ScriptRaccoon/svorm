@@ -1,10 +1,10 @@
 <script lang="ts">
 	import type { PageData } from "./$types";
-	import Submit from "./Submit.svelte";
+	import Answer from "./Answer.svelte";
 
 	export let data: PageData;
 
 	const { svorm, elements } = data;
 </script>
 
-<Submit {svorm} {elements} />
+<Answer {svorm} {elements} />

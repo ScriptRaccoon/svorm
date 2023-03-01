@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
-	import MultipleChoiceSubmit from "./MultipleChoiceSubmit.svelte";
-	import QuestionSubmit from "./QuestionSubmit.svelte";
+	import MultipleChoiceAnswer from "./MultipleChoiceAnswer.svelte";
+	import QuestionAnswer from "./QuestionAnswer.svelte";
 
 	export let svorm: svorm_db;
 	export let elements: element_db[];
@@ -27,14 +27,14 @@
 		answers_multiple_choices
 	};
 
-	async function submit() {
-		const response = await fetch("/submit", {
+	async function submit_answers() {
+		const response = await fetch("/answer", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(submission)
 		});
 		if (response.ok) {
-			goto("/submitted");
+			goto("/answered");
 		} else {
 			const data = await response.json();
 			window.alert(data.message);
@@ -51,12 +51,12 @@
 		<li>
 			<div class="element">
 				{#if "choices" in element}
-					<MultipleChoiceSubmit
+					<MultipleChoiceAnswer
 						bind:element
 						bind:answer={answers_multiple_choices[element.id]}
 					/>
 				{:else}
-					<QuestionSubmit
+					<QuestionAnswer
 						bind:element
 						bind:answer={answers_questions[element.id]}
 					/>
@@ -71,7 +71,7 @@
 </p>
 
 <menu>
-	<button on:click={submit}>Submit</button>
+	<button on:click={submit_answers}>Submit your answers</button>
 </menu>
 
 <style>
@@ -97,7 +97,7 @@
 	}
 
 	menu {
-		padding-block: 1rem;
+		margin-top: 1rem;
 		text-align: center;
 	}
 </style>
