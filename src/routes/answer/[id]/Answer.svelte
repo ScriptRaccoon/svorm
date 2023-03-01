@@ -5,6 +5,7 @@
 
 	export let svorm: svorm_db;
 	export let elements: element_db[];
+	let error_message = "";
 
 	const questions = elements.filter(
 		(element) => !("choices" in element)
@@ -28,6 +29,7 @@
 	};
 
 	async function submit_answers() {
+		error_message = "";
 		const response = await fetch("/answer", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -36,8 +38,7 @@
 		if (response.ok) {
 			goto("/answered");
 		} else {
-			const data = await response.json();
-			window.alert(data.message);
+			error_message = "Svorm could not be submitted";
 		}
 	}
 </script>
@@ -74,6 +75,12 @@
 	<button on:click={submit_answers}>Submit your answers</button>
 </menu>
 
+{#if error_message}
+	<p class="error">
+		{error_message}
+	</p>
+{/if}
+
 <style>
 	.elements {
 		list-style-type: none;
@@ -97,7 +104,12 @@
 	}
 
 	menu {
-		margin-top: 1rem;
+		padding-block: 1rem;
 		text-align: center;
+	}
+
+	.error {
+		color: var(--danger-color);
+		font-weight: bold;
 	}
 </style>

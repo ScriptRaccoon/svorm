@@ -7,6 +7,8 @@
 
 	let elements: element[] = [];
 
+	let error_message = "";
+
 	function add_question(): void {
 		const question: question = {
 			required: false,
@@ -24,25 +26,24 @@
 		elements = [...elements, multiple_choice];
 	}
 
-	async function createSvorm(): Promise<void> {
-		try {
-			const response = await fetch("/create", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ title, elements })
-			});
-			if (!response.ok) {
-				throw response.status + " Error: Svorm could not be created";
-			}
-			const data = await response.json();
-			const id = data.id as string;
+	async function create_svorm(): Promise<void> {
+		error_message = "";
 
-			if (!id) throw "Error: Svorm has unknown ID";
+		const response = await fetch("/create", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ title, elements })
+		});
 
-			goto(`created/${id}`);
-		} catch (errorMessage) {
-			window.alert(errorMessage);
+		if (!response.ok) {
+			error_message = "Svorm could not be created";
+			return;
 		}
+
+		const data = await response.json();
+		const id = data.id as string;
+
+		goto(`created/${id}`);
 	}
 
 	function delete_element(element: element): void {
@@ -72,8 +73,14 @@
 <Menu
 	on:choice={add_multiple_choice}
 	on:question={add_question}
-	on:finish={createSvorm}
+	on:finish={create_svorm}
 />
+
+{#if error_message}
+	<p class="error">
+		{error_message}
+	</p>
+{/if}
 
 <style>
 	.elements {
@@ -82,5 +89,10 @@
 		flex-direction: column;
 		gap: 1.75rem;
 		padding-block: 2rem;
+	}
+
+	.error {
+		color: var(--danger-color);
+		font-weight: bold;
 	}
 </style>
