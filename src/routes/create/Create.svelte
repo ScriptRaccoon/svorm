@@ -17,6 +17,7 @@
 	let loading = false;
 
 	function add_question(): void {
+		error_message = "";
 		const question: question = {
 			required: false,
 			question: ""
@@ -25,6 +26,7 @@
 	}
 
 	function add_multiple_choice(): void {
+		error_message = "";
 		const multiple_choice: multiple_choice = {
 			required: false,
 			question: "",
