@@ -28,20 +28,18 @@
 		try {
 			const response = await fetch("/create", {
 				method: "POST",
-				headers: {
-					"Content-Type": "application/json"
-				},
+				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ title, elements })
 			});
 			if (!response.ok) {
-				throw response.status + " error: svorm could not be created";
+				throw response.status + " Error: Svorm could not be created";
 			}
 			const data = await response.json();
-			const id = data.id;
+			const id = data.id as string;
 
-			if (!id) throw "error: svorm has unknown ID";
+			if (!id) throw "Error: Svorm has unknown ID";
 
-			goto("created/" + id);
+			goto(`created/${id}`);
 		} catch (errorMessage) {
 			window.alert(errorMessage);
 		}
