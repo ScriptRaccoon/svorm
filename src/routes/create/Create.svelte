@@ -36,6 +36,14 @@
 		loading = true;
 		error_message = "";
 
+		const valid = validate();
+
+		if (!valid) {
+			loading = false;
+			error_message = "Please fill in all required fields";
+			return;
+		}
+
 		const response = await fetch("/create", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -62,6 +70,19 @@
 	onMount(() => {
 		title_input?.focus();
 	});
+
+	function validate(): boolean {
+		return (
+			title.length > 0 &&
+			elements.every((e) => {
+				if ("choices" in e) {
+					return e.question.length > 0 && e.choices.length > 0;
+				} else {
+					return e.question.length > 0;
+				}
+			})
+		);
+	}
 </script>
 
 <h2>Create a svorm</h2>
