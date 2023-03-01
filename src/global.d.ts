@@ -18,17 +18,20 @@ type svorm = {
 
 type svorm_db = {
 	id: string;
+	created_at: string;
 	title: string;
 };
 
 type question_db = question & {
 	id: string;
+	created_at: string;
 	svorm_id: string;
 	index: number;
 };
 
 type multiple_choice_db = multiple_choice & {
 	id: string;
+	created_at: string;
 	svorm_id: string;
 	index: number;
 };
