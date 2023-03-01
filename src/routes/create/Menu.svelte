@@ -5,12 +5,12 @@
 
 <menu>
 	<button on:click={() => dispatch("question")}>
-		Add simple question
+		Add question
 	</button>
 	<button on:click={() => dispatch("choice")}>
-		Add multiple choice question
+		Add multiple choice
 	</button>
-	<button on:click={() => dispatch("finish")}>Finish svorm</button>
+	<button on:click={() => dispatch("finish")}>Create svorm</button>
 </menu>
 
 <style lang="scss">

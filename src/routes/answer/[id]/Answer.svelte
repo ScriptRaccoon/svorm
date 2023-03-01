@@ -78,7 +78,7 @@
 </h2>
 
 <ul class="elements">
-	{#each elements as element, index}
+	{#each elements as element}
 		<li>
 			<div class="element">
 				{#if "choices" in element}
