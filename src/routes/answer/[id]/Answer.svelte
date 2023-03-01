@@ -107,9 +107,4 @@
 		padding-block: 1rem;
 		text-align: center;
 	}
-
-	.error {
-		color: var(--danger-color);
-		font-weight: bold;
-	}
 </style>

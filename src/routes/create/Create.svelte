@@ -90,9 +90,4 @@
 		gap: 1.75rem;
 		padding-block: 2rem;
 	}
-
-	.error {
-		color: var(--danger-color);
-		font-weight: bold;
-	}
 </style>
