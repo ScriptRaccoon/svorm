@@ -1,8 +1,13 @@
-import { json } from "@sveltejs/kit";
+import { save_submission } from "@/db/answer";
+import { error, json } from "@sveltejs/kit";
 import type { RequestHandler } from "./$types";
 
 export const POST = (async ({ request }) => {
-	const data = (await request.json()) as submission;
-
-	return json({ message: "ok" });
+	const submission = (await request.json()) as submission;
+	const saved = await save_submission(submission);
+	if (!saved) {
+		throw error(500, "Submission was not successful");
+	} else {
+		return json({ message: "ok" });
+	}
 }) satisfies RequestHandler;
