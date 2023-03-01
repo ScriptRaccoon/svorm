@@ -37,3 +37,12 @@ type multiple_choice_db = multiple_choice & {
 };
 
 type element_db = question_db | multiple_choice_db;
+
+type submission = {
+	answers_questions: {
+		[k: string]: string;
+	};
+	answers_multiple_choices: {
+		[k: string]: number;
+	};
+};

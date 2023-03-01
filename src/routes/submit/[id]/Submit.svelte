@@ -21,7 +21,10 @@
 		multiple_choices.map((m) => [m.id, 0])
 	);
 
-	const submission = { answers_questions, answers_multiple_choices };
+	const submission: submission = {
+		answers_questions,
+		answers_multiple_choices
+	};
 
 	async function submit() {
 		const response = await fetch("/submit", {
