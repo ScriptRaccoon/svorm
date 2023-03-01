@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
+	import { onMount } from "svelte";
 	import Element from "./Element.svelte";
 	import Menu from "./Menu.svelte";
 
@@ -8,6 +9,8 @@
 	let elements: element[] = [];
 
 	let error_message = "";
+
+	let title_input: HTMLInputElement;
 
 	function add_question(): void {
 		const question: question = {
@@ -49,12 +52,16 @@
 	function delete_element(element: element): void {
 		elements = elements.filter((_element) => _element != element);
 	}
+
+	onMount(() => {
+		title_input?.focus();
+	});
 </script>
 
 <h2>Create a svorm</h2>
 
 <label for="title">Title</label>
-<input type="text" bind:value={title} />
+<input type="text" bind:value={title} bind:this={title_input} />
 
 {#if elements.length > 0}
 	<ul class="elements">

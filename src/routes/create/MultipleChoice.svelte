@@ -1,7 +1,14 @@
 <script lang="ts">
+	import { onMount } from "svelte";
+
 	export let element: multiple_choice;
 	export let index: number;
 	let next_choice: string = "";
+	let input: HTMLInputElement;
+	onMount(() => {
+		input?.focus();
+	});
+
 	function add_choice(): void {
 		element.choices = [...element.choices, next_choice];
 		next_choice = "";
@@ -19,6 +26,7 @@
 		type="text"
 		id="question{index}"
 		bind:value={element.question}
+		bind:this={input}
 	/>
 </p>
 
