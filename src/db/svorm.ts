@@ -14,10 +14,17 @@ export async function save_svorm(
 	return data[0].id;
 }
 
-export async function get_svorm(id: string) {
+export async function get_svorm(
+	id: string
+): Promise<svorm_db | null> {
 	const { data, error } = await supabase
 		.from("svorm")
 		.select()
 		.eq("id", id);
-	return { data, error };
+	if (error || !data || data.length == 0) {
+		console.log(error);
+		return null;
+	}
+	const svorm = data[0] as svorm_db;
+	return svorm;
 }
