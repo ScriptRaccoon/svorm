@@ -22,6 +22,11 @@ type svorm_db = {
 	title: string;
 };
 
+type element_save = {
+	svorm_id: string;
+	index: number;
+};
+
 type question_db = question & {
 	id: string;
 	created_at: string;

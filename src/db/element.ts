@@ -4,8 +4,8 @@ export async function save_elements(
 	elements: element[],
 	svorm_id: string
 ): Promise<boolean> {
-	const questions: Omit<question_db, "id">[] = [];
-	const multiple_choices: Omit<multiple_choice_db, "id">[] = [];
+	const questions: (question & element_save)[] = [];
+	const multiple_choices: (multiple_choice & element_save)[] = [];
 
 	for (let index = 0; index < elements.length; index++) {
 		const element = elements[index];
