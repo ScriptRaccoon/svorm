@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from "$app/navigation";
 	import type { PageData } from "./$types";
 	import Submit from "./Submit.svelte";
 

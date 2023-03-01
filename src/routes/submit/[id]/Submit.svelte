@@ -4,19 +4,33 @@
 
 	export let svorm: svorm_db;
 	export let elements: element_db[];
-	let submission: (string | number)[] = elements.map((e) =>
-		"choices" in e ? 0 : ""
+
+	const questions = elements.filter(
+		(element) => !("choices" in element)
 	);
+
+	const multiple_choices = elements.filter(
+		(element) => "choices" in element
+	);
+
+	const answers_questions = Object.fromEntries(
+		questions.map((q) => [q.id, ""])
+	);
+
+	const answers_multiple_choices = Object.fromEntries(
+		multiple_choices.map((m) => [m.id, 0])
+	);
+
+	const submission = { answers_questions, answers_multiple_choices };
 
 	async function submit() {
 		const response = await fetch("/submit", {
 			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify({ elements, submission })
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(submission)
 		});
 		const data = await response.json();
+		window.alert(JSON.stringify(data)); // TODO: handle data
 	}
 </script>
 
@@ -31,12 +45,12 @@
 				{#if "choices" in element}
 					<MultipleChoiceSubmit
 						bind:element
-						bind:answer={submission[index]}
+						bind:answer={answers_multiple_choices[element.id]}
 					/>
 				{:else}
 					<QuestionSubmit
 						bind:element
-						bind:answer={submission[index]}
+						bind:answer={answers_questions[element.id]}
 					/>
 				{/if}
 			</div>

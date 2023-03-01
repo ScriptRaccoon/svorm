@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let element: question_db;
-	export let answer: string | number;
+	export let answer: string;
 </script>
 
 <h3>
