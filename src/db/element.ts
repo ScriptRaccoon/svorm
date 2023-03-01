@@ -3,7 +3,7 @@ import { supabase } from "./supabase";
 export async function save_elements(
 	elements: element[],
 	svorm_id: string
-) {
+): Promise<boolean> {
 	const questions: Omit<question_db, "id">[] = [];
 	const multiple_choices: Omit<multiple_choice_db, "id">[] = [];
 
@@ -18,23 +18,23 @@ export async function save_elements(
 		}
 	}
 
-	const { data: question_data, error: question_error } =
-		await supabase.from("question").insert(questions).select();
-	if (question_error || !question_data) {
-		console.log(question_error);
-		return null;
+	const { error: question_error } = await supabase
+		.from("question")
+		.insert(questions)
+		.select();
+	if (question_error) {
+		console.log({ question_error });
+		return false;
 	}
 
-	const { data: multiple_choice_data, error: multiple_choice_error } =
-		await supabase
-			.from("multiple_choice")
-			.insert(multiple_choices)
-			.select();
-	if (multiple_choice_error || !multiple_choice_data) {
-		console.log(multiple_choice_error);
-		return null;
+	const { error: multiple_choice_error } = await supabase
+		.from("multiple_choice")
+		.insert(multiple_choices);
+	if (multiple_choice_error) {
+		console.log({ multiple_choice_error });
+		return false;
 	}
-	return [question_data, multiple_choice_data];
+	return true;
 }
 
 export async function get_questions(
@@ -45,7 +45,7 @@ export async function get_questions(
 		.select()
 		.eq("svorm_id", svorm_id);
 	if (error || !data) {
-		console.log(error);
+		console.log({ error });
 		return null;
 	}
 	return data as question_db[];
@@ -59,7 +59,7 @@ export async function get_multiple_choices(
 		.select()
 		.eq("svorm_id", svorm_id);
 	if (error || !data) {
-		console.log(error);
+		console.log({ error });
 		return null;
 	}
 	return data as multiple_choice_db[];

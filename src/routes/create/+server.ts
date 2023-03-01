@@ -20,7 +20,5 @@ export const POST = (async ({ request }) => {
 		throw error(500, "Elements could not be created");
 	}
 
-	console.log(saved);
-
 	return json({ id: svorm_id });
 }) satisfies RequestHandler;
