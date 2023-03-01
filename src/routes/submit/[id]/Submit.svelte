@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from "$app/navigation";
 	import MultipleChoiceSubmit from "./MultipleChoiceSubmit.svelte";
 	import QuestionSubmit from "./QuestionSubmit.svelte";
 
@@ -32,8 +33,12 @@
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(submission)
 		});
-		const data = await response.json();
-		window.alert(JSON.stringify(data)); // TODO: handle data
+		if (response.ok) {
+			goto("/submitted");
+		} else {
+			const data = await response.json();
+			window.alert(data.message);
+		}
 	}
 </script>
 
