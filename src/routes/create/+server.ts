@@ -17,7 +17,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	const saved = await save_questions(svorm.questions, svorm_id);
 
 	if (!saved) {
-		throw error(500, "Elements could not be created");
+		throw error(500, "Questions could not be created");
 	}
 
 	return json({ id: svorm_id });

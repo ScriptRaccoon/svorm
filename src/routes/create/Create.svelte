@@ -93,7 +93,7 @@
 <input type="text" bind:value={title} bind:this={title_input} />
 
 {#if questions.length > 0}
-	<ul class="elements">
+	<ul class="questions">
 		{#each questions as element, index}
 			<li>
 				<Question
@@ -117,7 +117,7 @@
 <Error {error_message} />
 
 <style>
-	.elements {
+	.questions {
 		list-style-type: none;
 		display: flex;
 		flex-direction: column;

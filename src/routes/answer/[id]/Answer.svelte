@@ -2,26 +2,25 @@
 	import { goto } from "$app/navigation";
 	import Error from "@/lib/Error.svelte";
 	import Loader from "@/lib/Loader.svelte";
-	import {} from "@/utils";
 	import MultipleChoiceAnswer from "./MultipleChoiceAnswer.svelte";
-	import QuestionAnswer from "./QuestionAnswer.svelte";
+	import SimpleAnswer from "././SimpleAnswer.svelte";
 
 	export let svorm: svorm_db;
-	export let elements: element_db[];
+	export let questions: question_db[];
 	let loading = false;
 
 	let error_message = "";
 
-	const questions = elements.filter(
-		(element) => !("choices" in element)
+	const simple_questions = questions.filter(
+		(q) => q.type === "simple_question"
 	);
 
-	const multiple_choices = elements.filter(
-		(element) => "choices" in element
+	const multiple_choices = questions.filter(
+		(q) => q.type === "multiple_choice"
 	);
 
-	const answers_questions = Object.fromEntries(
-		questions.map((q) => [q.id, ""])
+	const answers_simple_questions = Object.fromEntries(
+		simple_questions.map((q) => [q.id, ""])
 	);
 
 	const answers_multiple_choices = Object.fromEntries(
@@ -29,7 +28,7 @@
 	);
 
 	const submission: submission = {
-		answers_questions,
+		answers_simple_questions,
 		answers_multiple_choices
 	};
 
@@ -61,7 +60,7 @@
 				(question) =>
 					!(
 						question.required &&
-						answers_questions[question.id].length == 0
+						answers_simple_questions[question.id].length == 0
 					)
 			) &&
 			multiple_choices.every(
@@ -79,19 +78,19 @@
 	{svorm.title}
 </h2>
 
-<ul class="elements">
-	{#each elements as element}
+<ul class="questions">
+	{#each questions as question}
 		<li>
 			<div class="element">
-				{#if "choices" in element}
+				{#if question.type === "multiple_choice"}
 					<MultipleChoiceAnswer
-						bind:element
-						bind:answer={answers_multiple_choices[element.id]}
+						bind:question
+						bind:answer={answers_multiple_choices[question.id]}
 					/>
-				{:else}
-					<QuestionAnswer
-						bind:element
-						bind:answer={answers_questions[element.id]}
+				{:else if question.type === "simple_question"}
+					<SimpleAnswer
+						bind:question
+						bind:answer={answers_simple_questions[question.id]}
 					/>
 				{/if}
 			</div>
@@ -112,7 +111,7 @@
 <Error {error_message} />
 
 <style>
-	.elements {
+	.questions {
 		list-style-type: none;
 		display: flex;
 		flex-direction: column;

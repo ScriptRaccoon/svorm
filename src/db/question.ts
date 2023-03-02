@@ -28,34 +28,15 @@ export async function get_questions(
 		.from("questions")
 		.select()
 		.eq("svorm_id", svorm_id);
+
 	if (error || !data) {
 		console.log({ error });
 		return null;
 	}
-	return data as question_db[];
-}
 
-export async function get_multiple_choices(
-	svorm_id: string
-): Promise<multiple_choice_db[] | null> {
-	const { data, error } = await supabase
-		.from("multiple_choices")
-		.select()
-		.eq("svorm_id", svorm_id);
-	if (error || !data) {
-		console.log({ error });
-		return null;
-	}
-	return data as multiple_choice_db[];
-}
+	const questions = data.sort(
+		(a, b) => a.index - b.index
+	) as question_db[];
 
-export async function get_elements(
-	svorm_id: string
-): Promise<element_db[] | null> {
-	const questions = await get_questions(svorm_id);
-	const multiple_choices = await get_multiple_choices(svorm_id);
-	if (!questions || !multiple_choices) return null;
-	const elements: element_db[] = questions.concat(multiple_choices);
-	const sorted_elements = elements.sort((e, f) => e.index - f.index);
-	return sorted_elements;
+	return questions;
 }

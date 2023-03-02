@@ -24,29 +24,26 @@ type svorm_db = {
 	title: string;
 };
 
+type _db = {
+	id: string;
+	created_at: string;
+	svorm_id: string;
+	index: number;
+};
+
+type simple_question_db = simple_question & _db;
+
+type multiple_choice_db = multiple_choice & _db;
+
+type question_db = simple_question_db | multiple_choice_db;
+
 type element_save = {
 	svorm_id: string;
 	index: number;
 };
 
-type question_db = question & {
-	id: string;
-	created_at: string;
-	svorm_id: string;
-	index: number;
-};
-
-type multiple_choice_db = multiple_choice & {
-	id: string;
-	created_at: string;
-	svorm_id: string;
-	index: number;
-};
-
-type element_db = question_db | multiple_choice_db;
-
 type submission = {
-	answers_questions: {
+	answers_simple_questions: {
 		[k: string]: string;
 	};
 	answers_multiple_choices: {

@@ -1,4 +1,4 @@
-import { get_elements } from "@/db/question";
+import { get_questions } from "@/db/question";
 import { get_svorm } from "@/db/svorm";
 import { error } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
@@ -12,14 +12,14 @@ export const load: PageServerLoad = async ({ params }) => {
 		throw error(404, "No svorm was found with this ID");
 	}
 
-	const elements = await get_elements(id);
+	const questions = await get_questions(id);
 
-	if (!elements) {
+	if (!questions) {
 		throw error(
 			404,
-			"The elements of this svorm could not be loaded"
+			"The questions of this svorm could not be loaded"
 		);
 	}
 
-	return { svorm, elements };
+	return { svorm, questions };
 };
