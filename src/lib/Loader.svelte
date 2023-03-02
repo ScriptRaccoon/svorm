@@ -1,9 +1,15 @@
-<script>
+<script lang="ts">
+	import { scroll_to_bottom } from "@/utils";
+	import { tick } from "svelte";
+
 	export let loading = false;
+	$: if (loading) {
+		tick().then(scroll_to_bottom);
+	}
 </script>
 
 {#if loading}
-	<div class="wrapper">
+	<div class="loader">
 		<div class="ring">
 			<div />
 			<div />
@@ -14,7 +20,7 @@
 {/if}
 
 <style>
-	.wrapper {
+	.loader {
 		display: flex;
 		justify-content: center;
 	}
