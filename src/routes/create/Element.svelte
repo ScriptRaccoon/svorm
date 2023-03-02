@@ -1,15 +1,40 @@
 <script lang="ts">
+	import { onMount, createEventDispatcher } from "svelte";
 	import MultipleChoice from "./MultipleChoice.svelte";
-	import Question from "./Question.svelte";
+	import Fa from "svelte-fa";
+	import { faTrash } from "@fortawesome/free-solid-svg-icons";
+
+	const dispatch = createEventDispatcher();
+
 	export let element: element;
 	export let index: number;
+
+	let title = "choices" in element ? "Multiple Choice" : "Question";
+	let question_input: HTMLElement;
+
+	onMount(() => {
+		question_input?.focus();
+	});
 </script>
 
 <div class="element">
+	<div class="header">
+		<h3>{title}</h3>
+		<button class="small danger" on:click={() => dispatch("delete")}>
+			<Fa icon={faTrash} />
+		</button>
+	</div>
+	<p>
+		<label for="question{index}">Question</label>
+		<input
+			type="text"
+			id="question{index}"
+			bind:value={element.question}
+			bind:this={question_input}
+		/>
+	</p>
 	{#if "choices" in element}
-		<MultipleChoice {index} bind:element on:delete />
-	{:else}
-		<Question {index} bind:element on:delete />
+		<MultipleChoice bind:element on:delete />
 	{/if}
 	<p>
 		<label for="required{index}">Required</label>
@@ -19,7 +44,6 @@
 			bind:checked={element.required}
 		/>
 	</p>
-	<menu />
 </div>
 
 <style lang="scss">
@@ -30,9 +54,15 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.75rem;
+	}
 
-		:global(h3) {
-			text-transform: uppercase;
-		}
+	h3 {
+		text-transform: uppercase;
+	}
+
+	.header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 	}
 </style>
