@@ -3,36 +3,34 @@
 	import Error from "@/lib/Error.svelte";
 	import Loader from "@/lib/Loader.svelte";
 	import { onMount } from "svelte";
-	import Element from "./Element.svelte";
+	import Question from "./Question.svelte";
 	import Menu from "./Menu.svelte";
 
 	let title: string = "";
-
-	let elements: element[] = [];
-
+	let questions: question[] = [];
 	let error_message = "";
-
 	let title_input: HTMLInputElement;
-
 	let loading = false;
 
-	function add_question(): void {
+	function add_simple_question(): void {
 		error_message = "";
-		const question: question = {
+		const q: simple_question = {
+			type: "simple_question",
 			required: false,
 			question: ""
 		};
-		elements = [...elements, question];
+		questions = [...questions, q];
 	}
 
 	function add_multiple_choice(): void {
 		error_message = "";
-		const multiple_choice: multiple_choice = {
+		const m: multiple_choice = {
+			type: "multiple_choice",
 			required: false,
 			question: "",
 			choices: []
 		};
-		elements = [...elements, multiple_choice];
+		questions = [...questions, m];
 	}
 
 	async function create_svorm(): Promise<void> {
@@ -50,7 +48,7 @@
 		const response = await fetch("/create", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ title, elements })
+			body: JSON.stringify({ title, questions })
 		});
 
 		loading = false;
@@ -66,8 +64,8 @@
 		goto(`created/${id}`);
 	}
 
-	function delete_element(element: element): void {
-		elements = elements.filter((_element) => _element != element);
+	function delete_question(q: question): void {
+		questions = questions.filter((_q) => _q != q);
 	}
 
 	onMount(() => {
@@ -77,9 +75,9 @@
 	function validate(): boolean {
 		return (
 			title.length > 0 &&
-			elements.length > 0 &&
-			elements.every((e) => {
-				if ("choices" in e) {
+			questions.length > 0 &&
+			questions.every((e) => {
+				if (e.type === "multiple_choice") {
 					return e.question.length > 0 && e.choices.length > 0;
 				} else {
 					return e.question.length > 0;
@@ -94,14 +92,14 @@
 <label for="title">Title</label>
 <input type="text" bind:value={title} bind:this={title_input} />
 
-{#if elements.length > 0}
+{#if questions.length > 0}
 	<ul class="elements">
-		{#each elements as element, index}
+		{#each questions as element, index}
 			<li>
-				<Element
-					bind:element
+				<Question
+					bind:question={element}
 					{index}
-					on:delete={() => delete_element(element)}
+					on:delete={() => delete_question(element)}
 				/>
 			</li>
 		{/each}
@@ -110,7 +108,7 @@
 
 <Menu
 	on:choice={add_multiple_choice}
-	on:question={add_question}
+	on:question={add_simple_question}
 	on:finish={create_svorm}
 />
 

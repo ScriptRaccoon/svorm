@@ -2,27 +2,27 @@
 	import Fa from "svelte-fa";
 	import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 
-	export let element: multiple_choice;
+	export let choices: string[];
 
 	let next_choice: string = "";
 	let choice_input: HTMLInputElement;
 
 	function add_choice(): void {
-		element.choices = [...element.choices, next_choice];
+		choices = [...choices, next_choice];
 		next_choice = "";
 		choice_input.focus();
 	}
 
 	function delete_choice(index: number): void {
-		element.choices.splice(index, 1);
-		element.choices = element.choices;
+		choices.splice(index, 1);
+		choices = choices;
 	}
 </script>
 
-{#if element.choices.length > 0}
+{#if choices.length > 0}
 	<p>Choices</p>
 	<ol>
-		{#each element.choices as choice, index}
+		{#each choices as choice, index}
 			<li>
 				<span>{choice}</span>
 				<button

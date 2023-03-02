@@ -1,39 +1,23 @@
 import { supabase } from "./supabase";
 
-export async function save_elements(
-	elements: element[],
+export async function save_questions(
+	questions: question[],
 	svorm_id: string
 ): Promise<boolean> {
-	const questions: (question & element_save)[] = [];
-	const multiple_choices: (multiple_choice & element_save)[] = [];
+	const questions_enriched = questions.map((q, index) => {
+		return { ...q, index, svorm_id };
+	});
 
-	for (let index = 0; index < elements.length; index++) {
-		const element = elements[index];
-		if ("choices" in element) {
-			const multiple_choice = { ...element, svorm_id, index };
-			multiple_choices.push(multiple_choice);
-		} else {
-			const question = { ...element, svorm_id, index };
-			questions.push(question);
-		}
-	}
-
-	const { error: question_error } = await supabase
+	const { error } = await supabase
 		.from("questions")
-		.insert(questions)
+		.insert(questions_enriched)
 		.select();
-	if (question_error) {
-		console.log({ question_error });
+
+	if (error) {
+		console.log({ error });
 		return false;
 	}
 
-	const { error: multiple_choice_error } = await supabase
-		.from("multiple_choices")
-		.insert(multiple_choices);
-	if (multiple_choice_error) {
-		console.log({ multiple_choice_error });
-		return false;
-	}
 	return true;
 }
 

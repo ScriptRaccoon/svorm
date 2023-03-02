@@ -1,15 +1,19 @@
 <script lang="ts">
 	import { onMount, createEventDispatcher } from "svelte";
-	import MultipleChoice from "./MultipleChoice.svelte";
+	import Choices from "./Choices.svelte";
 	import Fa from "svelte-fa";
 	import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 	const dispatch = createEventDispatcher();
 
-	export let element: element;
+	export let question: question;
 	export let index: number;
 
-	let title = "choices" in element ? "Multiple Choice" : "Question";
+	let title =
+		question.type === "multiple_choice"
+			? "Multiple Choice"
+			: "Question";
+
 	let question_input: HTMLElement;
 
 	onMount(() => {
@@ -17,7 +21,7 @@
 	});
 </script>
 
-<div class="element">
+<div class="question">
 	<div class="header">
 		<h3>{title}</h3>
 		<button class="small danger" on:click={() => dispatch("delete")}>
@@ -29,25 +33,25 @@
 		<input
 			type="text"
 			id="question{index}"
-			bind:value={element.question}
+			bind:value={question.question}
 			bind:this={question_input}
 		/>
 	</p>
-	{#if "choices" in element}
-		<MultipleChoice bind:element on:delete />
+	{#if "choices" in question}
+		<Choices bind:choices={question.choices} />
 	{/if}
 	<p>
 		<label for="required{index}">Required</label>
 		<input
 			type="checkbox"
 			id="required{index}"
-			bind:checked={element.required}
+			bind:checked={question.required}
 		/>
 	</p>
 </div>
 
 <style lang="scss">
-	.element {
+	.question {
 		padding: 1rem;
 		border-radius: 0.5rem;
 		background-color: var(--light-color);

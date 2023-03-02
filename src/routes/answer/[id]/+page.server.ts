@@ -1,4 +1,4 @@
-import { get_elements } from "@/db/element";
+import { get_elements } from "@/db/question";
 import { get_svorm } from "@/db/svorm";
 import { error } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";

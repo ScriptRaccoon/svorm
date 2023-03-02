@@ -1,19 +1,21 @@
-type question = {
+type simple_question = {
+	type: "simple_question";
 	required: boolean;
 	question: string;
 };
 
 type multiple_choice = {
+	type: "multiple_choice";
 	required: boolean;
 	question: string;
 	choices: string[];
 };
 
-type element = question | multiple_choice;
+type question = simple_question | multiple_choice;
 
 type svorm = {
 	title: string;
-	elements: element[];
+	questions: question[];
 };
 
 type svorm_db = {

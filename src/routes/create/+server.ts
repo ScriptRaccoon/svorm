@@ -1,6 +1,6 @@
 import { error, json } from "@sveltejs/kit";
 
-import { save_elements } from "@/db/element";
+import { save_questions } from "@/db/question";
 import { save_svorm } from "@/db/svorm";
 
 import type { RequestHandler } from "./$types";
@@ -14,7 +14,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		throw error(500, "Svorm could not be created");
 	}
 
-	const saved = await save_elements(svorm.elements, svorm_id);
+	const saved = await save_questions(svorm.questions, svorm_id);
 
 	if (!saved) {
 		throw error(500, "Elements could not be created");
