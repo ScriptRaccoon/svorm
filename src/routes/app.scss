@@ -36,6 +36,9 @@ button {
 	border-radius: 0.2rem;
 	white-space: nowrap;
 	outline-offset: 0.1em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	&.small {
 		font-size: 1rem;
 		padding: 0.2rem 0.4rem;
@@ -44,10 +47,11 @@ button {
 		--color: var(--secondary-color);
 	}
 	&.danger {
-		--color: var(--danger-color);
+		--color: transparent;
+		color: var(--danger-color);
 	}
 	&:focus-visible {
-		outline: 0.2em solid var(--color);
+		outline: 0.2em solid var(--primary-color);
 	}
 }
 

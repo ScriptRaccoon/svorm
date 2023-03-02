@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { onMount } from "svelte";
+	import Fa from "svelte-fa";
+	import { faTrash } from "@fortawesome/free-solid-svg-icons";
+	import { onMount, createEventDispatcher } from "svelte";
+
+	const dispatch = createEventDispatcher();
 
 	export let element: multiple_choice;
 	export let index: number;
@@ -22,6 +26,13 @@
 	}
 </script>
 
+<div class="header">
+	<h3>Multiple Choice</h3>
+	<button class="small danger" on:click={() => dispatch("delete")}>
+		<Fa icon={faTrash} />
+	</button>
+</div>
+
 <p>
 	<label for="question{index}">Question</label>
 	<input
@@ -41,8 +52,10 @@
 				<button
 					class="small danger"
 					type="button"
-					on:click={() => delete_choice(index)}>x</button
+					on:click={() => delete_choice(index)}
 				>
+					<Fa icon={faTrash} />
+				</button>
 			</li>
 		{/each}
 	</ol>
@@ -62,6 +75,11 @@
 </form>
 
 <style lang="scss">
+	.header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
 	form {
 		display: flex;
 		gap: 0.5rem;
