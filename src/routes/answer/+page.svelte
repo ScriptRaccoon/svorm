@@ -1,14 +1,19 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
+	import { onMount } from "svelte";
 
 	let id: string = "";
+
+	let input: HTMLElement;
+
+	onMount(() => input.focus());
 </script>
 
-<h2>Answer a Svorm</h2>
+<h2>Answer a svorm</h2>
 
 <label>
 	Svorm ID
-	<input type="text" bind:value={id} />
+	<input type="text" bind:value={id} bind:this={input} />
 </label>
 
 <menu>
