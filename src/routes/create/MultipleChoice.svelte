@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Fa from "svelte-fa";
-	import { faTrash } from "@fortawesome/free-solid-svg-icons";
+	import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 	export let element: multiple_choice;
 
@@ -47,7 +47,9 @@
 		required
 		bind:this={choice_input}
 	/>
-	<button>Add choice</button>
+	<button class="small" aria-label="Add choice"
+		><Fa icon={faPlus} /></button
+	>
 </form>
 
 <style lang="scss">

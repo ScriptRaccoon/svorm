@@ -36,9 +36,7 @@ button {
 	border-radius: 0.2rem;
 	white-space: nowrap;
 	outline-offset: 0.1em;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+
 	&.small {
 		font-size: 1rem;
 		padding: 0.2rem 0.4rem;
