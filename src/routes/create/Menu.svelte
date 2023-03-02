@@ -10,7 +10,9 @@
 	<button on:click={() => dispatch("choice")}>
 		Add multiple choice
 	</button>
-	<button on:click={() => dispatch("finish")}>Create svorm</button>
+	<button class="secondary" on:click={() => dispatch("finish")}
+		>Create svorm</button
+	>
 </menu>
 
 <style lang="scss">
@@ -23,6 +25,7 @@
 		@media (min-width: 32rem) {
 			flex-direction: row;
 			flex-wrap: wrap;
+			justify-content: center;
 		}
 	}
 </style>

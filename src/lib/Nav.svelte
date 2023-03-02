@@ -12,15 +12,18 @@
 	</ul>
 </nav>
 
-<style>
+<style lang="scss">
 	nav {
-		padding: 1rem;
-		background-color: var(--light-color);
+		padding: 0.75rem;
+		background-color: var(--primary-color);
+		color: white;
+		font-size: 1rem;
 	}
 	ul {
+		margin: 0 auto;
 		display: flex;
 		justify-content: center;
 		list-style-type: none;
-		gap: 1rem;
+		gap: 1.2rem;
 	}
 </style>

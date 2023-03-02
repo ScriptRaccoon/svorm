@@ -5,8 +5,9 @@
 }
 
 :root {
-	--btn-color: #456;
-	--light-color: #eef;
+	--primary-color: #456;
+	--secondary-color: #579;
+	--light-color: #f0f0f0;
 	--danger-color: rgb(223, 58, 77);
 }
 
@@ -23,7 +24,7 @@ body {
 }
 
 button {
-	--color: var(--btn-color);
+	--color: var(--primary-color);
 	font-family: inherit;
 	font-size: inherit;
 	background: none;
@@ -38,7 +39,9 @@ button {
 	&.small {
 		font-size: 1rem;
 		padding: 0.2rem 0.4rem;
-		border-radius: 0rem;
+	}
+	&.secondary {
+		--color: var(--secondary-color);
 	}
 	&.danger {
 		--color: var(--danger-color);
@@ -57,34 +60,30 @@ input[type="text"] {
 	background-color: #fff;
 	width: 100%;
 	&:focus-visible {
-		outline: 0.1em solid var(--btn-color);
+		outline: 0.1em solid var(--primary-color);
 	}
 }
 
 input[type="checkbox"] {
-	accent-color: var(--btn-color);
+	accent-color: var(--primary-color);
 	scale: 1.2;
 	transform-origin: bottom left;
 	outline-offset: 0.1em;
 	&:focus-visible {
-		outline: 0.2em solid var(--btn-color);
+		outline: 0.2em solid var(--primary-color);
 	}
 }
 
 input[type="radio"] {
-	accent-color: var(--btn-color);
+	accent-color: var(--primary-color);
 	scale: 1.2;
 	&:focus-visible {
-		outline: 0.2em solid var(--btn-color);
+		outline: 0.2em solid var(--primary-color);
 	}
 }
 
 a {
-	color: var(--btn-color);
-	&:focus-visible {
-		outline-offset: 0.25em;
-		outline: 0.1em solid var(--btn-color);
-	}
+	color: inherit;
 }
 
 h1 {
