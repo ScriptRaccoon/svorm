@@ -108,9 +108,7 @@
 	<button on:click={submit_answers}>Submit your answers</button>
 </menu>
 
-{#if loading}
-	<Loader />
-{/if}
+<Loader {loading} />
 
 <p class={error_message ? "error" : ""} bind:this={error_element}>
 	{error_message}

@@ -1,11 +1,17 @@
-<div class="wrapper">
-	<div class="ring">
-		<div />
-		<div />
-		<div />
-		<div />
+<script>
+	export let loading = false;
+</script>
+
+{#if loading}
+	<div class="wrapper">
+		<div class="ring">
+			<div />
+			<div />
+			<div />
+			<div />
+		</div>
 	</div>
-</div>
+{/if}
 
 <style>
 	.wrapper {
