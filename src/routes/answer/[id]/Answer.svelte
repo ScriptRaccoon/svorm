@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
+	import Error from "@/lib/Error.svelte";
 	import Loader from "@/lib/Loader.svelte";
+	import {} from "@/utils";
 	import MultipleChoiceAnswer from "./MultipleChoiceAnswer.svelte";
 	import QuestionAnswer from "./QuestionAnswer.svelte";
 
@@ -9,7 +11,6 @@
 	let loading = false;
 
 	let error_message = "";
-	let error_element: HTMLElement;
 
 	const questions = elements.filter(
 		(element) => !("choices" in element)
@@ -39,7 +40,6 @@
 		if (!valid) {
 			loading = false;
 			error_message = "Please fill in all required fields";
-			error_element.scrollIntoView();
 			return;
 		}
 		const response = await fetch("/answer", {
@@ -52,7 +52,6 @@
 			goto("/answered");
 		} else {
 			error_message = "Svorm could not be submitted";
-			error_element.scrollIntoView();
 		}
 	}
 
@@ -110,9 +109,7 @@
 
 <Loader {loading} />
 
-<p class={error_message ? "error" : ""} bind:this={error_element}>
-	{error_message}
-</p>
+<Error {error_message} />
 
 <style>
 	.elements {

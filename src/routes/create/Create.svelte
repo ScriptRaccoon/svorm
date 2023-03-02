@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
+	import Error from "@/lib/Error.svelte";
 	import Loader from "@/lib/Loader.svelte";
 	import { onMount } from "svelte";
 	import Element from "./Element.svelte";
@@ -10,7 +11,6 @@
 	let elements: element[] = [];
 
 	let error_message = "";
-	let error_element: HTMLElement;
 
 	let title_input: HTMLInputElement;
 
@@ -44,8 +44,6 @@
 		if (!valid) {
 			loading = false;
 			error_message = "Please fill in all required fields";
-			error_element.scrollIntoView();
-
 			return;
 		}
 
@@ -59,7 +57,6 @@
 
 		if (!response.ok) {
 			error_message = "Svorm could not be created";
-			error_element.scrollIntoView();
 			return;
 		}
 
@@ -119,9 +116,7 @@
 
 <Loader {loading} />
 
-<p class={error_message ? "error" : ""} bind:this={error_element}>
-	{error_message}
-</p>
+<Error {error_message} />
 
 <style>
 	.elements {
