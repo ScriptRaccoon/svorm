@@ -4,6 +4,7 @@
 	import Loader from "@/lib/Loader.svelte";
 	import MultipleChoiceAnswer from "./MultipleChoiceAnswer.svelte";
 	import SimpleAnswer from "././SimpleAnswer.svelte";
+	import { ERROR, LABELS, TEXT } from "@/config";
 
 	export let svorm: svorm_db;
 	export let questions: question_db[];
@@ -40,7 +41,7 @@
 		if (response.ok) {
 			goto("/answered");
 		} else {
-			error_message = "Answers could not be submitted";
+			error_message = ERROR.NO_ANSWERS;
 		}
 	}
 
@@ -79,7 +80,7 @@
 
 		if (!valid) {
 			loading = false;
-			error_message = "Please fill in all required fields";
+			error_message = ERROR.NOT_FILLED_REQUIRED;
 		}
 
 		return valid;
@@ -111,11 +112,12 @@
 	</ul>
 
 	<p id="required">
-		<span class="danger" aria-hidden="true">*</span>required
+		<span class="danger" aria-hidden="true">*</span
+		>{TEXT.REQUIRED.toLowerCase()}
 	</p>
 
 	<menu>
-		<button type="submit">Submit your answers</button>
+		<button type="submit">{LABELS.SUBMIT_ANSWERS}</button>
 	</menu>
 </form>
 

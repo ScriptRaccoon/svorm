@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
+	import { onMount } from "svelte";
 	import Error from "@/lib/Error.svelte";
 	import Loader from "@/lib/Loader.svelte";
-	import { onMount } from "svelte";
 	import Question from "./Question.svelte";
 	import Menu from "./Menu.svelte";
+	import { ERROR, HEADINGS, LABELS } from "@/config";
 
 	let title: string = "";
 	let questions: question[] = [];
@@ -53,7 +54,7 @@
 		loading = false;
 
 		if (!response.ok) {
-			error_message = "Svorm could not be created";
+			error_message = ERROR.NO_SVORM;
 			return;
 		}
 
@@ -62,7 +63,7 @@
 		const { id } = data;
 
 		if (!id) {
-			error_message = "Svorm could not be created";
+			error_message = ERROR.NO_SVORM;
 			return;
 		}
 
@@ -75,25 +76,24 @@
 
 	function validate_questions(): boolean {
 		if (title.length === 0) {
-			error_message = "Please provide a title";
+			error_message = ERROR.NO_TITLE;
 			return false;
 		}
 
 		if (questions.length === 0) {
-			error_message = "Please add at least one question";
+			error_message = ERROR.NO_QUESTION;
 			return false;
 		}
 
 		if (questions.some((q) => q.question.length == 0)) {
-			error_message = "Please fill out each question";
+			error_message = ERROR.NOT_FILLED;
 			return false;
 		}
 
 		if (
 			questions.some((q) => "choices" in q && q.choices.length <= 1)
 		) {
-			error_message =
-				"Please add at least two choices for every multiple choice question";
+			error_message = ERROR.NO_CHOICE;
 			return false;
 		}
 
@@ -105,9 +105,9 @@
 	});
 </script>
 
-<h2>Create a svorm</h2>
+<h2>{HEADINGS.CREATE}</h2>
 
-<label for="title">Title</label>
+<label for="title">{LABELS.TITLE}</label>
 <input
 	id="title"
 	type="text"

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Fa from "svelte-fa";
 	import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
+	import { HEADINGS, LABELS, TEXT } from "@/config";
 
 	export let choices: string[];
 
@@ -20,13 +21,13 @@
 </script>
 
 {#if choices.length > 0}
-	<h4>Choices</h4>
+	<h4>{HEADINGS.CHOICES}</h4>
 	<ol>
 		{#each choices as choice, index}
 			<li>
 				<span>{choice}</span>
 				<button
-					aria-label="delete {choice}"
+					aria-label="{LABELS.DELETE} {choice}"
 					class="small danger"
 					type="button"
 					on:click={() => delete_choice(index)}
@@ -37,18 +38,18 @@
 		{/each}
 	</ol>
 {:else}
-	<p>Add at least one choice</p>
+	<p>{TEXT.ADD_CHOICE}</p>
 {/if}
 
 <form on:submit|preventDefault={add_choice}>
 	<input
 		type="text"
-		aria-label="choice"
 		required
+		aria-label={LABELS.CHOICE}
 		bind:value={next_choice}
 		bind:this={choice_input}
 	/>
-	<button class="small" aria-label="Add choice">
+	<button class="small" aria-label={LABELS.ADD_CHOICE}>
 		<Fa icon={faPlus} />
 	</button>
 </form>

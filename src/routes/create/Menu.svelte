@@ -1,18 +1,19 @@
 <script lang="ts">
+	import { LABELS } from "@/config";
 	import { createEventDispatcher } from "svelte";
 	const dispatch = createEventDispatcher();
 </script>
 
 <menu>
 	<button on:click={() => dispatch("question")}>
-		Add question
+		{LABELS.ADD_QUESTION}
 	</button>
 	<button on:click={() => dispatch("choice")}>
-		Add multiple choice
+		{LABELS.ADD_MULTIPLE_CHOICE}
 	</button>
-	<button class="secondary" on:click={() => dispatch("finish")}
-		>Create svorm</button
-	>
+	<button class="secondary" on:click={() => dispatch("finish")}>
+		{LABELS.CREATE_SVORM}
+	</button>
 </menu>
 
 <style lang="scss">

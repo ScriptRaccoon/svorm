@@ -1,13 +1,17 @@
+<script>
+	import { TEXT } from "@/config";
+</script>
+
 <nav>
 	<ul>
 		<li>
-			<a href="/">Home</a>
+			<a href="/">{TEXT.HOME}</a>
 		</li>
 		<li>
-			<a href="/create">Create a svorm</a>
+			<a href="/create">{TEXT.CREATE_SVORM}</a>
 		</li>
 		<li>
-			<a href="/answer">Answer a svorm</a>
+			<a href="/answer">{TEXT.ANSWER_SVORM}</a>
 		</li>
 	</ul>
 </nav>

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
+	import { HEADINGS, LABELS } from "@/config";
 	import { onMount } from "svelte";
 
 	let id: number;
@@ -13,16 +14,16 @@
 	}
 </script>
 
-<h2>Answer a svorm</h2>
+<h2>{HEADINGS.ANSWER}</h2>
 
 <form on:submit|preventDefault={goto_svorm}>
 	<label>
-		Svorm ID
+		{LABELS.SVORM_ID}
 		<input type="number" bind:value={id} bind:this={input} />
 	</label>
 
 	<menu>
-		<button>Submit ID</button>
+		<button>{LABELS.SUBMIT_ID}</button>
 	</menu>
 </form>
 

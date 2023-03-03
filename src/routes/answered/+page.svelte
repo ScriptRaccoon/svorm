@@ -1,3 +1,7 @@
-<h2>Submission successful</h2>
+<script>
+	import { HEADINGS, TEXT } from "@/config";
+</script>
 
-<p>Thank you!</p>
+<h2>{HEADINGS.SUCCESS}</h2>
+
+<p>{TEXT.THANKS}</p>

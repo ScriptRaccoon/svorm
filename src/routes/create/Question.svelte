@@ -3,13 +3,17 @@
 	import Choices from "./Choices.svelte";
 	import Fa from "svelte-fa";
 	import { faTrash } from "@fortawesome/free-solid-svg-icons";
+	import { HEADINGS, LABELS, TEXT } from "@/config";
 
 	const dispatch = createEventDispatcher();
 
 	export let question: question;
 	export let index: number;
 
-	let title = "choices" in question ? "Multiple Choice" : "Question";
+	let title =
+		"choices" in question
+			? HEADINGS.MULTPLE_CHOICE
+			: HEADINGS.SIMPLE_QUESTION;
 
 	let question_input: HTMLElement;
 
@@ -21,12 +25,16 @@
 <div class="question">
 	<div class="header">
 		<h3>{title}</h3>
-		<button class="small danger" on:click={() => dispatch("delete")}>
+		<button
+			aria-label={LABELS.DELETE_QUESTION}
+			class="small danger"
+			on:click={() => dispatch("delete")}
+		>
 			<Fa icon={faTrash} />
 		</button>
 	</div>
 	<p>
-		<label for="question{index}">Question</label>
+		<label for="question{index}">{LABELS.QUESTION}</label>
 		<input
 			type="text"
 			id="question{index}"
@@ -38,7 +46,7 @@
 		<Choices bind:choices={question.choices} />
 	{/if}
 	<p>
-		<label for="required{index}">Required</label>
+		<label for="required{index}">{TEXT.REQUIRED}</label>
 		<input
 			type="checkbox"
 			id="required{index}"

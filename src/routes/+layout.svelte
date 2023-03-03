@@ -1,10 +1,11 @@
 <script>
 	import "./app.scss";
 	import Nav from "@/lib/Nav.svelte";
+	import { TEXT } from "@/config";
 </script>
 
 <svelte:head>
-	<title>Svorm</title>
+	<title>{TEXT.TITLE}</title>
 </svelte:head>
 
 <Nav />

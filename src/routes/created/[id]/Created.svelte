@@ -1,12 +1,13 @@
 <script>
 	import { page } from "$app/stores";
+	import { HEADINGS, TEXT } from "@/config";
 	const id = $page.params.id;
 	const url = `${$page.url.origin}/answer/${id}`;
 </script>
 
-<h2>Svorm has been created</h2>
+<h2>{HEADINGS.CREATED}</h2>
 
-<p>Here is the link to answer your svorm:</p>
+<p>{TEXT.LINK}</p>
 
 <p class="link">
 	<a href={url}>{url}</a>
