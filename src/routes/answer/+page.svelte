@@ -2,7 +2,7 @@
 	import { goto } from "$app/navigation";
 	import { onMount } from "svelte";
 
-	let id: string = "";
+	let id: number;
 
 	let input: HTMLElement;
 
@@ -13,7 +13,7 @@
 
 <label>
 	Svorm ID
-	<input type="text" bind:value={id} bind:this={input} />
+	<input type="number" bind:value={id} bind:this={input} />
 </label>
 
 <menu>
