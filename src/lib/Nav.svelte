@@ -13,6 +13,9 @@
 		<li>
 			<a href="/answer">{TEXT.ANSWER_SVORM}</a>
 		</li>
+		<li>
+			<a href="/results">{TEXT.RESULTS_SVORM}</a>
+		</li>
 	</ul>
 </nav>
 
@@ -26,11 +29,13 @@
 	ul {
 		margin: 0 auto;
 		display: flex;
+		flex-wrap: wrap;
 		justify-content: center;
 		list-style-type: none;
 		gap: 1.2rem;
 	}
 	a {
+		white-space: nowrap;
 		text-underline-offset: 0.2em;
 	}
 </style>

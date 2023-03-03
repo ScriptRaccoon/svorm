@@ -2,6 +2,7 @@ export const TEXT = {
 	CREATE_SVORM: "Create a svorm",
 	HOME: "Home",
 	ANSWER_SVORM: "Answer a svorm",
+	RESULTS_SVORM: "Results of a svorm",
 	TITLE: "Svorm",
 	DESCRIPTION: "This app lets you create forms which can be shared with others. It is made with Svelte, hence the name.",
 	REQUIRED: "Required",
@@ -34,6 +35,7 @@ export const HEADINGS = {
 	CREATED: "Svorm has been created",
 	SUCCESS: "Submission successful",
 	ANSWER: "Answer a svorm",
+	RESULTS: "Results of a svorm",
 };
 
 export const LABELS = {
