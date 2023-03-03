@@ -7,18 +7,24 @@
 	let input: HTMLElement;
 
 	onMount(() => input.focus());
+
+	function goto_svorm() {
+		goto(`/answer/${id}`);
+	}
 </script>
 
 <h2>Answer a svorm</h2>
 
-<label>
-	Svorm ID
-	<input type="number" bind:value={id} bind:this={input} />
-</label>
+<form on:submit|preventDefault={goto_svorm}>
+	<label>
+		Svorm ID
+		<input type="number" bind:value={id} bind:this={input} />
+	</label>
 
-<menu>
-	<button on:click={() => goto(`/answer/${id}`)}>Go</button>
-</menu>
+	<menu>
+		<button>Submit ID</button>
+	</menu>
+</form>
 
 <style>
 	menu {
