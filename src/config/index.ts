@@ -23,7 +23,8 @@ export const ERROR = {
 	NO_ANSWERS: "Answers could not be submitted",
 	NOT_FILLED_REQUIRED: "Please fill out each required question",
 	INVALID_ID: "No svorm was found with this ID",
-	NOT_LOADED: "The questions for this svorm could not be loaded"
+	NOT_LOADED: "The questions for this svorm could not be loaded",
+	NO_RESULTS: "Results could not be loaded",
 };
 
 export const HEADINGS = {

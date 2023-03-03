@@ -51,3 +51,14 @@ type answer = { question_id: number } & (
 	| { answer: string }
 	| { choice: null | number }
 );
+
+type simple_question_results = simple_question_db & {
+	results: string[];
+};
+type multiple_choice_results = multiple_choice_db & {
+	results: number[];
+};
+
+type question_results =
+	| simple_question_results
+	| multiple_choice_results;
