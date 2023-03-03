@@ -15,7 +15,6 @@
 	function add_simple_question(): void {
 		error_message = "";
 		const q: simple_question = {
-			type: "simple_question",
 			required: false,
 			question: ""
 		};
@@ -25,7 +24,6 @@
 	function add_multiple_choice(): void {
 		error_message = "";
 		const m: multiple_choice = {
-			type: "multiple_choice",
 			required: false,
 			question: "",
 			choices: []
@@ -45,10 +43,12 @@
 			return;
 		}
 
+		const svorm: svorm = { title, questions };
+
 		const response = await fetch("/create", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ title, questions })
+			body: JSON.stringify(svorm)
 		});
 
 		loading = false;
@@ -60,7 +60,9 @@
 
 		const data = await response.json();
 
-		goto(`created/${data.id}`);
+		const { id } = data;
+
+		goto(`created/${id}`);
 	}
 
 	function delete_question(q: question): void {
@@ -75,11 +77,11 @@
 		return (
 			title.length > 0 &&
 			questions.length > 0 &&
-			questions.every((e) => {
-				if (e.type === "multiple_choice") {
-					return e.question.length > 0 && e.choices.length > 0;
+			questions.every((q) => {
+				if ("choices" in q) {
+					return q.question.length > 0 && q.choices.length > 0;
 				} else {
-					return e.question.length > 0;
+					return q.question.length > 0;
 				}
 			})
 		);
@@ -93,12 +95,12 @@
 
 {#if questions.length > 0}
 	<ul class="questions">
-		{#each questions as element, index}
+		{#each questions as question, index}
 			<li>
 				<Question
-					bind:question={element}
+					bind:question
 					{index}
-					on:delete={() => delete_question(element)}
+					on:delete={() => delete_question(question)}
 				/>
 			</li>
 		{/each}

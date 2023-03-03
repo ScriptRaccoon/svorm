@@ -4,17 +4,35 @@ export async function save_questions(
 	questions: question[],
 	svorm_id: number
 ): Promise<boolean> {
-	const questions_enriched = questions.map((q, index) => {
-		return { ...q, index, svorm_id };
-	});
+	const simple_questions = [];
+	const multiple_choices = [];
 
-	const { error } = await supabase
-		.from("questions")
-		.insert(questions_enriched)
+	for (let index = 0; index < questions.length; index++) {
+		const question = questions[index];
+		if ("choices" in question) {
+			multiple_choices.push({ ...question, index, svorm_id });
+		} else {
+			simple_questions.push({ ...question, index, svorm_id });
+		}
+	}
+
+	let { error: error_1 } = await supabase
+		.from("simple_questions")
+		.insert(simple_questions)
 		.select();
 
-	if (error) {
-		console.log({ error });
+	if (error_1) {
+		console.log({ error: error_1 });
+		return false;
+	}
+
+	let { error: error_2 } = await supabase
+		.from("multiple_choices")
+		.insert(multiple_choices)
+		.select();
+
+	if (error_2) {
+		console.log({ error: error_2 });
 		return false;
 	}
 
@@ -24,18 +42,31 @@ export async function save_questions(
 export async function get_questions(
 	svorm_id: number
 ): Promise<question_db[] | null> {
-	const { data, error } = await supabase
-		.from("questions")
+	const { data: simple_questions, error: error1 } = await supabase
+		.from("simple_questions")
 		.select()
 		.eq("svorm_id", svorm_id);
 
-	if (error || !data) {
-		console.log({ error });
+	if (error1 || !simple_questions) {
+		console.log({ error: error1 });
 		return null;
 	}
 
-	const questions = data.sort((a, b) => a.index - b.index);
+	const { data: multiple_choices, error: error2 } = await supabase
+		.from("multiple_choices")
+		.select()
+		.eq("svorm_id", svorm_id);
 
-	// TODO: fix question.type restriction
-	return questions;
+	if (error2 || !multiple_choices) {
+		console.log({ error: error2 });
+		return null;
+	}
+
+	const questions = simple_questions.concat(multiple_choices);
+
+	const sorted_questions = questions.sort(
+		(p, q) => p.index - q.index
+	);
+
+	return sorted_questions;
 }

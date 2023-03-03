@@ -9,70 +9,99 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      answers: {
+      multiple_choices: {
         Row: {
-          answer: string | null
-          choice: number | null
-          created_at: string
-          id: number
-          question_id: number
-        }
-        Insert: {
-          answer?: string | null
-          choice?: number | null
-          created_at?: string
-          id?: number
-          question_id: number
-        }
-        Update: {
-          answer?: string | null
-          choice?: number | null
-          created_at?: string
-          id?: number
-          question_id?: number
-        }
-      }
-      "question types": {
-        Row: {
-          type: string
-        }
-        Insert: {
-          type: string
-        }
-        Update: {
-          type?: string
-        }
-      }
-      questions: {
-        Row: {
-          choices: string[] | null
+          choices: string[]
           created_at: string
           id: number
           index: number
           question: string
           required: boolean
           svorm_id: number
-          type: string
         }
         Insert: {
-          choices?: string[] | null
+          choices: string[]
           created_at?: string
           id?: number
           index: number
           question?: string
           required?: boolean
           svorm_id: number
-          type: string
         }
         Update: {
-          choices?: string[] | null
+          choices?: string[]
           created_at?: string
           id?: number
           index?: number
           question?: string
           required?: boolean
           svorm_id?: number
-          type?: string
+        }
+      }
+      multiple_choices_answers: {
+        Row: {
+          choice: number | null
+          created_at: string
+          id: number
+          question_id: number
+        }
+        Insert: {
+          choice?: number | null
+          created_at?: string
+          id?: number
+          question_id: number
+        }
+        Update: {
+          choice?: number | null
+          created_at?: string
+          id?: number
+          question_id?: number
+        }
+      }
+      simple_questions: {
+        Row: {
+          created_at: string
+          id: number
+          index: number
+          question: string
+          required: boolean
+          svorm_id: number
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          index: number
+          question?: string
+          required?: boolean
+          svorm_id: number
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          index?: number
+          question?: string
+          required?: boolean
+          svorm_id?: number
+        }
+      }
+      simple_questions_answers: {
+        Row: {
+          answer: string | null
+          created_at: string
+          id: number
+          question_id: number
+        }
+        Insert: {
+          answer?: string | null
+          created_at?: string
+          id?: number
+          question_id: number
+        }
+        Update: {
+          answer?: string | null
+          created_at?: string
+          id?: number
+          question_id?: number
         }
       }
       svorms: {

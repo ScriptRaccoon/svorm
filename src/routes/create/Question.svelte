@@ -9,10 +9,7 @@
 	export let question: question;
 	export let index: number;
 
-	let title =
-		question.type === "multiple_choice"
-			? "Multiple Choice"
-			: "Question";
+	let title = "choices" in question ? "Multiple Choice" : "Question";
 
 	let question_input: HTMLElement;
 
