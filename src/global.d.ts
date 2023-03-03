@@ -37,16 +37,10 @@ type multiple_choice_db = multiple_choice & _db;
 
 type question_db = simple_question_db | multiple_choice_db;
 
-type element_save = {
-	svorm_id: string;
-	index: number;
-};
-
-type submission = {
-	answers_simple_questions: {
-		[k: string]: string;
-	};
-	answers_multiple_choices: {
-		[k: string]: number | null;
-	};
+type answers = {
+	answers_simple_questions: { question_id: string; answer: string }[];
+	choices_multiple_choices: {
+		question_id: string;
+		choice: null | number;
+	}[];
 };

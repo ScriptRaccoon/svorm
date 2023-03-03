@@ -7,8 +7,8 @@
 
 	export let svorm: svorm_db;
 	export let questions: question_db[];
-	let loading = false;
 
+	let loading = false;
 	let error_message = "";
 
 	const simple_questions = questions.filter(
@@ -19,58 +19,82 @@
 		(q) => q.type === "multiple_choice"
 	);
 
-	const answers_simple_questions = Object.fromEntries(
+	const answers_simple_questions_by_id = Object.fromEntries(
 		simple_questions.map((q) => [q.id, ""])
 	);
 
-	const answers_multiple_choices = Object.fromEntries(
+	const choices_multiple_choices_by_id = Object.fromEntries(
 		multiple_choices.map((m) => [m.id, null])
 	);
 
-	const submission: submission = {
-		answers_simple_questions,
-		answers_multiple_choices
-	};
+	function compute_answers(): answers {
+		const answers_simple_questions = Object.entries(
+			answers_simple_questions_by_id
+		)
+			.map(([question_id, answer]) => ({ question_id, answer }))
+			.filter((q) => q.answer.length > 0);
+
+		const choices_multiple_choices = Object.entries(
+			choices_multiple_choices_by_id
+		)
+			.map(([question_id, choice]) => ({ question_id, choice }))
+			.filter((m) => m.choice !== null);
+
+		const answers = {
+			answers_simple_questions,
+			choices_multiple_choices
+		};
+
+		return answers;
+	}
 
 	async function submit_answers() {
 		loading = true;
 		error_message = "";
-		const valid = validate_submission();
-		if (!valid) {
-			loading = false;
-			error_message = "Please fill in all required fields";
-			return;
-		}
+
+		if (!answers_are_valid()) return;
+
+		const answers = compute_answers();
+
 		const response = await fetch("/answer", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(submission)
+			body: JSON.stringify(answers)
 		});
+
 		loading = false;
+
 		if (response.ok) {
 			goto("/answered");
 		} else {
-			error_message = "Svorm could not be submitted";
+			error_message = "Answers could not be submitted";
 		}
 	}
 
-	function validate_submission(): boolean {
-		return (
-			questions.every(
-				(question) =>
-					!(
-						question.required &&
-						answers_simple_questions[question.id].length == 0
-					)
-			) &&
-			multiple_choices.every(
-				(multiple_choice) =>
-					!(
-						multiple_choice.required &&
-						answers_multiple_choices[multiple_choice.id] === null
-					)
-			)
+	function answers_are_valid(): boolean {
+		const questions_are_valid = questions.every(
+			(question) =>
+				!(
+					question.required &&
+					answers_simple_questions_by_id[question.id].length == 0
+				)
 		);
+
+		const multiple_choices_are_valid = multiple_choices.every(
+			(multiple_choice) =>
+				!(
+					multiple_choice.required &&
+					choices_multiple_choices_by_id[multiple_choice.id] === null
+				)
+		);
+
+		const valid = questions_are_valid && multiple_choices_are_valid;
+
+		if (!valid) {
+			loading = false;
+			error_message = "Please fill in all required fields";
+		}
+		return valid;
 	}
 </script>
 
@@ -85,12 +109,12 @@
 				{#if question.type === "multiple_choice"}
 					<MultipleChoiceAnswer
 						bind:question
-						bind:answer={answers_multiple_choices[question.id]}
+						bind:choice={choices_multiple_choices_by_id[question.id]}
 					/>
 				{:else if question.type === "simple_question"}
 					<SimpleAnswer
 						bind:question
-						bind:answer={answers_simple_questions[question.id]}
+						bind:answer={answers_simple_questions_by_id[question.id]}
 					/>
 				{/if}
 			</div>
@@ -99,7 +123,7 @@
 </ul>
 
 <p id="required">
-	<sup aria-hidden="true">*</sup>required
+	<span class="danger" aria-hidden="true">*</span>required
 </p>
 
 <menu>
@@ -126,10 +150,6 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.75rem;
-	}
-
-	sup {
-		color: var(--danger-color);
 	}
 
 	menu {

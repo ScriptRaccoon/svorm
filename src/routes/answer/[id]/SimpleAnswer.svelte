@@ -5,7 +5,11 @@
 
 <h3>
 	{question.question}{#if question.required}
-		<sup aria-hidden="true" aria-describedby="required">*</sup>
+		<span
+			class="danger"
+			aria-hidden="true"
+			aria-describedby="required">*</span
+		>
 	{/if}
 </h3>
 
@@ -13,9 +17,3 @@
 	Answer
 	<input type="text" bind:value={answer} />
 </label>
-
-<style>
-	sup {
-		color: var(--danger-color);
-	}
-</style>
