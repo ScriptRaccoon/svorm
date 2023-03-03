@@ -1,7 +1,5 @@
 <script>
-	import { HEADINGS, TEXT } from "@/config";
+	import Answered from "./Answered.svelte";
 </script>
 
-<h2>{HEADINGS.SUCCESS}</h2>
-
-<p>{TEXT.THANKS}</p>
+<Answered />
