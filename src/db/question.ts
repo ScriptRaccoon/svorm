@@ -34,9 +34,8 @@ export async function get_questions(
 		return null;
 	}
 
-	const questions = data.sort(
-		(a, b) => a.index - b.index
-	) as question_db[];
+	const questions = data.sort((a, b) => a.index - b.index);
 
+	// TODO: fix question.type restriction
 	return questions;
 }

@@ -2,6 +2,7 @@ type simple_question = {
 	type: "simple_question";
 	required: boolean;
 	question: string;
+	choices: null;
 };
 
 type multiple_choice = {
@@ -19,7 +20,7 @@ type svorm = {
 };
 
 type svorm_db = {
-	id: string;
+	id: number;
 	created_at: string;
 	title: string;
 };

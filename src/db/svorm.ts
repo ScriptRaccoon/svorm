@@ -11,7 +11,8 @@ export async function save_svorm(
 		console.log({ error });
 		return null;
 	}
-	return data[0].id;
+	const { id } = data[0];
+	return id;
 }
 
 export async function get_svorm(
@@ -25,6 +26,6 @@ export async function get_svorm(
 		console.log({ error });
 		return null;
 	}
-	const svorm = data[0] as svorm_db;
+	const svorm = data[0];
 	return svorm;
 }
