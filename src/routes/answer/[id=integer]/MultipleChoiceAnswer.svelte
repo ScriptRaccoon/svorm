@@ -2,25 +2,15 @@
 	export let question: multiple_choice_db_answer;
 </script>
 
-<h3>
-	{question.question}{#if question.required}
-		<span
-			class="danger"
-			aria-hidden="true"
-			aria-describedby="required">*</span
-		>
-	{/if}
-</h3>
-
 <div class="choices">
-	{#each question.choices as _choice, index}
+	{#each question.choices as choice, index}
 		<label>
 			<input
 				type="radio"
 				value={index}
 				bind:group={question.choice}
 			/>
-			<span>{_choice}</span>
+			<span>{choice}</span>
 		</label>
 	{/each}
 </div>

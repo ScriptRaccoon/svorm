@@ -94,6 +94,15 @@
 	{#each questions_with_answers as question}
 		<li>
 			<div class="question">
+				<h3>
+					{question.question}{#if question.required}
+						<span
+							class="danger"
+							aria-hidden="true"
+							aria-describedby="required">*</span
+						>
+					{/if}
+				</h3>
 				{#if "choices" in question}
 					<MultipleChoiceAnswer bind:question />
 				{:else}
