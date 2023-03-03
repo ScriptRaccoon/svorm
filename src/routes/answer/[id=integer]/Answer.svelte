@@ -94,13 +94,9 @@
 	{#each questions_with_answers as question}
 		<li>
 			<div class="question">
-				<h3>
+				<h3 aria-describedby="required">
 					{question.question}{#if question.required}
-						<span
-							class="danger"
-							aria-hidden="true"
-							aria-describedby="required">*</span
-						>
+						<span class="danger" aria-hidden="true">*</span>
 					{/if}
 				</h3>
 				{#if "choices" in question}
