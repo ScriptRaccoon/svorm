@@ -7,8 +7,11 @@ export async function save_svorm(
 		.from("svorms")
 		.insert([{ title: svorm.title }])
 		.select();
-	if (error || !data || data.length == 0) {
+	if (error) {
 		console.log({ error });
+		return null;
+	}
+	if (!data || data.length == 0) {
 		return null;
 	}
 	const { id } = data[0];
@@ -22,8 +25,11 @@ export async function get_svorm(
 		.from("svorms")
 		.select()
 		.eq("id", id);
-	if (error || !data || data.length == 0) {
+	if (error) {
 		console.log({ error });
+		return null;
+	}
+	if (!data || data.length == 0) {
 		return null;
 	}
 	const svorm = data[0];

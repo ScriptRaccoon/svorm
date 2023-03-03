@@ -47,8 +47,12 @@ export async function get_questions(
 		.select()
 		.eq("svorm_id", svorm_id);
 
-	if (error1 || !simple_questions) {
+	if (error1) {
 		console.log({ error: error1 });
+		return null;
+	}
+
+	if (!simple_questions) {
 		return null;
 	}
 
@@ -57,8 +61,12 @@ export async function get_questions(
 		.select()
 		.eq("svorm_id", svorm_id);
 
-	if (error2 || !multiple_choices) {
+	if (error2) {
 		console.log({ error: error2 });
+		return null;
+	}
+
+	if (!multiple_choices) {
 		return null;
 	}
 
