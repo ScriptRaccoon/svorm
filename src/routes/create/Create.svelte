@@ -59,9 +59,8 @@
 		}
 
 		const data = await response.json();
-		const id = data.id as string;
 
-		goto(`created/${id}`);
+		goto(`created/${data.id}`);
 	}
 
 	function delete_question(q: question): void {

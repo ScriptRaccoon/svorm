@@ -1,6 +1,5 @@
 <script lang="ts">
-	export let question: question_db;
-	export let answer: string;
+	export let question: simple_question_db_answer;
 </script>
 
 <h3>
@@ -15,5 +14,5 @@
 
 <label>
 	Answer
-	<input type="text" bind:value={answer} />
+	<input type="text" bind:value={question.answer} />
 </label>

@@ -2,7 +2,7 @@ import { supabase } from "./supabase";
 
 export async function save_questions(
 	questions: question[],
-	svorm_id: string
+	svorm_id: number
 ): Promise<boolean> {
 	const questions_enriched = questions.map((q, index) => {
 		return { ...q, index, svorm_id };
@@ -22,7 +22,7 @@ export async function save_questions(
 }
 
 export async function get_questions(
-	svorm_id: string
+	svorm_id: number
 ): Promise<question_db[] | null> {
 	const { data, error } = await supabase
 		.from("questions")

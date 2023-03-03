@@ -1,6 +1,5 @@
 <script lang="ts">
-	export let question: multiple_choice_db;
-	export let choice: number | null = null;
+	export let question: multiple_choice_db_answer;
 </script>
 
 <h3>
@@ -16,7 +15,11 @@
 <div class="choices">
 	{#each question.choices as _choice, index}
 		<label>
-			<input type="radio" value={index} bind:group={choice} />
+			<input
+				type="radio"
+				value={index}
+				bind:group={question.choice}
+			/>
 			<span>{_choice}</span>
 		</label>
 	{/each}

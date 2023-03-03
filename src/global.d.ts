@@ -25,7 +25,7 @@ type svorm_db = {
 };
 
 type _db = {
-	id: string;
+	id: number;
 	created_at: string;
 	svorm_id: string;
 	index: number;
@@ -37,10 +37,19 @@ type multiple_choice_db = multiple_choice & _db;
 
 type question_db = simple_question_db | multiple_choice_db;
 
-type answers = {
-	answers_simple_questions: { question_id: string; answer: string }[];
-	choices_multiple_choices: {
-		question_id: string;
-		choice: null | number;
-	}[];
+type simple_question_db_answer = simple_question_db & {
+	answer: string;
 };
+
+type multiple_choice_db_answer = multiple_choice_db & {
+	choice: null | number;
+};
+
+type question_answer =
+	| simple_question_db_answer
+	| multiple_choice_db_answer;
+
+type answer = { question_id: number } & (
+	| { answer: string }
+	| { choice: null | number }
+);
