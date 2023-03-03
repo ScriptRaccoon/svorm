@@ -13,7 +13,7 @@
 
 	const questions_with_answers: question_answer[] = questions.map(
 		(q) => {
-			if (q.type === "multiple_choice") {
+			if ("choices" in q) {
 				return { ...q, choice: null };
 			} else {
 				return { ...q, answer: "" };
@@ -47,14 +47,14 @@
 	function filtered_answers(): answer[] {
 		return questions_with_answers
 			.filter((q) => {
-				if (q.type === "multiple_choice") {
+				if ("choices" in q) {
 					return q.choice !== null;
 				} else {
 					return q.answer.length > 0;
 				}
 			})
 			.map((q) => {
-				if (q.type === "multiple_choice") {
+				if ("choices" in q) {
 					return {
 						question_id: q.id,
 						choice: q.choice
@@ -70,7 +70,7 @@
 
 	function answers_are_valid(): boolean {
 		const valid = questions_with_answers.every((q) => {
-			if (q.type === "multiple_choice") {
+			if ("choices" in q) {
 				return !(q.required && q.choice === null);
 			} else {
 				return !(q.required && q.answer.length === 0);
@@ -81,6 +81,7 @@
 			loading = false;
 			error_message = "Please fill in all required fields";
 		}
+
 		return valid;
 	}
 </script>
@@ -92,8 +93,8 @@
 <ul class="questions">
 	{#each questions_with_answers as question}
 		<li>
-			<div class="element">
-				{#if question.type === "multiple_choice"}
+			<div class="question">
+				{#if "choices" in question}
 					<MultipleChoiceAnswer bind:question />
 				{:else}
 					<SimpleAnswer bind:question />
@@ -124,7 +125,7 @@
 		padding-block: 1rem;
 	}
 
-	.element {
+	.question {
 		background-color: var(--light-color);
 		padding: 1rem;
 		border-radius: 0.5rem;
