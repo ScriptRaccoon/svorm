@@ -4,7 +4,7 @@ import { error } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async ({ params }) => {
-	const id = params.id as any as number;
+	const id = parseInt(params.id);
 
 	const svorm = await get_svorm(id);
 
