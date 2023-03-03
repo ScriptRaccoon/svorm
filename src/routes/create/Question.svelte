@@ -8,7 +8,6 @@
 	const dispatch = createEventDispatcher();
 
 	export let question: question;
-	export let index: number;
 
 	let title =
 		"choices" in question
@@ -34,24 +33,23 @@
 		</button>
 	</div>
 	<p>
-		<label for="question{index}">{LABELS.QUESTION}</label>
-		<input
-			type="text"
-			id="question{index}"
-			bind:value={question.question}
-			bind:this={question_input}
-		/>
+		<label>
+			{LABELS.QUESTION}
+			<input
+				type="text"
+				bind:value={question.question}
+				bind:this={question_input}
+			/>
+		</label>
 	</p>
 	{#if "choices" in question}
 		<Choices bind:choices={question.choices} />
 	{/if}
 	<p>
-		<label for="required{index}">{TEXT.REQUIRED}</label>
-		<input
-			type="checkbox"
-			id="required{index}"
-			bind:checked={question.required}
-		/>
+		<label>
+			{TEXT.REQUIRED}
+			<input type="checkbox" bind:checked={question.required} />
+		</label>
 	</p>
 </div>
 

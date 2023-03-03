@@ -107,20 +107,16 @@
 
 <h2>{HEADINGS.CREATE}</h2>
 
-<label for="title">{LABELS.TITLE}</label>
-<input
-	id="title"
-	type="text"
-	bind:value={title}
-	bind:this={title_input}
-/>
+<label>
+	{LABELS.TITLE}
+	<input type="text" bind:value={title} bind:this={title_input} />
+</label>
 
 {#if questions.length > 0}
 	<ul class="questions">
-		{#each questions as question, index}
+		{#each questions as question}
 			<li>
 				<Question
-					{index}
 					bind:question
 					on:delete={() => delete_question(question)}
 				/>
