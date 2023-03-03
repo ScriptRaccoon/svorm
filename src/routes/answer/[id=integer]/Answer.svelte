@@ -90,32 +90,34 @@
 	{svorm.title}
 </h2>
 
-<ul class="questions">
-	{#each questions_with_answers as question}
-		<li>
-			<div class="question">
-				<h3 aria-describedby="required">
-					{question.question}{#if question.required}
-						<span class="danger" aria-hidden="true">*</span>
+<form on:submit|preventDefault={submit_answers}>
+	<ul class="questions">
+		{#each questions_with_answers as question}
+			<li>
+				<div class="question">
+					<h3 aria-describedby="required">
+						{question.question}{#if question.required}
+							<span class="danger" aria-hidden="true">*</span>
+						{/if}
+					</h3>
+					{#if "choices" in question}
+						<MultipleChoiceAnswer bind:question />
+					{:else}
+						<SimpleAnswer bind:question />
 					{/if}
-				</h3>
-				{#if "choices" in question}
-					<MultipleChoiceAnswer bind:question />
-				{:else}
-					<SimpleAnswer bind:question />
-				{/if}
-			</div>
-		</li>
-	{/each}
-</ul>
+				</div>
+			</li>
+		{/each}
+	</ul>
 
-<p id="required">
-	<span class="danger" aria-hidden="true">*</span>required
-</p>
+	<p id="required">
+		<span class="danger" aria-hidden="true">*</span>required
+	</p>
 
-<menu>
-	<button on:click={submit_answers}>Submit your answers</button>
-</menu>
+	<menu>
+		<button type="submit">Submit your answers</button>
+	</menu>
+</form>
 
 <Loader {loading} />
 
