@@ -7,3 +7,7 @@
 <p>
 	{TEXT.DESCRIPTION}
 </p>
+
+<br />
+
+<p>{@html TEXT.GITHUB}</p>
