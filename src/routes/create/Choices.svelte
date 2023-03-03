@@ -20,12 +20,13 @@
 </script>
 
 {#if choices.length > 0}
-	<p>Choices</p>
+	<h4>Choices</h4>
 	<ol>
 		{#each choices as choice, index}
 			<li>
 				<span>{choice}</span>
 				<button
+					aria-label="delete {choice}"
 					class="small danger"
 					type="button"
 					on:click={() => delete_choice(index)}
@@ -36,20 +37,20 @@
 		{/each}
 	</ol>
 {:else}
-	<p>No choice has been added so far</p>
+	<p>Add at least one choice</p>
 {/if}
 
 <form on:submit|preventDefault={add_choice}>
 	<input
-		aria-label="choice"
 		type="text"
-		bind:value={next_choice}
+		aria-label="choice"
 		required
+		bind:value={next_choice}
 		bind:this={choice_input}
 	/>
-	<button class="small" aria-label="Add choice"
-		><Fa icon={faPlus} /></button
-	>
+	<button class="small" aria-label="Add choice">
+		<Fa icon={faPlus} />
+	</button>
 </form>
 
 <style lang="scss">
@@ -58,6 +59,11 @@
 		gap: 0.5rem;
 		align-items: center;
 	}
+
+	h4 {
+		font-weight: initial;
+	}
+
 	ol {
 		padding-left: 2rem;
 		display: flex;

@@ -14,32 +14,31 @@
 
 	function add_simple_question(): void {
 		error_message = "";
-		const q: simple_question = {
+		const question: simple_question = {
 			required: false,
 			question: ""
 		};
-		questions = [...questions, q];
+		questions = [...questions, question];
 	}
 
 	function add_multiple_choice(): void {
 		error_message = "";
-		const m: multiple_choice = {
+		const question: multiple_choice = {
 			required: false,
 			question: "",
 			choices: []
 		};
-		questions = [...questions, m];
+		questions = [...questions, question];
 	}
 
 	async function create_svorm(): Promise<void> {
 		loading = true;
 		error_message = "";
 
-		const valid = validate();
+		const valid = validate_questions();
 
 		if (!valid) {
 			loading = false;
-			error_message = "Please fill in all required fields";
 			return;
 		}
 
@@ -62,6 +61,11 @@
 
 		const { id } = data;
 
+		if (!id) {
+			error_message = "Svorm could not be created";
+			return;
+		}
+
 		goto(`created/${id}`);
 	}
 
@@ -69,37 +73,55 @@
 		questions = questions.filter((_q) => _q != q);
 	}
 
+	function validate_questions(): boolean {
+		if (title.length === 0) {
+			error_message = "Please provide a title";
+			return false;
+		}
+
+		if (questions.length === 0) {
+			error_message = "Please add at least one question";
+			return false;
+		}
+
+		if (questions.some((q) => q.question.length == 0)) {
+			error_message = "Please fill out each question";
+			return false;
+		}
+
+		if (
+			questions.some((q) => "choices" in q && q.choices.length <= 1)
+		) {
+			error_message =
+				"Please add at least two choices for every multiple choice question";
+			return false;
+		}
+
+		return true;
+	}
+
 	onMount(() => {
 		title_input?.focus();
 	});
-
-	function validate(): boolean {
-		return (
-			title.length > 0 &&
-			questions.length > 0 &&
-			questions.every((q) => {
-				if ("choices" in q) {
-					return q.question.length > 0 && q.choices.length > 0;
-				} else {
-					return q.question.length > 0;
-				}
-			})
-		);
-	}
 </script>
 
 <h2>Create a svorm</h2>
 
 <label for="title">Title</label>
-<input type="text" bind:value={title} bind:this={title_input} />
+<input
+	id="title"
+	type="text"
+	bind:value={title}
+	bind:this={title_input}
+/>
 
 {#if questions.length > 0}
 	<ul class="questions">
 		{#each questions as question, index}
 			<li>
 				<Question
-					bind:question
 					{index}
+					bind:question
 					on:delete={() => delete_question(question)}
 				/>
 			</li>
