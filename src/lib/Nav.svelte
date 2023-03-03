@@ -26,4 +26,7 @@
 		list-style-type: none;
 		gap: 1.2rem;
 	}
+	a {
+		text-underline-offset: 0.2em;
+	}
 </style>
