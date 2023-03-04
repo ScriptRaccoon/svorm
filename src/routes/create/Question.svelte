@@ -32,25 +32,24 @@
 			<Fa icon={faTrash} />
 		</button>
 	</div>
-	<p>
-		<label>
-			{LABELS.QUESTION}
-			<input
-				type="text"
-				bind:value={question.question}
-				bind:this={question_input}
-			/>
-		</label>
-	</p>
+
+	<label>
+		{LABELS.QUESTION}
+		<input
+			type="text"
+			bind:value={question.question}
+			bind:this={question_input}
+		/>
+	</label>
+
 	{#if "choices" in question}
 		<Choices bind:choices={question.choices} />
 	{/if}
-	<p>
-		<label>
-			{TEXT.REQUIRED}
-			<input type="checkbox" bind:checked={question.required} />
-		</label>
-	</p>
+
+	<label>
+		{TEXT.REQUIRED}
+		<input type="checkbox" bind:checked={question.required} />
+	</label>
 </div>
 
 <style lang="scss">

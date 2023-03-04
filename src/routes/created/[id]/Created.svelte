@@ -2,24 +2,31 @@
 	import { page } from "$app/stores";
 	import { HEADINGS, TEXT } from "@/config";
 	const id = $page.params.id;
-	const answer_url = `${$page.url.origin}/answer/${id}`;
-	const results_url = `${$page.url.origin}/results/${id}`;
+	const origin_url = $page.url.origin;
+	const answer_url = `${origin_url}/answer/${id}`;
+	const results_url = `${origin_url}/results/${id}`;
 </script>
 
 <h2>{HEADINGS.CREATED}</h2>
 
 <p>{TEXT.LINK}</p>
 
-<p class="link">
-	<a href={answer_url}>{answer_url}</a>
-</p>
-
-<p class="link">
-	<a href={results_url}>{results_url}</a>
-</p>
+<ul>
+	<li>
+		<a href={answer_url} target="_blank" rel="noreferrer">
+			{answer_url}
+		</a>
+	</li>
+	<li>
+		<a href={results_url} target="_blank" rel="noreferrer">
+			{results_url}
+		</a>
+	</li>
+</ul>
 
 <style>
-	.link {
+	ul {
+		padding-left: 1rem;
 		margin-top: 1rem;
 	}
 </style>

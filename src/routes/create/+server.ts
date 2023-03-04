@@ -9,8 +9,7 @@ import { ERROR } from "@/config";
 export const POST: RequestHandler = async ({ request }) => {
 	delete_old_svorms();
 
-	const svorm = (await request.json()) as svorm;
-
+	const svorm: svorm = await request.json();
 	const svorm_id = await save_svorm(svorm);
 
 	if (!svorm_id) {

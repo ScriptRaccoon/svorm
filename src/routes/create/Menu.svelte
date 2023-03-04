@@ -11,7 +11,7 @@
 	<button on:click={() => dispatch("choice")}>
 		{LABELS.ADD_MULTIPLE_CHOICE}
 	</button>
-	<button class="secondary" on:click={() => dispatch("finish")}>
+	<button class="secondary" on:click={() => dispatch("create")}>
 		{LABELS.CREATE_SVORM}
 	</button>
 </menu>

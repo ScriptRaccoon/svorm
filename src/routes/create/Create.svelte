@@ -7,8 +7,8 @@
 	import Menu from "./Menu.svelte";
 	import { ERROR, HEADINGS, LABELS } from "@/config";
 
-	let title: string = "";
-	let questions: question[] = [];
+	let svorm: svorm = { title: "", questions: [] };
+
 	let error_message = "";
 	let title_input: HTMLInputElement;
 	let loading = false;
@@ -19,7 +19,7 @@
 			required: false,
 			question: ""
 		};
-		questions = [...questions, question];
+		svorm.questions = [...svorm.questions, question];
 	}
 
 	function add_multiple_choice(): void {
@@ -29,21 +29,19 @@
 			question: "",
 			choices: []
 		};
-		questions = [...questions, question];
+		svorm.questions = [...svorm.questions, question];
 	}
 
 	async function create_svorm(): Promise<void> {
 		loading = true;
 		error_message = "";
 
-		const valid = validate_questions();
+		const valid = validate_svorm();
 
 		if (!valid) {
 			loading = false;
 			return;
 		}
-
-		const svorm: svorm = { title, questions };
 
 		const response = await fetch("/create", {
 			method: "POST",
@@ -70,28 +68,37 @@
 		goto(`created/${id}`);
 	}
 
-	function delete_question(q: question): void {
-		questions = questions.filter((_q) => _q != q);
+	function delete_question(selected_question: question): void {
+		svorm.questions = svorm.questions.filter(
+			(question) => question != selected_question
+		);
 	}
 
-	function validate_questions(): boolean {
-		if (title.length === 0) {
+	function validate_svorm(): boolean {
+		if (svorm.title.length === 0) {
 			error_message = ERROR.NO_TITLE;
 			return false;
 		}
 
-		if (questions.length === 0) {
+		if (svorm.questions.length === 0) {
 			error_message = ERROR.NO_QUESTION;
 			return false;
 		}
 
-		if (questions.some((q) => q.question.length == 0)) {
+		if (
+			svorm.questions.some(
+				(question) => question.question.length == 0
+			)
+		) {
 			error_message = ERROR.NOT_FILLED;
 			return false;
 		}
 
 		if (
-			questions.some((q) => "choices" in q && q.choices.length <= 1)
+			svorm.questions.some(
+				(question) =>
+					"choices" in question && question.choices.length <= 1
+			)
 		) {
 			error_message = ERROR.NO_CHOICE;
 			return false;
@@ -109,12 +116,16 @@
 
 <label>
 	{LABELS.TITLE}
-	<input type="text" bind:value={title} bind:this={title_input} />
+	<input
+		type="text"
+		bind:value={svorm.title}
+		bind:this={title_input}
+	/>
 </label>
 
-{#if questions.length > 0}
+{#if svorm.questions.length > 0}
 	<ul class="questions">
-		{#each questions as question}
+		{#each svorm.questions as question}
 			<li>
 				<Question
 					bind:question
@@ -128,7 +139,7 @@
 <Menu
 	on:choice={add_multiple_choice}
 	on:question={add_simple_question}
-	on:finish={create_svorm}
+	on:create={create_svorm}
 />
 
 <Loader {loading} />
