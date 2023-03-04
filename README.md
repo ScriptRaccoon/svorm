@@ -1,6 +1,7 @@
-# Svorm (Work In Progress)
+# Svorm
 
-This app lets you create forms which can be shared with others. It
-is made with Svelte, hence the name.
+https://svorm.netlify.app
 
-See [database.md](database.md) for a documentation of the database.
+This app is similar to Google Forms. It lets you create forms - called _svorms_. Questions can be either simple questions or multiple choice questions. Once a svorm is created, it can be shared with others who can answer it. The results can also be seen.
+
+This app is made with SvelteKit, TypeScript as well as Supabase. See [database.md](database.md) for a documentation of the database.
