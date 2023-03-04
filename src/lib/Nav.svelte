@@ -27,12 +27,16 @@
 		font-size: 1rem;
 	}
 	ul {
-		margin: 0 auto;
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: center;
+		justify-content: flex-start;
 		list-style-type: none;
 		column-gap: 1.2rem;
+		row-gap: 0.4rem;
+
+		@media (min-width: 32rem) {
+			justify-content: center;
+		}
 	}
 	a {
 		white-space: nowrap;
