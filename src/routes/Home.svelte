@@ -10,4 +10,10 @@
 
 <br />
 
+<p>
+	{TEXT.DELETE_NOTICE}
+</p>
+
+<br />
+
 <p>{@html TEXT.GITHUB}</p>
