@@ -49,7 +49,7 @@
 		loading = false;
 
 		if (response.ok) {
-			goto("/answered");
+			goto(`/answered/${svorm.id}`);
 		} else {
 			error_message = ERROR.NO_ANSWERS;
 		}
