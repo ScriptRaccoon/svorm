@@ -4,12 +4,12 @@ export const TEXT = {
 	ANSWER_SVORM: "Answer a svorm",
 	RESULTS_SVORM: "Results of a svorm",
 	TITLE: "Svorm",
-	DESCRIPTION: "This app lets you create forms which can be shared with others. It is made with Svelte, hence the name.",
+	DESCRIPTION: "Create forms and share them with others. They are called svorms here, since this app is made with SvelteKit. Use the navigation above to either create, answer or see the results of a svorm.",
 	REQUIRED: "Required",
 	LINK: "Here are the links to answer and see the results of your svorm:",
 	THANKS: "Thank you!",
 	ADD_CHOICE: "Add a choice",
-	GITHUB: "You can find the code on <a href='https://github.com/ScriptRaccoon/svorm' target='_blank'>GitHub</a>.",
+	GITHUB: "You can find the code of this app on <a href='https://github.com/ScriptRaccoon/svorm' target='_blank'>GitHub</a>.",
 	NO_ANSWERS: "There are no answers so far"
 };
 
@@ -29,7 +29,7 @@ export const ERROR = {
 };
 
 export const HEADINGS = {
-	TITLE: "Svorm (Work in Progress)",
+	TITLE: "Svorm",
 	CREATE: "Create a svorm",
 	SIMPLE_QUESTION: "Question",
 	MULTPLE_CHOICE: "Multiple Choice",
