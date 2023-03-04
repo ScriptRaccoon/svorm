@@ -10,7 +10,7 @@ export async function save_svorm(
 ): Promise<number | null> {
 	const { data, error } = await supabase
 		.from("svorms")
-		.insert([{ title: svorm.title }])
+		.insert({ title: svorm.title })
 		.select();
 	if (error) {
 		console.log({ error });
