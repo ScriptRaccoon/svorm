@@ -26,16 +26,9 @@
 		<input type="number" bind:value={id} bind:this={input} />
 	</label>
 
-	<menu>
+	<menu class="small-menu">
 		<button>{LABELS.SUBMIT_ID}</button>
 	</menu>
 </form>
 
 <Loader {loading} />
-
-<style>
-	menu {
-		text-align: center;
-		margin-block: 1rem;
-	}
-</style>

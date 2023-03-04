@@ -108,7 +108,7 @@
 		>{TEXT.REQUIRED.toLowerCase()}
 	</p>
 
-	<menu>
+	<menu class="small-menu">
 		<button type="submit">{LABELS.SUBMIT_ANSWERS}</button>
 	</menu>
 </form>
@@ -116,10 +116,3 @@
 <Loader {loading} />
 
 <Error {error_message} />
-
-<style>
-	menu {
-		padding-block: 1rem;
-		text-align: center;
-	}
-</style>
