@@ -1,14 +1,12 @@
 import { error, json } from "@sveltejs/kit";
 
 import { save_questions } from "@/db/question";
-import { delete_old_svorms, save_svorm } from "@/db/svorm";
+import { save_svorm } from "@/db/svorm";
 
 import type { RequestHandler } from "./$types";
 import { ERROR } from "@/config";
 
 export const POST: RequestHandler = async ({ request }) => {
-	delete_old_svorms();
-
 	const svorm: svorm = await request.json();
 	const svorm_id = await save_svorm(svorm);
 
