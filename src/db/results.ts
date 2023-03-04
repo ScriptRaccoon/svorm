@@ -62,9 +62,7 @@ async function get_simple_questions_answers(
 		return null;
 	}
 
-	const answers = data
-		.map((q) => q.answer)
-		.filter((a) => a != null) as string[];
+	const answers = data.map((q) => q.answer);
 
 	return answers;
 }
@@ -86,9 +84,7 @@ async function get_multiple_choices_answers(
 		return null;
 	}
 
-	const choices = data
-		.map((q) => q.choice)
-		.filter((c) => c != null) as number[];
+	const choices = data.map((q) => q.choice);
 
 	return choices;
 }
