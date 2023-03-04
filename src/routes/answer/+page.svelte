@@ -1,15 +1,19 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
 	import { HEADINGS, LABELS } from "@/config";
+	import Loader from "@/lib/Loader.svelte";
 	import { onMount } from "svelte";
 
 	let id: number;
 
 	let input: HTMLElement;
 
+	let loading = false;
+
 	onMount(() => input.focus());
 
 	function goto_svorm() {
+		loading = true;
 		goto(`/answer/${id}`);
 	}
 </script>
@@ -27,9 +31,11 @@
 	</menu>
 </form>
 
+<Loader {loading} />
+
 <style>
 	menu {
 		text-align: center;
-		margin-top: 1rem;
+		margin-block: 1rem;
 	}
 </style>
