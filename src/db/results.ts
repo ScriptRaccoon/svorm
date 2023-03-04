@@ -4,7 +4,7 @@ import { supabase } from "./supabase";
 
 export async function get_results(
 	svorm_id: number
-): Promise<null | question_results[]> {
+): Promise<null | svorm_results> {
 	const svorm = await get_svorm(svorm_id);
 
 	if (!svorm) {
@@ -37,7 +37,12 @@ export async function get_results(
 		}
 	}
 
-	return questions_with_results;
+	const svorm_with_results: svorm_results = {
+		...svorm,
+		results: questions_with_results
+	};
+
+	return svorm_with_results;
 }
 
 async function get_simple_questions_answers(

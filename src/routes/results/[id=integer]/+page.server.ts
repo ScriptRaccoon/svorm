@@ -5,9 +5,9 @@ import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async ({ params }) => {
 	const id = parseInt(params.id);
-	const results = await get_results(id);
-	if (!results) {
+	const svorm_with_results = await get_results(id);
+	if (!svorm_with_results) {
 		throw error(500, ERROR.NO_RESULTS);
 	}
-	return { results };
+	return { svorm_with_results };
 };

@@ -62,3 +62,5 @@ type multiple_choice_results = multiple_choice_db & {
 type question_results =
 	| simple_question_results
 	| multiple_choice_results;
+
+type svorm_results = svorm_db & { results: question_results[] };
