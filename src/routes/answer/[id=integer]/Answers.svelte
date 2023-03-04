@@ -2,25 +2,18 @@
 	import { goto } from "$app/navigation";
 	import Error from "@/lib/Error.svelte";
 	import Loader from "@/lib/Loader.svelte";
-	import MultipleChoiceAnswer from "./MultipleChoiceAnswer.svelte";
-	import SimpleAnswer from "././SimpleAnswer.svelte";
 	import { ERROR, LABELS, TEXT } from "@/config";
+	import MultipleChoiceAnswer from "./MultipleChoiceAnswer.svelte";
+	import SimpleAnswer from "./SimpleAnswer.svelte";
 
 	export let svorm: svorm_db;
 	export let questions: question_db[];
 
+	let answers_object: Record<string, string> = {};
+	let choices_object: Record<string, number> = {};
+
 	let loading = false;
 	let error_message = "";
-
-	const questions_with_answers: question_answer[] = questions.map(
-		(q) => {
-			if ("choices" in q) {
-				return { ...q, choice: null };
-			} else {
-				return { ...q, answer: "" };
-			}
-		}
-	);
 
 	async function submit_answers() {
 		loading = true;
@@ -28,7 +21,24 @@
 
 		if (!answers_are_valid()) return;
 
-		const answers = filtered_answers();
+		const simple_questions_answers: simple_question_answer[] =
+			Object.entries(answers_object)
+				.map(([id_string, answer]) => ({
+					question_id: parseInt(id_string),
+					answer
+				}))
+				.filter((a) => a.answer.length > 0);
+
+		const multiple_choices_answers: multiple_choice_answer[] =
+			Object.entries(choices_object).map(([id_string, choice]) => ({
+				question_id: parseInt(id_string),
+				choice
+			}));
+
+		const answers: answers = {
+			simple_questions_answers,
+			multiple_choices_answers
+		};
 
 		const response = await fetch("/answer", {
 			method: "POST",
@@ -45,36 +55,18 @@
 		}
 	}
 
-	function filtered_answers(): answer[] {
-		return questions_with_answers
-			.filter((q) => {
-				if ("choices" in q) {
-					return q.choice !== null;
-				} else {
-					return q.answer.length > 0;
-				}
-			})
-			.map((q) => {
-				if ("choices" in q) {
-					return {
-						question_id: q.id,
-						choice: q.choice
-					};
-				} else {
-					return {
-						question_id: q.id,
-						answer: q.answer
-					};
-				}
-			});
-	}
-
 	function answers_are_valid(): boolean {
-		const valid = questions_with_answers.every((q) => {
-			if ("choices" in q) {
-				return !(q.required && q.choice === null);
+		const valid = questions.every((question) => {
+			if ("choices" in question) {
+				return (
+					!question.required ||
+					choices_object[question.id] !== undefined
+				);
 			} else {
-				return !(q.required && q.answer.length === 0);
+				return (
+					!question.required ||
+					answers_object[question.id]?.length > 0
+				);
 			}
 		});
 
@@ -93,7 +85,7 @@
 
 <form on:submit|preventDefault={submit_answers}>
 	<ul class="questions" style="padding-block:1rem;">
-		{#each questions_with_answers as question}
+		{#each questions as question}
 			<li>
 				<div class="question">
 					<h3 aria-describedby="required">
@@ -102,9 +94,9 @@
 						{/if}
 					</h3>
 					{#if "choices" in question}
-						<MultipleChoiceAnswer bind:question />
+						<MultipleChoiceAnswer {question} bind:choices_object />
 					{:else}
-						<SimpleAnswer bind:question />
+						<SimpleAnswer {question} bind:answers_object />
 					{/if}
 				</div>
 			</li>

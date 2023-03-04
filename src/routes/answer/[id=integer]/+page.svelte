@@ -1,8 +1,7 @@
 <script lang="ts">
 	import type { PageData } from "./$types";
-	import Answer from "./Answer.svelte";
+	import Answers from "./Answers.svelte";
 	export let data: PageData;
-	const { svorm, questions } = data;
 </script>
 
-<Answer {svorm} {questions} />
+<Answers {...data} />

@@ -40,19 +40,19 @@ export interface Database {
       }
       multiple_choices_answers: {
         Row: {
-          choice: number | null
+          choice: number
           created_at: string
           id: number
           question_id: number
         }
         Insert: {
-          choice?: number | null
+          choice: number
           created_at?: string
           id?: number
           question_id: number
         }
         Update: {
-          choice?: number | null
+          choice?: number
           created_at?: string
           id?: number
           question_id?: number
@@ -86,19 +86,19 @@ export interface Database {
       }
       simple_questions_answers: {
         Row: {
-          answer: string | null
+          answer: string
           created_at: string
           id: number
           question_id: number
         }
         Insert: {
-          answer?: string | null
+          answer?: string
           created_at?: string
           id?: number
           question_id: number
         }
         Update: {
-          answer?: string | null
+          answer?: string
           created_at?: string
           id?: number
           question_id?: number

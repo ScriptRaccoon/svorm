@@ -35,22 +35,14 @@ type multiple_choice_db = multiple_choice & _db;
 
 type question_db = simple_question_db | multiple_choice_db;
 
-type simple_question_db_answer = simple_question_db & {
-	answer: string;
+type simple_question_answer = { question_id: number; answer: string };
+
+type multiple_choice_answer = { question_id: number; choice: number };
+
+type answers = {
+	simple_questions_answers: simple_question_answer[];
+	multiple_choices_answers: multiple_choice_answer[];
 };
-
-type multiple_choice_db_answer = multiple_choice_db & {
-	choice: null | number;
-};
-
-type question_answer =
-	| simple_question_db_answer
-	| multiple_choice_db_answer;
-
-type answer = { question_id: number } & (
-	| { answer: string }
-	| { choice: null | number }
-);
 
 type simple_question_results = simple_question_db & {
 	results: string[];
