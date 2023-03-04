@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { LABELS } from "@/config";
+
 	export let question: multiple_choice_db;
 	export let choices_object: Record<string, number> = {};
 
@@ -23,7 +25,7 @@
 
 <menu>
 	<button type="button" on:click={reset_choice} class="small">
-		Reset
+		{LABELS.RESET}
 	</button>
 </menu>
 

@@ -55,6 +55,7 @@ export const LABELS = {
 	SVORM_ID: "Svorm ID",
 	SUBMIT_ID: "Submit ID",
 	ANSWER: "Answer",
-	SUBMIT_ANSWERS: "Submit your answers"
+	SUBMIT_ANSWERS: "Submit your answers",
+	RESET: "Reset"
 	
 };
