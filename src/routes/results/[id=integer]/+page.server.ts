@@ -1,6 +1,7 @@
 import { ERROR } from "@/config";
 import { get_results } from "@/db/results";
-import { error, json } from "@sveltejs/kit";
+
+import { error } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async ({ params }) => {
