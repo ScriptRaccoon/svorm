@@ -1,24 +1,20 @@
 <script lang="ts">
+	import { HEADINGS } from "@/config";
 	import { frequency } from "@/utils";
+	import Result from "./Result.svelte";
 
 	export let title: string;
 	export let results: question_results[];
 </script>
 
 <h2>
-	{title} &ndash; Results
+	{title} &ndash; {HEADINGS.RESULTS_SHORT}
 </h2>
 
-{#each results as result}
-	<h3>{result.question}</h3>
-	{#if "choices" in result}
-		{#each result.choices as choice, index}
-			{@const f = frequency(result.results, index)}
-			<p>{f} &times; {choice}</p>
-		{/each}
-	{:else}
-		{#each result.results as answer}
-			<p>{answer}</p>
-		{/each}
-	{/if}
-{/each}
+<ol class="questions">
+	{#each results as result}
+		<li class="question">
+			<Result {result} />
+		</li>
+	{/each}
+</ol>

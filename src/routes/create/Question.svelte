@@ -54,15 +54,6 @@
 </div>
 
 <style lang="scss">
-	.question {
-		padding: 1rem;
-		border-radius: 0.5rem;
-		background-color: var(--light-color);
-		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
-	}
-
 	h3 {
 		text-transform: uppercase;
 	}

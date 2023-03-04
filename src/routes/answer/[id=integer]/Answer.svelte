@@ -92,7 +92,7 @@
 </h2>
 
 <form on:submit|preventDefault={submit_answers}>
-	<ul class="questions">
+	<ul class="questions" style="padding-block:1rem;">
 		{#each questions_with_answers as question}
 			<li>
 				<div class="question">
@@ -126,23 +126,6 @@
 <Error {error_message} />
 
 <style>
-	.questions {
-		list-style-type: none;
-		display: flex;
-		flex-direction: column;
-		gap: 1.75rem;
-		padding-block: 1rem;
-	}
-
-	.question {
-		background-color: var(--light-color);
-		padding: 1rem;
-		border-radius: 0.5rem;
-		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
-	}
-
 	menu {
 		padding-block: 1rem;
 		text-align: center;

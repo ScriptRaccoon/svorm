@@ -134,13 +134,3 @@
 <Loader {loading} />
 
 <Error {error_message} />
-
-<style>
-	.questions {
-		list-style-type: none;
-		display: flex;
-		flex-direction: column;
-		gap: 1.75rem;
-		padding-block: 2rem;
-	}
-</style>

@@ -37,6 +37,7 @@ export const HEADINGS = {
 	SUCCESS: "Submission successful",
 	ANSWER: "Answer a svorm",
 	RESULTS: "Results of a svorm",
+	RESULTS_SHORT: "Results"
 };
 
 export const LABELS = {
