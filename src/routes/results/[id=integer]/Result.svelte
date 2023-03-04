@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { TEXT } from "@/config";
 	import { frequency } from "@/utils";
 	export let result: question_results;
 </script>
@@ -21,7 +22,7 @@
 		{/each}
 	</ul>
 {:else}
-	<i>There are no answers so far</i>
+	<i>{TEXT.NO_ANSWERS}</i>
 {/if}
 
 <style>
