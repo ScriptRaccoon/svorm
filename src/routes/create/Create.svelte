@@ -124,7 +124,7 @@
 </label>
 
 {#if svorm.questions.length > 0}
-	<ul class="questions">
+	<ul class="cards">
 		{#each svorm.questions as question}
 			<li>
 				<Question

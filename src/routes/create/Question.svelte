@@ -21,8 +21,8 @@
 	});
 </script>
 
-<div class="question">
-	<div class="header">
+<div class="card">
+	<header>
 		<h3>{title}</h3>
 		<button
 			aria-label={LABELS.DELETE_QUESTION}
@@ -31,7 +31,7 @@
 		>
 			<Fa icon={faTrash} />
 		</button>
-	</div>
+	</header>
 
 	<label>
 		{LABELS.QUESTION}
@@ -57,7 +57,7 @@
 		text-transform: uppercase;
 	}
 
-	.header {
+	header {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;

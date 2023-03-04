@@ -4,26 +4,28 @@
 	export let result: question_results;
 </script>
 
-<h3>{result.question}</h3>
-{#if "choices" in result}
-	<ul class="choices">
-		{#each result.choices as choice, index}
-			{@const f = frequency(result.results, index)}
-			<li>
-				<span class="frequency">{f}</span>
-				&times; {choice}
-			</li>
-		{/each}
-	</ul>
-{:else if result.results.length > 0}
-	<ul class="answers">
-		{#each result.results as answer}
-			<li>{answer}</li>
-		{/each}
-	</ul>
-{:else}
-	<i>{TEXT.NO_ANSWERS}</i>
-{/if}
+<div class="card">
+	<h3>{result.question}</h3>
+	{#if "choices" in result}
+		<ul class="choices">
+			{#each result.choices as choice, index}
+				{@const f = frequency(result.results, index)}
+				<li>
+					<span class="frequency">{f}</span>
+					&times; {choice}
+				</li>
+			{/each}
+		</ul>
+	{:else if result.results.length > 0}
+		<ul class="answers">
+			{#each result.results as answer}
+				<li>{answer}</li>
+			{/each}
+		</ul>
+	{:else}
+		<i>{TEXT.NO_ANSWERS}</i>
+	{/if}
+</div>
 
 <style>
 	.choices {

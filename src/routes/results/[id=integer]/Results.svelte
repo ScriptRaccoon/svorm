@@ -11,9 +11,9 @@
 	{title} &ndash; {HEADINGS.RESULTS_SHORT}
 </h2>
 
-<ol class="questions">
+<ol class="cards">
 	{#each results as result}
-		<li class="question">
+		<li>
 			<Result {result} />
 		</li>
 	{/each}

@@ -84,10 +84,10 @@
 </h2>
 
 <form on:submit|preventDefault={submit_answers}>
-	<ul class="questions" style="padding-block:1rem;">
+	<ul class="cards">
 		{#each questions as question}
 			<li>
-				<div class="question">
+				<div class="card">
 					<h3 aria-describedby="required">
 						{question.question}{#if question.required}
 							<span class="danger" aria-hidden="true">*</span>
