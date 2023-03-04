@@ -13,12 +13,12 @@
 
 <ul>
 	<li>
-		<a href={answer_url} target="_blank" rel="noreferrer">
+		<a href={answer_url}>
 			{answer_url}
 		</a>
 	</li>
 	<li>
-		<a href={results_url} target="_blank" rel="noreferrer">
+		<a href={results_url}>
 			{results_url}
 		</a>
 	</li>
