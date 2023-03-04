@@ -32,7 +32,7 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		list-style-type: none;
-		gap: 1.2rem;
+		column-gap: 1.2rem;
 	}
 	a {
 		white-space: nowrap;
