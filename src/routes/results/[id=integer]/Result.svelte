@@ -14,12 +14,14 @@
 			</li>
 		{/each}
 	</ul>
-{:else}
+{:else if result.results.length > 0}
 	<ul class="answers">
 		{#each result.results as answer}
 			<li>{answer}</li>
 		{/each}
 	</ul>
+{:else}
+	<i>There are no answers so far</i>
 {/if}
 
 <style>
