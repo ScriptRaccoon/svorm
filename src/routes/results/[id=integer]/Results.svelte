@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { HEADINGS } from "@/config";
-	import { frequency } from "@/utils";
 	import Result from "./Result.svelte";
 
 	export let title: string;

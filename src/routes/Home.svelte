@@ -8,12 +8,14 @@
 	{TEXT.DESCRIPTION}
 </p>
 
-<br />
-
 <p>
 	{TEXT.DELETE_NOTICE}
 </p>
 
-<br />
-
 <p>{@html TEXT.GITHUB}</p>
+
+<style>
+	p {
+		margin-bottom: 0.75rem;
+	}
+</style>

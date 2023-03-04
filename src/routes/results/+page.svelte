@@ -5,17 +5,17 @@
 	import { onMount } from "svelte";
 
 	let id: number;
-
 	let input: HTMLElement;
-
 	let loading = false;
-
-	onMount(() => input.focus());
 
 	function goto_svorm() {
 		loading = true;
 		goto(`/results/${id}`);
 	}
+
+	onMount(() => {
+		input?.focus();
+	});
 </script>
 
 <h2>{HEADINGS.RESULTS}</h2>
