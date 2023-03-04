@@ -6,7 +6,7 @@ export const TEXT = {
 	TITLE: "Svorm",
 	DESCRIPTION: "This app lets you create forms which can be shared with others. It is made with Svelte, hence the name.",
 	REQUIRED: "Required",
-	LINK: "Here is the link to answer your svorm:",
+	LINK: "Here are the links to answer and see the results of your svorm:",
 	THANKS: "Thank you!",
 	ADD_CHOICE: "Add a choice",
 	GITHUB: "You can find the code on <a href='https://github.com/ScriptRaccoon/svorm' target='_blank'>GitHub</a>."
