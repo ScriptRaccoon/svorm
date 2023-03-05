@@ -2,9 +2,9 @@ import { get_svorm } from "./svorm";
 import { get_questions } from "./question";
 import { supabase } from "./supabase";
 
-export async function get_results(
+export async function get_result(
 	svorm_id: number
-): Promise<null | svorm_results> {
+): Promise<svorm_result | null> {
 	const svorm = await get_svorm(svorm_id);
 
 	if (!svorm) {
@@ -17,35 +17,42 @@ export async function get_results(
 		return null;
 	}
 
-	const questions_with_results: question_results[] = [];
+	const simple_questions_results: simple_question_result[] = [];
+	const multiple_choices_results: multiple_choice_result[] = [];
 
 	for (let i = 0; i < questions.length; i++) {
 		const question = questions[i];
 
 		if ("choices" in question) {
-			const results = await get_multiple_choices_answers(question.id);
-			if (!results) {
+			const result = await get_multiple_choice_result(question.id);
+			if (!result) {
 				return null;
 			}
-			questions_with_results.push({ ...question, results });
+			multiple_choices_results.push({
+				question_id: question.id,
+				result
+			});
 		} else {
-			const results = await get_simple_questions_answers(question.id);
-			if (!results) {
+			const result = await get_simple_question_result(question.id);
+			if (!result) {
 				return null;
 			}
-			questions_with_results.push({ ...question, results });
+			simple_questions_results.push({
+				question_id: question.id,
+				result
+			});
 		}
 	}
 
-	const svorm_with_results: svorm_results = {
-		...svorm,
-		results: questions_with_results
+	return {
+		svorm,
+		questions,
+		simple_questions_results,
+		multiple_choices_results
 	};
-
-	return svorm_with_results;
 }
 
-async function get_simple_questions_answers(
+async function get_simple_question_result(
 	question_id: number
 ): Promise<null | string[]> {
 	const { data, error } = await supabase
@@ -67,7 +74,7 @@ async function get_simple_questions_answers(
 	return answers;
 }
 
-async function get_multiple_choices_answers(
+async function get_multiple_choice_result(
 	question_id: number
 ): Promise<null | number[]> {
 	const { data, error } = await supabase

@@ -1,3 +1,5 @@
+// create types
+
 type simple_question = {
 	required: boolean;
 	question: string;
@@ -15,6 +17,8 @@ type svorm = {
 	title: string;
 	questions: question[];
 };
+
+// answers types
 
 type svorm_db = {
 	id: number;
@@ -44,15 +48,21 @@ type answers = {
 	multiple_choices_answers: multiple_choice_answer[];
 };
 
-type simple_question_results = simple_question_db & {
-	results: string[];
-};
-type multiple_choice_results = multiple_choice_db & {
-	results: number[];
+// results types
+
+type simple_question_result = {
+	question_id: number;
+	result: string[];
 };
 
-type question_results =
-	| simple_question_results
-	| multiple_choice_results;
+type multiple_choice_result = {
+	question_id: number;
+	result: number[];
+};
 
-type svorm_results = svorm_db & { results: question_results[] };
+type svorm_result = {
+	svorm: svorm_db;
+	questions: question_db[];
+	simple_questions_results: simple_question_result[];
+	multiple_choices_results: multiple_choice_result[];
+};

@@ -1,14 +1,14 @@
 import { ERROR } from "@/config";
-import { get_results } from "@/db/results";
+import { get_result } from "@/db/results";
 
 import { error } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async ({ params }) => {
 	const id = parseInt(params.id);
-	const svorm_with_results = await get_results(id);
-	if (!svorm_with_results) {
+	const svorm_result = await get_result(id);
+	if (!svorm_result) {
 		throw error(500, ERROR.NO_RESULTS);
 	}
-	return { svorm_with_results };
+	return svorm_result;
 };

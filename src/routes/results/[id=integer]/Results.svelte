@@ -1,19 +1,38 @@
 <script lang="ts">
 	import { HEADINGS } from "@/config";
-	import Result from "./Result.svelte";
-
-	export let title: string;
-	export let results: question_results[];
+	import MultipleChoiceResult from "./MultipleChoiceResult.svelte";
+	import SimpleQuestionResult from "./SimpleQuestionResult.svelte";
+	export let svorm: svorm_db;
+	export let questions: question_db[];
+	export let simple_questions_results: simple_question_result[];
+	export let multiple_choices_results: multiple_choice_result[];
 </script>
 
 <h2>
-	{title} &ndash; {HEADINGS.RESULTS_SHORT}
+	{svorm.title} &ndash; {HEADINGS.RESULTS_SHORT}
 </h2>
 
 <ol class="cards">
-	{#each results as result}
+	{#each questions as question}
 		<li>
-			<Result {result} />
+			<div class="card">
+				<h3>{question.question}</h3>
+				{#if "choices" in question}
+					{@const result =
+						multiple_choices_results.find(
+							(r) => r.question_id == question.id
+						)?.result || []}
+					<MultipleChoiceResult
+						{question}
+						{multiple_choices_results}
+					/>
+				{:else}
+					<SimpleQuestionResult
+						{question}
+						{simple_questions_results}
+					/>
+				{/if}
+			</div>
 		</li>
 	{/each}
 </ol>
