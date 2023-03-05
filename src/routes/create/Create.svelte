@@ -6,6 +6,7 @@
 	import Question from "./Question.svelte";
 	import Menu from "./Menu.svelte";
 	import { ERROR, HEADINGS, LABELS } from "@/config";
+	import { fade } from "svelte/transition";
 
 	let title: string = "";
 	let questions: question[] = [];
@@ -121,7 +122,7 @@
 {#if questions.length > 0}
 	<ul class="cards">
 		{#each questions as question (question.client_id)}
-			<li>
+			<li transition:fade>
 				<Question
 					bind:question
 					on:delete={() => delete_question(question)}
