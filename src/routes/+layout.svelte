@@ -18,6 +18,7 @@
 	<meta property="og:type" content="Website" />
 	<meta property="og:url" content="https://svorm.netlify.app" />
 	<meta property="og:site_name" content="Svorm" />
+	<meta property="og:image" content="./slogo.jpg" />
 
 	<link
 		rel="apple-touch-icon"
