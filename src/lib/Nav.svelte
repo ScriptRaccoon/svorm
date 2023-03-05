@@ -29,17 +29,12 @@
 	ul {
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: flex-start;
+		justify-content: center;
 		list-style-type: none;
 		column-gap: 1.2rem;
 		row-gap: 0.4rem;
-
-		@media (min-width: 32rem) {
-			justify-content: center;
-		}
 	}
 	a {
-		white-space: nowrap;
-		text-underline-offset: 0.2em;
+		text-underline-offset: 0.15em;
 	}
 </style>

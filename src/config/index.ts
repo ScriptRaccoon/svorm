@@ -1,8 +1,8 @@
 export const TEXT = {
-	CREATE_SVORM: "Create a svorm",
+	CREATE_SVORM: "Create",
 	HOME: "Home",
-	ANSWER_SVORM: "Answer a svorm",
-	RESULTS_SVORM: "Results of a svorm",
+	ANSWER_SVORM: "Answer",
+	RESULTS_SVORM: "Results",
 	TITLE: "Svorm",
 	DESCRIPTION: "Create forms and share them with others. They are called svorms here, since this app is made with SvelteKit. Use the navigation above to either create, answer or see the results of a svorm.",
 	REQUIRED: "Required",
