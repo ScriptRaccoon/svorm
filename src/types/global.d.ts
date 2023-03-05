@@ -1,11 +1,13 @@
 // create types
 
 type simple_question = {
+	client_id: string;
 	required: boolean;
 	question: string;
 };
 
 type multiple_choice = {
+	client_id: string;
 	required: boolean;
 	question: string;
 	choices: string[];
@@ -29,13 +31,13 @@ type svorm_db = {
 type _db = {
 	id: number;
 	created_at: string;
-	svorm_id: id;
+	svorm_id: number;
 	index: number;
 };
 
-type simple_question_db = simple_question & _db;
+type simple_question_db = Omit<simple_question, "client_id"> & _db;
 
-type multiple_choice_db = multiple_choice & _db;
+type multiple_choice_db = Omit<multiple_choice, "client_id"> & _db;
 
 type question_db = simple_question_db | multiple_choice_db;
 

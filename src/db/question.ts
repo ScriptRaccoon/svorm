@@ -10,9 +10,19 @@ export async function save_questions(
 	for (let index = 0; index < questions.length; index++) {
 		const question = questions[index];
 		if ("choices" in question) {
-			multiple_choices.push({ ...question, index, svorm_id });
+			const { client_id, ...question_without_id } = question;
+			multiple_choices.push({
+				...question_without_id,
+				index,
+				svorm_id
+			});
 		} else {
-			simple_questions.push({ ...question, index, svorm_id });
+			const { client_id, ...question_without_id } = question;
+			simple_questions.push({
+				...question_without_id,
+				index,
+				svorm_id
+			});
 		}
 	}
 

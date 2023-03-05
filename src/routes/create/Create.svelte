@@ -7,7 +7,8 @@
 	import Menu from "./Menu.svelte";
 	import { ERROR, HEADINGS, LABELS } from "@/config";
 
-	let svorm: svorm = { title: "", questions: [] };
+	let title: string = "";
+	let questions: question[] = [];
 
 	let error_message = "";
 	let title_input: HTMLInputElement;
@@ -17,9 +18,10 @@
 		error_message = "";
 		const question: simple_question = {
 			required: false,
-			question: ""
+			question: "",
+			client_id: crypto.randomUUID()
 		};
-		svorm.questions = [...svorm.questions, question];
+		questions = [...questions, question];
 	}
 
 	function add_multiple_choice(): void {
@@ -27,9 +29,10 @@
 		const question: multiple_choice = {
 			required: false,
 			question: "",
-			choices: []
+			choices: [],
+			client_id: crypto.randomUUID()
 		};
-		svorm.questions = [...svorm.questions, question];
+		questions = [...questions, question];
 	}
 
 	async function create_svorm(): Promise<void> {
@@ -46,7 +49,7 @@
 		const response = await fetch("/create", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(svorm)
+			body: JSON.stringify({ title, questions })
 		});
 
 		loading = false;
@@ -69,33 +72,29 @@
 	}
 
 	function delete_question(selected_question: question): void {
-		svorm.questions = svorm.questions.filter(
+		questions = questions.filter(
 			(question) => question != selected_question
 		);
 	}
 
 	function validate_svorm(): boolean {
-		if (svorm.title.length === 0) {
+		if (title.length === 0) {
 			error_message = ERROR.NO_TITLE;
 			return false;
 		}
 
-		if (svorm.questions.length === 0) {
+		if (questions.length === 0) {
 			error_message = ERROR.NO_QUESTION;
 			return false;
 		}
 
-		if (
-			svorm.questions.some(
-				(question) => question.question.length == 0
-			)
-		) {
+		if (questions.some((question) => question.question.length == 0)) {
 			error_message = ERROR.NOT_FILLED;
 			return false;
 		}
 
 		if (
-			svorm.questions.some(
+			questions.some(
 				(question) =>
 					"choices" in question && question.choices.length <= 1
 			)
@@ -116,16 +115,12 @@
 
 <label>
 	{LABELS.TITLE}
-	<input
-		type="text"
-		bind:value={svorm.title}
-		bind:this={title_input}
-	/>
+	<input type="text" bind:value={title} bind:this={title_input} />
 </label>
 
-{#if svorm.questions.length > 0}
+{#if questions.length > 0}
 	<ul class="cards">
-		{#each svorm.questions as question}
+		{#each questions as question (question.client_id)}
 			<li>
 				<Question
 					bind:question
