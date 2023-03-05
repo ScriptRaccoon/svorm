@@ -122,7 +122,7 @@
 {#if questions.length > 0}
 	<ul class="cards">
 		{#each questions as question (question.client_id)}
-			<li transition:fade>
+			<li transition:fade|local>
 				<Question
 					bind:question
 					on:delete={() => delete_question(question)}
