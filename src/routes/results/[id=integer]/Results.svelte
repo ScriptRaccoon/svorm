@@ -18,10 +18,6 @@
 			<div class="card">
 				<h3>{question.question}</h3>
 				{#if "choices" in question}
-					{@const result =
-						multiple_choices_results.find(
-							(r) => r.question_id == question.id
-						)?.result || []}
 					<MultipleChoiceResult
 						{question}
 						{multiple_choices_results}
