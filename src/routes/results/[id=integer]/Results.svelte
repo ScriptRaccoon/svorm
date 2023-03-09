@@ -14,21 +14,13 @@
 
 <ol class="cards">
 	{#each questions as question}
-		<li>
-			<div class="card">
-				<h3>{question.question}</h3>
-				{#if "choices" in question}
-					<MultipleChoiceResult
-						{question}
-						{multiple_choices_results}
-					/>
-				{:else}
-					<SimpleQuestionResult
-						{question}
-						{simple_questions_results}
-					/>
-				{/if}
-			</div>
+		<li class="card">
+			<h3>{question.question}</h3>
+			{#if "choices" in question}
+				<MultipleChoiceResult {question} {multiple_choices_results} />
+			{:else}
+				<SimpleQuestionResult {question} {simple_questions_results} />
+			{/if}
 		</li>
 	{/each}
 </ol>

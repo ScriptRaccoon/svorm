@@ -86,19 +86,17 @@
 <form on:submit|preventDefault={submit_answers}>
 	<ul class="cards">
 		{#each questions as question}
-			<li>
-				<div class="card">
-					<h3 aria-describedby="required">
-						{question.question}{#if question.required}
-							<span class="danger" aria-hidden="true">*</span>
-						{/if}
-					</h3>
-					{#if "choices" in question}
-						<MultipleChoiceAnswer {question} bind:choices_object />
-					{:else}
-						<SimpleAnswer {question} bind:answers_object />
+			<li class="card">
+				<h3 aria-describedby="required">
+					{question.question}{#if question.required}
+						<span class="danger" aria-hidden="true">*</span>
 					{/if}
-				</div>
+				</h3>
+				{#if "choices" in question}
+					<MultipleChoiceAnswer {question} bind:choices_object />
+				{:else}
+					<SimpleAnswer {question} bind:answers_object />
+				{/if}
 			</li>
 		{/each}
 	</ul>
