@@ -12,6 +12,6 @@
 
 <br />
 
-<p>You can see the results here:</p>
+<p>{TEXT.SEE_RESULTS}</p>
 
 <a href={results_url}>{results_url}</a>

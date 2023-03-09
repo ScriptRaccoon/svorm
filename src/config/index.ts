@@ -12,7 +12,8 @@ export const TEXT = {
 	ADD_CHOICE: "Add a choice",
 	GITHUB: "You can find the code of this app on <a href='https://github.com/ScriptRaccoon/svorm' target='_blank'>GitHub</a>.",
 	NO_ANSWERS: "There are no answers so far",
-	DELETE_NOTICE: "Please notice that svorms which are older than a month will be deleted regularly."
+	DELETE_NOTICE: "Please notice that svorms which are older than a month will be deleted regularly.",
+	SEE_RESULTS: "You can see the results here:"
 };
 
 export const ERROR = {
