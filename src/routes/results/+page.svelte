@@ -23,7 +23,7 @@
 <form on:submit|preventDefault={goto_svorm}>
 	<label>
 		{LABELS.SVORM_ID}
-		<input type="number" bind:value={id} bind:this={input} />
+		<input type="number" bind:value={id} bind:this={input} required />
 	</label>
 
 	<menu class="small-menu">
