@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, createEventDispatcher } from "svelte";
+	import { createEventDispatcher } from "svelte";
 	import Choices from "./Choices.svelte";
 	import Fa from "svelte-fa";
 	import { faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -14,12 +14,6 @@
 		"choices" in question
 			? HEADINGS.MULTPLE_CHOICE
 			: HEADINGS.SIMPLE_QUESTION;
-
-	let question_input: HTMLElement;
-
-	onMount(() => {
-		question_input?.focus();
-	});
 </script>
 
 <div class="card">
@@ -36,11 +30,7 @@
 
 	<label>
 		{LABELS.QUESTION}<Asterisk />
-		<input
-			type="text"
-			bind:value={question.question}
-			bind:this={question_input}
-		/>
+		<input type="text" bind:value={question.question} />
 	</label>
 
 	{#if "choices" in question}

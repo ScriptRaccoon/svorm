@@ -6,12 +6,10 @@
 	export let choices: string[];
 
 	let next_choice: string = "";
-	let choice_input: HTMLInputElement;
 
 	function add_choice(): void {
 		choices = [...choices, next_choice];
 		next_choice = "";
-		choice_input.focus();
 	}
 
 	function delete_choice(index: number): void {
@@ -47,7 +45,6 @@
 		required
 		aria-label={LABELS.CHOICE}
 		bind:value={next_choice}
-		bind:this={choice_input}
 	/>
 	<button class="small" aria-label={LABELS.ADD_CHOICE}>
 		<Fa icon={faPlus} />

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
-	import { onMount } from "svelte";
 	import Error from "@/lib/Error.svelte";
 	import Loader from "@/lib/Loader.svelte";
 	import Question from "./Question.svelte";
@@ -108,10 +107,6 @@
 
 		return true;
 	}
-
-	onMount(() => {
-		title_input?.focus();
-	});
 </script>
 
 <h2>{HEADINGS.CREATE}</h2>

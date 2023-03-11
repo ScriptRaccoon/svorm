@@ -5,10 +5,8 @@
 	import Error from "@/lib/Error.svelte";
 	import Loader from "@/lib/Loader.svelte";
 	import Required from "@/lib/Required.svelte";
-	import { onMount } from "svelte";
 
 	let id: number;
-	let input: HTMLElement;
 	let loading = false;
 	let error_message = "";
 
@@ -21,10 +19,6 @@
 		loading = true;
 		goto(`/answer/${id}`);
 	}
-
-	onMount(() => {
-		input?.focus();
-	});
 </script>
 
 <h2>{HEADINGS.ANSWER}</h2>
@@ -34,7 +28,7 @@
 <form on:submit|preventDefault={goto_svorm}>
 	<label>
 		{LABELS.SVORM_ID}<Asterisk />
-		<input type="number" bind:value={id} bind:this={input} />
+		<input type="number" bind:value={id} />
 	</label>
 
 	<menu class="small-menu">
