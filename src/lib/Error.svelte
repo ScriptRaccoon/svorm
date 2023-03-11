@@ -9,7 +9,7 @@
 </script>
 
 {#if error_message}
-	<p class="error">
+	<p class="error" aria-live="assertive">
 		{error_message}
 	</p>
 {/if}
