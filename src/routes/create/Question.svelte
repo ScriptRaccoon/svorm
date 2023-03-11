@@ -17,16 +17,7 @@
 </script>
 
 <div class="card">
-	<header>
-		<h3>{title}</h3>
-		<button
-			aria-label={LABELS.DELETE_QUESTION}
-			class="small danger"
-			on:click={() => dispatch("delete")}
-		>
-			<Fa icon={faTrash} />
-		</button>
-	</header>
+	<h3>{title}</h3>
 
 	<label>
 		{LABELS.QUESTION}<Asterisk />
@@ -37,10 +28,19 @@
 		<Choices bind:choices={question.choices} />
 	{/if}
 
-	<label>
-		{LABELS.REQUIRED}
-		<input type="checkbox" bind:checked={question.required} />
-	</label>
+	<div class="footer">
+		<label>
+			{LABELS.REQUIRED}
+			<input type="checkbox" bind:checked={question.required} />
+		</label>
+		<button
+			aria-label={LABELS.DELETE_QUESTION}
+			class="small danger"
+			on:click={() => dispatch("delete")}
+		>
+			<Fa icon={faTrash} />
+		</button>
+	</div>
 </div>
 
 <style lang="scss">
@@ -48,7 +48,7 @@
 		text-transform: uppercase;
 	}
 
-	header {
+	.footer {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
