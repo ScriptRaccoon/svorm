@@ -8,14 +8,12 @@
 	}
 </script>
 
-{#if error_message}
-	<p class="error" aria-live="assertive">
-		{error_message}
-	</p>
-{/if}
+<p aria-live="assertive" class:show={error_message}>
+	{error_message}
+</p>
 
 <style>
-	.error {
+	.show {
 		color: var(--danger-color);
 		font-weight: bold;
 		padding-block: 1rem;
