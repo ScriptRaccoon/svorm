@@ -4,7 +4,7 @@
 	import Loader from "@/lib/Loader.svelte";
 	import Question from "./Question.svelte";
 	import Menu from "./Menu.svelte";
-	import { ERROR, HEADINGS, LABELS, TEXT } from "@/config";
+	import { ERROR, HEADINGS, LABELS } from "@/config";
 	import { fade } from "svelte/transition";
 	import Asterisk from "@/lib/Asterisk.svelte";
 	import Required from "@/lib/Required.svelte";
