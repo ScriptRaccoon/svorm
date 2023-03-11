@@ -49,7 +49,7 @@
 
 <Nav />
 
-<main>
+<main aria-live="polite">
 	<slot />
 </main>
 
