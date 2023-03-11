@@ -3,7 +3,8 @@
 	import Choices from "./Choices.svelte";
 	import Fa from "svelte-fa";
 	import { faTrash } from "@fortawesome/free-solid-svg-icons";
-	import { HEADINGS, LABELS, TEXT } from "@/config";
+	import { HEADINGS, LABELS } from "@/config";
+	import Asterisk from "@/lib/Asterisk.svelte";
 
 	const dispatch = createEventDispatcher();
 
@@ -34,7 +35,7 @@
 	</header>
 
 	<label>
-		{LABELS.QUESTION}
+		{LABELS.QUESTION}<Asterisk />
 		<input
 			type="text"
 			bind:value={question.question}
@@ -47,7 +48,7 @@
 	{/if}
 
 	<label>
-		{TEXT.REQUIRED}
+		{LABELS.REQUIRED}
 		<input type="checkbox" bind:checked={question.required} />
 	</label>
 </div>

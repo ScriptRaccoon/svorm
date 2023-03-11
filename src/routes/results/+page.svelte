@@ -1,14 +1,23 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
-	import { HEADINGS, LABELS } from "@/config";
+	import { HEADINGS, LABELS, ERROR } from "@/config";
+	import Asterisk from "@/lib/Asterisk.svelte";
+	import Error from "@/lib/Error.svelte";
 	import Loader from "@/lib/Loader.svelte";
+	import Required from "@/lib/Required.svelte";
 	import { onMount } from "svelte";
 
 	let id: number;
 	let input: HTMLElement;
 	let loading = false;
+	let error_message = "";
 
 	function goto_svorm() {
+		if (!id) {
+			error_message = ERROR.NO_ID;
+			return;
+		}
+		error_message = "";
 		loading = true;
 		goto(`/results/${id}`);
 	}
@@ -20,10 +29,12 @@
 
 <h2>{HEADINGS.RESULTS}</h2>
 
+<Required noun="Fields" />
+
 <form on:submit|preventDefault={goto_svorm}>
 	<label>
-		{LABELS.SVORM_ID}
-		<input type="number" bind:value={id} bind:this={input} required />
+		{LABELS.SVORM_ID}<Asterisk />
+		<input type="number" bind:value={id} bind:this={input} />
 	</label>
 
 	<menu class="small-menu">
@@ -32,3 +43,5 @@
 </form>
 
 <Loader {loading} />
+
+<Error {error_message} />

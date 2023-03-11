@@ -6,14 +6,14 @@ export const TEXT = {
 	TITLE: "Svorm",
 	TEASER: "Create forms and share them with others.",
 	DESCRIPTION: "This app allows you to create forms &ndash; called <i>svorms</i> &ndash;, which are made up out of simple questions and multiple choices. Share the link with others who can then answer the svorm. The results of each svorm can also be seen.",
-	REQUIRED: "Required",
+	REQUIRED_INFO: " marked with <span class=\"danger\">*</span> are required.",
 	LINK: "Here are the links to answer and see the results of your svorm:",
 	THANKS: "Thank you!",
-	ADD_CHOICE: "Add a choice",
+	ADD_CHOICE: "Add at least two choices",
 	GITHUB: "You can find the code of this app on <a href='https://github.com/ScriptRaccoon/svorm' target='_blank'>GitHub</a>.",
 	NO_ANSWERS: "There are no answers so far",
 	DELETE_NOTICE: "Please notice that svorms which are older than a month will be deleted regularly.",
-	SEE_RESULTS: "You can see the results here:"
+	SEE_RESULTS: "You can see the results here:",
 };
 
 export const ERROR = {
@@ -29,6 +29,7 @@ export const ERROR = {
 	INVALID_ID: "No svorm was found with this ID",
 	NOT_LOADED: "The questions for this svorm could not be loaded",
 	NO_RESULTS: "Results could not be loaded",
+	NO_ID: "Please provide an ID",
 };
 
 export const HEADINGS = {
@@ -58,6 +59,6 @@ export const LABELS = {
 	SUBMIT_ID: "Submit ID",
 	ANSWER: "Answer",
 	SUBMIT_ANSWERS: "Submit your answers",
-	RESET: "Reset"
-	
+	RESET: "Reset",
+	REQUIRED: "Required",
 };

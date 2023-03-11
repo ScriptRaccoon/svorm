@@ -5,6 +5,8 @@
 	import { ERROR, LABELS, TEXT } from "@/config";
 	import MultipleChoiceAnswer from "./MultipleChoiceAnswer.svelte";
 	import SimpleAnswer from "./SimpleAnswer.svelte";
+	import Required from "@/lib/Required.svelte";
+	import Asterisk from "@/lib/Asterisk.svelte";
 
 	export let svorm: svorm_db;
 	export let questions: question_db[];
@@ -83,14 +85,14 @@
 	{svorm.title}
 </h2>
 
+<Required noun="Questions" />
+
 <form on:submit|preventDefault={submit_answers}>
 	<ul class="cards">
 		{#each questions as question}
 			<li class="card">
-				<h3 aria-describedby="required">
-					{question.question}{#if question.required}
-						<span class="danger" aria-hidden="true">*</span>
-					{/if}
+				<h3>
+					{question.question}<Asterisk show={question.required} />
 				</h3>
 				{#if "choices" in question}
 					<MultipleChoiceAnswer {question} bind:choices_object />
@@ -100,11 +102,6 @@
 			</li>
 		{/each}
 	</ul>
-
-	<p id="required">
-		<span class="danger" aria-hidden="true">*</span
-		>{TEXT.REQUIRED.toLowerCase()}
-	</p>
 
 	<menu class="small-menu">
 		<button type="submit">{LABELS.SUBMIT_ANSWERS}</button>
